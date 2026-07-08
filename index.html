@@ -264,7 +264,6 @@
   .reveal{opacity:0;transform:translateY(34px)}
   /* ---------- cinema scrub ---------- */
   .cinema{background:#0f0f0e;border-top:1px solid #26251f}
-  .cine-stage{height:100vh;display:flex;flex-direction:column;overflow:hidden}
   .cine-head{text-align:center;padding:92px 26px 14px}
   .cine-head .kick{color:#a5a199;justify-content:center}
   .cine-head .kick::after{content:"";width:30px;height:1px;background:var(--gold)}
@@ -279,7 +278,9 @@
   .cc4{bottom:10px;right:10px;border-left:none;border-top:none}
   .cine-tag{position:absolute;bottom:16px;left:20px;font-size:9px;letter-spacing:.3em;text-transform:uppercase;color:#b9b5ac}
   .cine-progress{position:absolute;bottom:16px;right:20px;font-size:9px;letter-spacing:.3em;color:var(--gold2)}
-  .cine-hint{position:absolute;bottom:22px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.34em;text-transform:uppercase;color:#807c73}
+  .cine-hint{display:none}
+  .cineov{position:absolute;inset:0;background:#0f0f0e;opacity:0;pointer-events:none;z-index:6;display:flex;align-items:center;justify-content:center;padding:70px 20px 46px}
+  .cineov .cine-frame{position:relative;width:min(1150px,96vw);height:min(72vh,100%);border:1px solid #2c2b28;background:#000;overflow:hidden}
 
   .logo-nav{height:54px;width:auto;display:block}
   .logo-foot{height:88px;width:auto;display:block}
@@ -656,18 +657,7 @@
 
       </svg>
     </div>
-    <div class="phase"><b id="phaselabel">PHASE 01 · SITE &amp; SURVEY</b></div>
-  </div>
-</section>
-
-<!-- ================= CINEMA SCRUB ================= -->
-<section class="cinema" id="cinema">
-  <div class="cine-stage" id="cinestage">
-    <div class="cine-head">
-      <div class="kick">From Drawing To Delivery</div>
-      <h2>Now watch it <em>for real.</em></h2>
-    </div>
-    <div class="cine-wrap">
+    <div class="cineov" id="cineov">
       <div class="cine-frame">
         <canvas id="cinecanvas"></canvas>
         <div class="cine-corner cc1"></div><div class="cine-corner cc2"></div>
@@ -676,9 +666,10 @@
         <div class="cine-progress" id="cineprog">0%</div>
       </div>
     </div>
-    <div class="cine-hint">Scroll to play</div>
+    <div class="phase"><b id="phaselabel">PHASE 01 &#183; SITE &amp; SURVEY</b></div>
   </div>
 </section>
+
 
 <!-- ================= PROJECTS ================= -->
 <section class="projects" id="projects">
@@ -766,9 +757,9 @@
       </div>
       <div class="reveal">
         <div class="vidframe">
-          <div class="grid-ov"></div>
-          <div class="play"></div>
-          <div class="note">Video Slot · 16:9 — drop your generated build video here</div>
+          <video src="media/interior.mp4" autoplay muted loop playsinline
+            style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover"></video>
+          <div class="note" style="z-index:2">Toscano · Interior Flythrough</div>
         </div>
       </div>
     </div>
@@ -944,54 +935,50 @@ gsap.to('.band svg',{yPercent:-14,ease:'none',
   scrollTrigger:{trigger:'.band',start:'top bottom',end:'bottom top',scrub:.6}});
 
 
-/* cinematic frame scrub */
-(function(){
-  const TOTAL=80, canvas=document.getElementById('cinecanvas');
-  if(!canvas) return;
-  const ctx=canvas.getContext('2d');
-  const imgs=[]; let loaded=0, failed=false;
-  const pad=n=>String(n).padStart(3,'0');
-  for(let i=1;i<=TOTAL;i++){
-    const im=new Image();
-    im.src='frames/f_'+pad(i)+'.webp';
-    im.onload=()=>{loaded++; if(i===1) draw(0);};
-    im.onerror=()=>{ if(i===1){ failed=true; document.getElementById('cinema').style.display='none'; ScrollTrigger.refresh(); } };
-    imgs.push(im);
-  }
-  function size(){
-    const r=canvas.parentElement.getBoundingClientRect();
-    canvas.width=r.width*window.devicePixelRatio;
-    canvas.height=r.height*window.devicePixelRatio;
-  }
-  size(); window.addEventListener('resize',()=>{size(); draw(lastP);});
-  let lastP=0;
-  function draw(p){
-    lastP=p;
-    const idx=Math.min(TOTAL-1, Math.floor(p*(TOTAL-1)));
-    const im=imgs[idx];
-    if(!im||!im.complete||!im.naturalWidth) return;
-    const cw=canvas.width, ch=canvas.height;
-    const s=Math.max(cw/im.naturalWidth, ch/im.naturalHeight);
-    const w=im.naturalWidth*s, h=im.naturalHeight*s;
-    ctx.clearRect(0,0,cw,ch);
-    ctx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);
-    const el=document.getElementById('cineprog');
-    if(el) el.textContent=Math.round(p*100)+'%';
-  }
-  gsap.to({p:0},{p:1,ease:'none',
-    scrollTrigger:{trigger:'#cinestage',start:'top top',end:'+=2200',scrub:.5,pin:true,
-      onUpdate:self=>draw(self.progress)}});
-})();
 
-/* pinned build scene: multi-family, level by level */
+/* pinned build scene: drawn build -> real footage, one continuous scroll */
+const TOTAL_FRAMES=80, cinecanvas=document.getElementById('cinecanvas');
+const cctx=cinecanvas.getContext('2d');
+const cimgs=[]; const cpad=n=>String(n).padStart(3,'0');
+let framesOK=true;
+for(let i=1;i<=TOTAL_FRAMES;i++){
+  const im=new Image(); im.src='frames/f_'+cpad(i)+'.webp';
+  if(i===1){ im.onerror=()=>{framesOK=false;}; }
+  cimgs.push(im);
+}
+function cineSize(){
+  const r=cinecanvas.parentElement.getBoundingClientRect();
+  cinecanvas.width=Math.max(2,r.width*window.devicePixelRatio);
+  cinecanvas.height=Math.max(2,r.height*window.devicePixelRatio);
+}
+cineSize(); window.addEventListener('resize',cineSize);
+function cineDraw(p){
+  const idx=Math.min(TOTAL_FRAMES-1, Math.floor(p*(TOTAL_FRAMES-1)));
+  const im=cimgs[idx];
+  if(!im||!im.complete||!im.naturalWidth) return;
+  const cw=cinecanvas.width, ch=cinecanvas.height;
+  const s=Math.max(cw/im.naturalWidth, ch/im.naturalHeight);
+  const w=im.naturalWidth*s, h=im.naturalHeight*s;
+  cctx.clearRect(0,0,cw,ch);
+  cctx.drawImage(im,(cw-w)/2,(ch-h)/2,w,h);
+  const el=document.getElementById('cineprog');
+  if(el) el.textContent=Math.round(p*100)+'%';
+}
+const CUT=0.52;
 const tl = gsap.timeline({
   scrollTrigger:{
-    trigger:'#stage', start:'top top', end:'+=1700', scrub:.8, pin:true,
+    trigger:'#stage', start:'top top', end:'+=3600', scrub:.8, pin:true,
     onUpdate:self=>{
       const p=self.progress, lbl=document.getElementById('phaselabel');
-      lbl.textContent = p<.12?'PHASE 01 \u00B7 SITE & SURVEY' : p<.26?'PHASE 02 \u00B7 FOUNDATION'
-        : p<.44?'PHASE 03 \u00B7 LEVEL ONE' : p<.6?'PHASE 04 \u00B7 LEVEL TWO'
-        : p<.74?'PHASE 05 \u00B7 LEVEL THREE & ROOF' : p<.88?'PHASE 06 \u00B7 FINISHES' : 'PHASE 07 \u00B7 DELIVERED';
+      if(p<CUT){
+        const q=p/CUT;
+        lbl.textContent = q<.12?'PHASE 01 \u00B7 SITE & SURVEY' : q<.26?'PHASE 02 \u00B7 FOUNDATION'
+          : q<.44?'PHASE 03 \u00B7 LEVEL ONE' : q<.6?'PHASE 04 \u00B7 LEVEL TWO'
+          : q<.74?'PHASE 05 \u00B7 LEVEL THREE & ROOF' : q<.88?'PHASE 06 \u00B7 FINISHES' : 'PHASE 07 \u00B7 DELIVERED';
+      } else {
+        lbl.textContent='SITE FOOTAGE \u00B7 001';
+        if(framesOK) cineDraw(Math.max(0,Math.min(1,(p-CUT-0.04)/(1-CUT-0.06))));
+      }
     }
   }
 });
@@ -1017,6 +1004,8 @@ tl.to('#goldwin3',{opacity:.85,duration:.35},6.35);
 tl.fromTo('#van',{opacity:0,x:-140},{opacity:1,x:0,duration:.25},6.2);
 tl.to('#van',{x:1190,duration:1.8,ease:'none'},6.4);
 tl.to('#dims',{opacity:1,duration:.6},7.2);
+tl.to('#cineov',{opacity:1,duration:.8,ease:'power1.inOut'},8.2);
+tl.to({},{duration:8.4},9.0);
 </script>
 </body>
 </html>
