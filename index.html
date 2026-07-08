@@ -1128,7 +1128,6 @@
 .check .tick::after{opacity:1}.qa .qa-a{max-height:none}</style></noscript>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -1199,13 +1198,11 @@ const finePtr = matchMedia('(pointer:fine)').matches;
     burger.classList.toggle('open', open);
     burger.setAttribute('aria-expanded', open);
     document.body.style.overflow = open ? 'hidden' : '';
-    if(window.__lenis){ open ? window.__lenis.stop() : window.__lenis.start(); }
   });
   menu.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
     menu.classList.remove('open'); burger.classList.remove('open');
     burger.setAttribute('aria-expanded','false');
     document.body.style.overflow = '';
-    if(window.__lenis) window.__lenis.start();
   }));
 })();
 
@@ -1290,6 +1287,8 @@ function showAllStatic(){
   document.querySelectorAll('.mapsvg .ring').forEach(r=>{ r.style.opacity = .9; });
   const rl = document.getElementById('reality');
   if(rl){ rl.style.opacity = 1; rl.style.clipPath = 'inset(0 0% 0 0)'; }
+  const bsvg = document.querySelector('.board .sheet svg');
+  if(bsvg) bsvg.style.opacity = 0;
   const qs = document.getElementById('qstamp'); if(qs) qs.style.opacity = .95;
   const pf = document.getElementById('phasefill'); if(pf) pf.style.width = '100%';
   const pl = document.getElementById('phaselabel'); if(pl) pl.textContent = 'PHASE 07 · DELIVERED';
@@ -1313,15 +1312,7 @@ if(reduced){
   showAllStatic();
 }else{
 
-/* smooth scrolling engine (graceful if CDN unavailable) */
-let lenis = null;
-if(typeof Lenis !== 'undefined'){
-  lenis = new Lenis({duration:1.1, smoothWheel:true});
-  window.__lenis = lenis;
-  lenis.on('scroll', ScrollTrigger.update);
-  gsap.ticker.add(t=>lenis.raf(t*1000));
-  gsap.ticker.lagSmoothing(0);
-}
+/* native scrolling — ScrollTrigger listens to the window directly */
 window.addEventListener('load', ()=>ScrollTrigger.refresh());
 
 /* ---- hero headline split into words ---- */
@@ -1355,11 +1346,9 @@ const heroIntro = gsap.timeline({paused:true})
 const morph = gsap.timeline({paused:true})
   .set('#reality',{opacity:1})
   .to('#reality',{clipPath:'inset(0 0% 0 0)',duration:1.7,ease:'power2.inOut'})
+  .to('.board .sheet svg',{opacity:0,duration:1.7,ease:'power2.inOut'},'<')
   .fromTo('#plothead',{opacity:1,left:'0%'},{left:'100%',duration:1.7,ease:'power2.inOut'},'<')
-  .to('#plothead',{opacity:0,duration:.35},'-=.1')
-  .add(gsap.timeline({repeat:-1,repeatDelay:4.6,delay:3.2})
-    .to('#reality',{opacity:.14,duration:1.6,ease:'power2.inOut'})
-    .to('#reality',{opacity:1,duration:1.6,ease:'power2.inOut'},'+=2.4'));
+  .to('#plothead',{opacity:0,duration:.35},'-=.1');
 
 gsap.set('#heroline .w i',{y:'112%'});
 const ldbox = document.getElementById('ldbox');
@@ -1504,7 +1493,7 @@ mm.add('(min-width: 900px)', ()=>{
 /* pinned build film: footage scrub */
 gsap.timeline({
   scrollTrigger:{
-    trigger:'#stage', start:'top top', end:'+=2400', scrub:.8, pin:true, anticipatePin:1, refreshPriority:1,
+    trigger:'#stage', start:'top top', end:'+=1600', scrub:.8, pin:true, anticipatePin:1, refreshPriority:1,
     onUpdate:self=>{
       const p = self.progress, lbl = document.getElementById('phaselabel');
       document.getElementById('phasefill').style.width = (p*100)+'%';
@@ -1542,14 +1531,13 @@ gsap.to('.skyline',{yPercent:-8,ease:'none',
 } /* end !reduced */
 } /* end gsap present */
 
-/* ============ ANCHOR LINKS (Lenis-aware) ============ */
+/* ============ ANCHOR LINKS ============ */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click',e=>{
     const id = a.getAttribute('href');
     if(id.length > 1 && document.querySelector(id)){
       e.preventDefault();
-      if(window.__lenis) window.__lenis.scrollTo(id,{offset:-90});
-      else document.querySelector(id).scrollIntoView({behavior:reduced?'auto':'smooth'});
+      document.querySelector(id).scrollIntoView({behavior:reduced?'auto':'smooth'});
     }
   });
 });
@@ -1558,8 +1546,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
 (function(){
   const tt = document.getElementById('totop'); if(!tt) return;
   tt.addEventListener('click',()=>{
-    if(window.__lenis) window.__lenis.scrollTo(0);
-    else window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});
+    window.scrollTo({top:0,behavior:reduced?'auto':'smooth'});
   });
   if(!window.gsap || reduced){
     addEventListener('scroll',()=>tt.classList.toggle('show', scrollY > 700),{passive:true});
