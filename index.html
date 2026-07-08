@@ -262,6 +262,24 @@
     font-size:11px;letter-spacing:.12em;color:#807c73}
 
   .reveal{opacity:0;transform:translateY(34px)}
+  /* --- v10 polish --- */
+  [id]{scroll-margin-top:92px}
+  .phase{z-index:7}
+  .stage.film .phase b{color:var(--gold2)}
+  .stage.film .phase{color:#8a867d}
+  .nav{transition:padding .3s ease}
+  .nav .logo-nav{transition:height .3s ease}
+  .nav.scrolled{padding-top:6px;padding-bottom:6px}
+  .nav.scrolled .logo-nav{height:42px}
+  .links a{position:relative}
+  .links a::after{content:"";position:absolute;left:0;bottom:-6px;height:1px;width:0;background:var(--gold);transition:width .3s}
+  .links a:hover::after{width:100%}
+  .ticker:hover .track{animation-play-state:paused}
+  .svc{transition:background .3s, transform .3s}
+  .svc:hover{transform:translateY(-3px)}
+  .board{will-change:transform}
+  .proj .ph svg{opacity:.95}
+
   /* ---------- cinema scrub ---------- */
   .cinema{background:#0f0f0e;border-top:1px solid #26251f}
   .cine-head{text-align:center;padding:92px 26px 14px}
@@ -879,6 +897,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lenis/1.1.13/lenis.min.js"></script>
 <script>
 document.getElementById('yr').textContent = new Date().getFullYear();
 gsap.registerPlugin(ScrollTrigger);
@@ -889,7 +908,7 @@ gsap.to('#tapefill',{width:'100%',ease:'none',
 
 /* reveals */
 gsap.utils.toArray('.reveal').forEach(el=>{
-  gsap.to(el,{opacity:1,y:0,duration:.9,ease:'power3.out',
+  gsap.to(el,{opacity:1,y:0,duration:.8,ease:'power3.out',
     scrollTrigger:{trigger:el,start:'top 88%'}});
 });
 
@@ -936,6 +955,60 @@ gsap.to('.band svg',{yPercent:-14,ease:'none',
 
 
 
+
+/* smooth scrolling engine (graceful if CDN unavailable) */
+let lenis=null;
+if (typeof Lenis!=='undefined'){
+  lenis=new Lenis({duration:1.1,smoothWheel:true});
+  lenis.on('scroll',ScrollTrigger.update);
+  gsap.ticker.add(t=>lenis.raf(t*1000));
+  gsap.ticker.lagSmoothing(0);
+  document.querySelectorAll('a[href^="#"]').forEach(a=>{
+    a.addEventListener('click',e=>{
+      const id=a.getAttribute('href');
+      if(id.length>1 && document.querySelector(id)){
+        e.preventDefault(); lenis.scrollTo(id,{offset:-90});
+      }
+    });
+  });
+}
+window.addEventListener('load',()=>ScrollTrigger.refresh());
+
+/* hero entrance */
+gsap.timeline({defaults:{ease:'power3.out'}})
+  .from('.hero .kick',{y:24,opacity:0,duration:.7},.15)
+  .from('.hero h1',{y:34,opacity:0,duration:.9},.25)
+  .from('.hero .lead',{y:24,opacity:0,duration:.8},.45)
+  .from('.hero .btnrow',{y:20,opacity:0,duration:.7},.6)
+  .from('.hero .metrics',{y:18,opacity:0,duration:.7},.75)
+  .from('.board',{y:30,opacity:0,duration:1},.35);
+
+/* nav compacts on scroll */
+ScrollTrigger.create({start:80,onEnter:()=>document.querySelector('.nav').classList.add('scrolled'),
+  onLeaveBack:()=>document.querySelector('.nav').classList.remove('scrolled')});
+
+/* hero board: soft scroll parallax + desktop tilt */
+gsap.to('.board',{yPercent:-3,ease:'none',
+  scrollTrigger:{trigger:'.hero-sec',start:'top top',end:'bottom top',scrub:.6}});
+if (window.matchMedia('(pointer:fine)').matches){
+  const board=document.querySelector('.board');
+  board.addEventListener('mousemove',e=>{
+    const r=board.getBoundingClientRect();
+    const rx=((e.clientY-r.top)/r.height-.5)*-2.4, ry=((e.clientX-r.left)/r.width-.5)*2.4;
+    gsap.to(board,{rotateX:rx,rotateY:ry,transformPerspective:900,duration:.5,ease:'power2.out'});
+  });
+  board.addEventListener('mouseleave',()=>gsap.to(board,{rotateX:0,rotateY:0,duration:.7,ease:'power3.out'}));
+}
+
+/* project drawings draw themselves */
+gsap.utils.toArray('.proj .ph svg').forEach(svg=>{
+  const shapes=svg.querySelectorAll('line,rect,polyline,path,circle');
+  shapes.forEach(s=>{const len=s.getTotalLength?s.getTotalLength():300;
+    s.style.strokeDasharray=len;s.style.strokeDashoffset=len;});
+  gsap.to(shapes,{strokeDashoffset:0,duration:1.8,ease:'power2.out',stagger:.05,
+    scrollTrigger:{trigger:svg,start:'top 86%'}});
+});
+
 /* pinned build scene: drawn build -> real footage, one continuous scroll */
 const TOTAL_FRAMES=80, cinecanvas=document.getElementById('cinecanvas');
 const cctx=cinecanvas.getContext('2d');
@@ -943,7 +1016,7 @@ const cimgs=[]; const cpad=n=>String(n).padStart(3,'0');
 let framesOK=true;
 for(let i=1;i<=TOTAL_FRAMES;i++){
   const im=new Image(); im.src='frames/f_'+cpad(i)+'.webp';
-  if(i===1){ im.onerror=()=>{framesOK=false;}; }
+  if(i===1){ im.onerror=()=>{framesOK=false;}; im.onload=()=>cineDraw(0); }
   cimgs.push(im);
 }
 function cineSize(){
@@ -967,9 +1040,10 @@ function cineDraw(p){
 const CUT=0.52;
 const tl = gsap.timeline({
   scrollTrigger:{
-    trigger:'#stage', start:'top top', end:'+=3600', scrub:.8, pin:true,
+    trigger:'#stage', start:'top top', end:'+=3600', scrub:.8, pin:true, anticipatePin:1,
     onUpdate:self=>{
       const p=self.progress, lbl=document.getElementById('phaselabel');
+      document.getElementById('stage').classList.toggle('film', p>=CUT);
       if(p<CUT){
         const q=p/CUT;
         lbl.textContent = q<.12?'PHASE 01 \u00B7 SITE & SURVEY' : q<.26?'PHASE 02 \u00B7 FOUNDATION'
