@@ -188,6 +188,10 @@
     display:flex;align-items:center;justify-content:center;overflow:hidden}
   .mslot video,.mslot img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
   .mslot .tag{position:absolute;bottom:10px;right:12px;font-size:8px;letter-spacing:.24em;color:var(--dim);text-transform:uppercase}
+  /* real-photo slots: oversized for scroll parallax, slow zoom on hover, soft floor shade */
+  .mslot.has-img img.par{top:-9%;height:118%;scale:1.001;transition:scale 1.4s cubic-bezier(.2,.7,.2,1),filter .6s;filter:saturate(.9) brightness(.92)}
+  .svc:hover .mslot.has-img img.par{scale:1.07;filter:saturate(1) brightness(1)}
+  .mslot.has-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,12,.5),transparent 45%);pointer-events:none}
   .svc-ico{width:64px;height:64px}
   .svc-ico line,.svc-ico rect,.svc-ico polyline,.svc-ico path,.svc-ico circle{stroke:var(--txt);fill:none;stroke-width:1.2;transition:stroke .3s}
   .svc:hover .svc-ico line,.svc:hover .svc-ico rect,.svc:hover .svc-ico polyline,.svc:hover .svc-ico path,.svc:hover .svc-ico circle{stroke:var(--gold2)}
@@ -251,6 +255,24 @@
   .vidframe .note{position:absolute;bottom:12px;left:14px;font-size:9px;letter-spacing:.26em;text-transform:uppercase;color:#cfcabf;z-index:2;
     text-shadow:0 1px 6px rgba(0,0,0,.8)}
   .qstamp{position:absolute;top:16px;right:18px;height:74px;width:auto;opacity:0;z-index:2;transform:rotate(-14deg)}
+  .vidframe::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.45),transparent 40%);pointer-events:none;z-index:1}
+  .about-media{position:relative;padding-bottom:56px}
+  .about-inset{position:absolute;left:-18px;bottom:0;width:42%;aspect-ratio:4/5;overflow:hidden;border:1px solid var(--line2);
+    background:#000;box-shadow:0 30px 60px -24px rgba(0,0,0,.85);z-index:3}
+  .about-inset::before{content:"";position:absolute;top:0;left:0;width:34px;height:2px;background:var(--gold2);z-index:2}
+  .about-inset img{position:absolute;left:0;top:-8%;width:100%;height:116%;object-fit:cover}
+  @media(max-width:560px){.about-inset{left:-6px;width:46%}.about-media{padding-bottom:70px}}
+
+  /* ---------- full-bleed photo band ---------- */
+  .fullbleed{position:relative;height:115vh;min-height:640px;overflow:hidden;background:var(--bg);border-top:1px solid var(--line)}
+  .fb-media{position:absolute;inset:0;overflow:hidden}
+  .fb-media img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:40% 45%}
+  .fb-media::after{content:"";position:absolute;inset:0;
+    background:linear-gradient(to top,rgba(13,13,12,.92) 0%,rgba(13,13,12,.35) 42%,rgba(13,13,12,.1) 70%),linear-gradient(to right,rgba(13,13,12,.55),transparent 60%)}
+  .fb-copy{position:absolute;left:0;right:0;bottom:12vh;padding:0 16px;max-width:1240px;margin:0 auto;z-index:2}
+  @media(min-width:940px){.fb-copy{padding:0 40px}}
+  .fb-copy h2{max-width:17ch}
+  .fb-copy p{margin-top:18px;max-width:46ch;font-weight:300;font-size:15px;line-height:1.7;color:#cfcabf}
   .checks{margin-top:26px;display:grid;gap:14px}
   .check{display:flex;gap:14px;align-items:flex-start}
   .check .tick{width:18px;height:18px;border:1px solid var(--gold);flex-shrink:0;margin-top:2px;position:relative;background:transparent}
@@ -408,6 +430,10 @@
   .proj:hover{transform:translateY(-4px);border-color:var(--line2)}
   .proj .ph{aspect-ratio:4/3;background:var(--bg2);position:relative;display:flex;align-items:center;justify-content:center;overflow:hidden}
   .proj .ph svg{width:74%;position:relative}
+  .proj .ph.has-img img{position:absolute;left:-6%;top:0;width:112%;height:100%;object-fit:cover;scale:1.001;
+    transition:scale 1.4s cubic-bezier(.2,.7,.2,1),filter .6s;filter:saturate(.9) brightness(.9)}
+  .proj:hover .ph.has-img img{scale:1.06;filter:saturate(1) brightness(1)}
+  .proj .ph.has-img::after{content:"";position:absolute;inset:0;background:linear-gradient(to top,rgba(13,13,12,.45),transparent 40%);pointer-events:none}
   .proj .ph .slot{position:absolute;bottom:10px;right:12px;font-size:8px;letter-spacing:.24em;color:var(--dim);text-transform:uppercase}
   .proj .meta{display:flex;justify-content:space-between;align-items:center;padding:16px 18px;border-top:1px solid var(--line)}
   .proj .meta b{font-family:var(--serif);font-size:20px;font-weight:600;color:var(--txt)}
@@ -513,10 +539,7 @@
     <div class="svc-grid">
       <!-- To feature real footage: drop a <video muted loop playsinline> or <img> inside any .mslot — it will cover the placeholder automatically. -->
       <div class="svc reveal">
-        <div class="mslot">
-          <svg class="svc-ico" viewBox="0 0 64 64" aria-hidden="true"><rect x="12" y="12" width="40" height="40"/><line x1="12" y1="32" x2="52" y2="32"/><line x1="32" y1="12" x2="32" y2="52"/><path d="M32 32 L52 12"/><circle cx="46" cy="46" r="5"/></svg>
-          <div class="tag">Footage Coming Soon</div>
-        </div>
+        <div class="mslot has-img"><img class="par" src="media/photos/kitchen-walnut.webp" alt="Kitchen remodel with a walnut island, quartz countertop and white globe pendants" loading="lazy" decoding="async"></div>
         <div class="body">
           <div class="idx">01</div><h3>Remodeling</h3>
           <p>Kitchens, baths, whole floors, whole units — planned tight, dust contained, and finished to the inch.</p>
@@ -535,10 +558,7 @@
         </div>
       </div>
       <div class="svc reveal">
-        <div class="mslot">
-          <svg class="svc-ico" viewBox="0 0 64 64" aria-hidden="true"><line x1="8" y1="46" x2="56" y2="46"/><line x1="12" y1="46" x2="12" y2="54"/><line x1="52" y1="46" x2="52" y2="54"/><line x1="10" y1="40" x2="34" y2="40"/><line x1="10" y1="34" x2="34" y2="34"/><line x1="10" y1="28" x2="34" y2="28"/><polyline points="38,40 38,20 54,20 54,40"/><line x1="42" y1="20" x2="42" y2="14"/><line x1="50" y1="20" x2="50" y2="14"/></svg>
-          <div class="tag">Deck Footage Coming Soon</div>
-        </div>
+        <div class="mslot has-img"><img class="par" src="media/photos/framing-interior.webp" alt="Interior wall framing with fresh studs and sheathing" loading="lazy" decoding="async"></div>
         <div class="body">
           <div class="idx">03</div><h3>Carpentry &amp; Decks</h3>
           <p>Decks, stairs, railings, trim, and structural repairs — built square by our in-house carpenters.</p>
@@ -546,10 +566,7 @@
         </div>
       </div>
       <div class="svc reveal">
-        <div class="mslot">
-          <svg class="svc-ico" viewBox="0 0 64 64" aria-hidden="true"><rect x="14" y="10" width="30" height="12" rx="2"/><path d="M44 14 h8 v10 h-18 v6"/><rect x="30" y="30" width="8" height="24"/></svg>
-          <div class="tag">Footage Coming Soon</div>
-        </div>
+        <div class="mslot has-img"><img class="par" src="media/photos/paint-prep.webp" alt="Kitchen masked with plastic and paper, prepped for painting" loading="lazy" decoding="async"></div>
         <div class="body">
           <div class="idx">04</div><h3>Painting</h3>
           <p>Interior and exterior, residential and commercial — crisp lines, clean prep, and colors that hold up.</p>
@@ -557,10 +574,7 @@
         </div>
       </div>
       <div class="svc reveal">
-        <div class="mslot">
-          <svg class="svc-ico" viewBox="0 0 64 64" aria-hidden="true"><polyline points="6,34 32,14 58,34"/><polyline points="12,30 12,54 52,54 52,30"/><line x1="20" y1="24" x2="30" y2="32"/><line x1="26" y1="20" x2="36" y2="28"/><line x1="32" y1="16" x2="42" y2="24"/><line x1="20" y1="14" x2="20" y2="20"/><line x1="26" y1="14" x2="20" y2="14"/></svg>
-          <div class="tag">Footage Coming Soon</div>
-        </div>
+        <div class="mslot has-img"><img class="par" src="media/photos/framing-roofline.webp" alt="Framed two-story structure with a finished roofline and edge safety rails" loading="lazy" decoding="async"></div>
         <div class="body">
           <div class="idx">05</div><h3>Roofing</h3>
           <p>Roof repairs and improvements — leaks found, flashing fixed, and full replacements managed end to end.</p>
@@ -626,6 +640,16 @@
   </div>
 </section>
 
+<!-- ================= FULL-BLEED PHOTO BAND (expands to full width on scroll) ================= -->
+<section class="fullbleed" id="behind" aria-label="Behind the finish">
+  <div class="fb-media"><img src="media/photos/framer-sky.webp" alt="Carpenter setting a framed wall against a blue sky" loading="lazy" decoding="async"></div>
+  <div class="fb-copy">
+    <div class="kick">Behind the Finish</div>
+    <h2 class="fb-line">Every clean finish starts with <em>a frame built square.</em></h2>
+    <p>What you see at the walkthrough is only as good as what's behind the walls. We manage both.</p>
+  </div>
+</section>
+
 <!-- ================= PROJECT FILM (scroll-scrub) ================= -->
 <section class="build-sec" id="craft">
   <div class="stage" id="stage">
@@ -665,12 +689,13 @@
           <div class="check reveal"><div class="tick"></div><p><b>Licensed, insured, clean.</b> Every site left broom-ready, every workday.</p></div>
         </div>
       </div>
-      <div class="reveal">
+      <div class="reveal about-media">
         <div class="vidframe">
-          <img class="still" src="frames/f_080.webp" alt="A finished Toscano Construction project — modern multi-unit exterior">
+          <img class="still" src="media/photos/kitchen-white-island.webp" alt="Open-plan kitchen with a waterfall quartz island, white shaker cabinets and vaulted ceiling" loading="lazy" decoding="async">
           <img class="qstamp" id="qstamp" src="logo-white.png" alt="" aria-hidden="true">
-          <div class="note">Toscano · Delivered Work</div>
+          <div class="note">Remodeling · Finish Standard</div>
         </div>
+        <div class="about-inset"><img src="media/photos/kitchen-white-galley.webp" alt="Detail of quartz waterfall edge, herringbone tile backsplash and pot filler" loading="lazy" decoding="async"></div>
       </div>
     </div>
   </div>
@@ -745,61 +770,44 @@
     </div>
     <div class="kick reveal">Selected Work</div>
     <h2 class="reveal">Planned. Managed. <em>Delivered.</em></h2>
-    <p class="sub reveal">Finished-project photography is being shot now — the drawings hold each frame until then.</p>
+    <p class="sub reveal">A look at recent work — kitchens, framing, roofing, and paint, all run start to finish by our team.</p>
   </div>
   <div class="hscroll" id="hscroll">
     <div class="htrack" id="htrack">
       <div class="proj reveal">
-        <div class="ph">
-          <svg viewBox="0 0 300 200" aria-hidden="true">
-            <rect class="p-ln" x="46" y="48" width="170" height="112"/>
-            <line class="p-ln" x1="46" y1="86" x2="216" y2="86"/><line class="p-ln" x1="46" y1="124" x2="216" y2="124"/>
-            <rect class="p-thin" x="58" y="58" width="22" height="20"/><rect class="p-thin" x="94" y="58" width="22" height="20"/>
-            <rect class="p-thin" x="130" y="58" width="22" height="20"/><rect class="p-thin" x="166" y="58" width="22" height="20"/>
-            <rect class="p-thin" x="58" y="96" width="22" height="20"/><rect class="p-thin" x="94" y="96" width="22" height="20"/>
-            <rect class="p-thin" x="130" y="96" width="22" height="20"/><rect class="p-thin" x="166" y="96" width="22" height="20"/>
-            <rect class="p-thin" x="118" y="132" width="26" height="28"/>
-            <rect class="p-ln" x="216" y="98" width="52" height="62"/>
-            <line class="p-thin" x1="30" y1="160" x2="280" y2="160"/>
-            <line class="p-thin" x1="46" y1="38" x2="216" y2="38"/>
-            <line class="p-thin" x1="46" y1="34" x2="46" y2="42"/><line class="p-thin" x1="216" y1="34" x2="216" y2="42"/>
-          </svg>
-          <div class="slot">Photography In Progress</div>
-        </div>
-        <div class="meta"><b>Unit Renovations</b><span>Residential</span></div>
-        <div class="specs"><span>Plaistow, NH</span><span>6 Units · Full Interior</span><span>2026</span></div>
+        <div class="ph has-img"><img src="media/photos/kitchen-walnut.webp" alt="Remodeled kitchen with walnut island, quartz countertop and globe pendants" loading="lazy" decoding="async"></div>
+        <div class="meta"><b>Walnut &amp; Quartz Kitchen</b><span>Remodeling</span></div>
+        <div class="specs"><span>Residential</span><span>Full Kitchen</span><span>Cabinetry · Tile · Lighting</span></div>
       </div>
       <div class="proj reveal">
-        <div class="ph">
-          <svg viewBox="0 0 300 200" aria-hidden="true">
-            <rect class="p-ln" x="52" y="60" width="196" height="100"/>
-            <line class="p-ln" x1="52" y1="120" x2="248" y2="120"/>
-            <rect class="p-thin" x="66" y="130" width="40" height="30"/><rect class="p-thin" x="128" y="130" width="44" height="30"/>
-            <rect class="p-thin" x="192" y="130" width="40" height="30"/>
-            <line class="p-thin" x1="66" y1="74" x2="234" y2="74"/><line class="p-thin" x1="66" y1="92" x2="234" y2="92"/>
-            <line class="p-thin" x1="100" y1="60" x2="100" y2="120"/><line class="p-thin" x1="150" y1="60" x2="150" y2="120"/>
-            <line class="p-thin" x1="200" y1="60" x2="200" y2="120"/>
-            <line class="p-thin" x1="36" y1="160" x2="264" y2="160"/>
-          </svg>
-          <div class="slot">Photography In Progress</div>
-        </div>
-        <div class="meta"><b>Retail Build-Out</b><span>Commercial</span></div>
-        <div class="specs"><span>Greater Boston</span><span>4,800 SF</span><span>2026</span></div>
+        <div class="ph has-img"><img src="media/photos/kitchen-white-island.webp" alt="Open-plan kitchen with waterfall quartz island and vaulted ceiling" loading="lazy" decoding="async"></div>
+        <div class="meta"><b>Open-Plan Kitchen &amp; Living</b><span>Remodeling</span></div>
+        <div class="specs"><span>Residential</span><span>Kitchen + Living</span><span>Waterfall Island</span></div>
       </div>
       <div class="proj reveal">
-        <div class="ph">
-          <svg viewBox="0 0 300 200" aria-hidden="true">
-            <rect class="p-ln" x="50" y="50" width="200" height="110"/>
-            <line class="p-ln" x1="50" y1="105" x2="250" y2="105"/><line class="p-ln" x1="150" y1="50" x2="150" y2="160"/>
-            <path class="p-thin" d="M150 105 L250 50"/>
-            <rect class="p-thin" x="62" y="118" width="34" height="42"/><circle class="p-ln" cx="216" cy="132" r="14"/>
-            <polyline class="p-thin" points="222,160 222,152 230,152 230,144 238,144 238,136 246,136"/>
-            <line class="p-thin" x1="60" y1="160" x2="240" y2="160"/>
-          </svg>
-          <div class="slot">Photography In Progress</div>
-        </div>
-        <div class="meta"><b>Kitchen + 2 Bath Remodel</b><span>Remodeling</span></div>
-        <div class="specs"><span>Southern NH</span><span>Full Floor</span><span>2026</span></div>
+        <div class="ph has-img"><img src="media/photos/kitchen-white-galley.webp" alt="Kitchen detail with herringbone backsplash, pot filler and quartz waterfall edge" loading="lazy" decoding="async"></div>
+        <div class="meta"><b>Chef's Kitchen Detail</b><span>Finish Carpentry</span></div>
+        <div class="specs"><span>Residential</span><span>Tile + Trim</span><span>Custom Hood</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="ph has-img"><img src="media/photos/framing-interior.webp" alt="Interior wall framing with studs and sheathing" loading="lazy" decoding="async"></div>
+        <div class="meta"><b>Interior Framing</b><span>Carpentry</span></div>
+        <div class="specs"><span>Residential</span><span>Layout + Framing</span><span>Pre-Drywall</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="ph has-img"><img src="media/photos/framer-sky.webp" alt="Carpenter setting a framed wall against a blue sky" loading="lazy" decoding="async"></div>
+        <div class="meta"><b>Wall &amp; Roof Framing</b><span>Carpentry</span></div>
+        <div class="specs"><span>Structural</span><span>Framing Crew</span><span>Built Square</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="ph has-img"><img src="media/photos/framing-roofline.webp" alt="Framed two-story structure with finished roofline and safety rails" loading="lazy" decoding="async"></div>
+        <div class="meta"><b>Two-Story Framing &amp; Roof</b><span>Roofing</span></div>
+        <div class="specs"><span>Structural</span><span>Roof + Framing</span><span>Site Managed</span></div>
+      </div>
+      <div class="proj reveal">
+        <div class="ph has-img"><img src="media/photos/paint-prep.webp" alt="Kitchen fully masked and protected for interior painting" loading="lazy" decoding="async"></div>
+        <div class="meta"><b>Protected Interior Repaint</b><span>Painting</span></div>
+        <div class="specs"><span>Residential</span><span>Full Masking</span><span>Dust Contained</span></div>
       </div>
       <div class="proj p-cta reveal">
         <b>Your project here.</b>
@@ -1297,6 +1305,38 @@ gsap.timeline({scrollTrigger:{trigger:'.vidframe',start:'top 70%'}})
   .to('#qstamp',{scale:1.07,duration:.1,ease:'power1.out'})
   .to('#qstamp',{scale:1,duration:.2,ease:'power2.out'});
 
+/* about photos: main still settles from a slow zoom; inset card rises faster for depth */
+gsap.fromTo('.vidframe img.still',{scale:1.18},{scale:1,ease:'none',
+  scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}});
+gsap.fromTo('.about-inset',{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.3,ease:'power4.out',
+  scrollTrigger:{trigger:'.about-inset',start:'top 92%'}});
+gsap.fromTo('.about-inset',{yPercent:16},{yPercent:-12,ease:'none',
+  scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}});
+gsap.fromTo('.about-inset img',{yPercent:-6},{yPercent:6,ease:'none',
+  scrollTrigger:{trigger:'.about',start:'top bottom',end:'bottom top',scrub:.6}});
+
+/* service photos: wipe in top-down, then drift inside their frame while scrolling */
+gsap.utils.toArray('.mslot.has-img').forEach(slot=>{
+  const img = slot.querySelector('img');
+  gsap.fromTo(slot,{clipPath:'inset(0% 0% 100% 0%)'},{clipPath:'inset(0% 0% 0% 0%)',duration:1.3,ease:'power4.out',
+    scrollTrigger:{trigger:slot,start:'top 90%'}});
+  gsap.fromTo(img,{yPercent:-6},{yPercent:6,ease:'none',
+    scrollTrigger:{trigger:slot,start:'top bottom',end:'bottom top',scrub:.6}});
+});
+
+/* full-bleed band: framed photo opens to the edges, zoom settles, copy rises */
+(function(){
+  const sec = document.getElementById('behind'); if(!sec) return;
+  const media = sec.querySelector('.fb-media'), img = media.querySelector('img');
+  const i = window.innerWidth < 700 ? 5 : 12;
+  gsap.fromTo(media,{clipPath:`inset(${i}% ${i}% ${i}% ${i}%)`},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',
+    scrollTrigger:{trigger:sec,start:'top bottom',end:'top top',scrub:.6}});
+  gsap.fromTo(img,{scale:1.28},{scale:1,ease:'none',
+    scrollTrigger:{trigger:sec,start:'top bottom',end:'bottom top',scrub:.6}});
+  gsap.from(sec.querySelectorAll('.fb-copy > *'),{opacity:0,y:40,duration:1.1,stagger:.14,ease:'power3.out',
+    scrollTrigger:{trigger:sec.querySelector('.fb-copy'),start:'top 88%'}});
+})();
+
 /* nav: compact + hide on scroll down, show on scroll up; back-to-top visibility */
 (function(){
   const nav = document.getElementById('nav');
@@ -1346,7 +1386,11 @@ mm.add('(min-width: 900px)', ()=>{
       trigger:'#hscroll',start:'top 86px',end:()=>'+='+dist(),pin:true,scrub:.6,invalidateOnRefresh:true,refreshPriority:-1,
       onUpdate:s=>{ document.getElementById('hprogfill').style.width = (s.progress*100)+'%'; }
     }});
-  return ()=>{ tw.scrollTrigger && tw.scrollTrigger.kill(); gsap.set(track,{x:0}); };
+  /* photos pan against the wall's motion for depth */
+  const pans = gsap.utils.toArray('#htrack .ph.has-img img').map(img=>
+    gsap.fromTo(img,{xPercent:4},{xPercent:-4,ease:'none',
+      scrollTrigger:{trigger:img.closest('.proj'),containerAnimation:tw,start:'left right',end:'right left',scrub:true}}));
+  return ()=>{ pans.forEach(p=>p.scrollTrigger && p.scrollTrigger.kill()); tw.scrollTrigger && tw.scrollTrigger.kill(); gsap.set(track,{x:0}); };
 });
 
 /* pinned project film: footage scrub */
