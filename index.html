@@ -106,6 +106,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   img,video{max-width:100%;display:block}
   a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible{outline:1px solid var(--txt);outline-offset:4px}
   [id]{scroll-margin-top:84px}
+  [hidden]{display:none !important}
   .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 
   /* ---------- type primitives ---------- */
@@ -858,19 +859,19 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
       </article>
     </div>
 
-    <!-- BEFORE / AFTER — shows side by side without JS or with reduced motion; draggable otherwise.
-         Replace both images with a real before/after pair shot from the same spot. -->
-    <div class="ba-row">
+    <!-- BEFORE / AFTER (unit turn) — HIDDEN until a real pair arrives. To publish: add media/photos/unit-turn-before.webp + unit-turn-after.webp
+         (same spot, same angle), fill in the location, then delete the `hidden` attribute below. Side by side without JS / reduced motion; draggable otherwise. -->
+    <div class="ba-row" hidden>
       <div class="ba-copy">
-        <div class="wk-top"><span class="label">P—04</span><span class="label">Exterior Improvements</span></div>
+        <div class="wk-top"><span class="label">P—04</span><span class="label">Unit Turn</span></div>
         <h3 class="reveal">Before &amp; after.</h3>
-        <p class="reveal">Siding, trim, windows, and roofline — the same building, from open envelope to finished exterior.<span class="live-only"> Drag to compare.</span></p>
-        <div class="wk-meta"><span>Greater New England</span><span>Siding · Trim · Roofing</span></div>
+        <p class="reveal">One unit, start to finish — paint, flooring, fixtures, and punch list, turned and handed back ready to rent.<span class="live-only"> Drag to compare.</span></p>
+        <div class="wk-meta"><span>LOCATION</span><span>Paint · Flooring · Fixtures</span><span>YEAR</span></div>
       </div>
       <div class="ba" data-ba>
         <div class="ba-stage">
-          <figure class="ba-fig ba-before"><img src="media/photos/ba-before.webp" alt="Before: multifamily building with exposed roof framing and unfinished first-floor exterior" width="980" height="570" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
-          <figure class="ba-fig ba-after"><img src="media/photos/ba-after.webp" alt="After: the same building with finished siding, trim, windows and roofline" width="980" height="570" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
+          <figure class="ba-fig ba-before"><img src="media/photos/unit-turn-before.webp" alt="Before: apartment unit at move-out, before the turn" width="980" height="570" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
+          <figure class="ba-fig ba-after"><img src="media/photos/unit-turn-after.webp" alt="After: the same unit after paint, flooring and fixtures" width="980" height="570" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
           <input class="ba-range" type="range" min="0" max="100" step="1" value="50" aria-label="Before and after comparison: move to reveal more of the before or after photo">
           <div class="ba-handle" aria-hidden="true"><div class="ba-knob"><i></i><i></i></div></div>
         </div>
