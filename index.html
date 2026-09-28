@@ -13,15 +13,15 @@
 <meta property="og:title" content="Toscano Construction LLC — Built Right. Managed Start to Finish.">
 <meta property="og:description" content="General contracting &amp; project management for multifamily owners, landlords, property managers, and homeowners — one contractor for the whole property. Plaistow, NH &amp; Greater New England. Licensed &amp; insured.">
 <meta property="og:url" content="https://toscanoconstructionllc.net/">
-<meta property="og:image" content="https://toscanoconstructionllc.net/og.png">
+<meta property="og:image" content="https://toscanoconstructionllc.net/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Toscano Construction LLC — Built Right. Managed Start to Finish.">
 <meta name="twitter:description" content="General contracting &amp; project management for multifamily owners, landlords, property managers, and homeowners. Licensed &amp; insured.">
-<meta name="twitter:image" content="https://toscanoconstructionllc.net/og.png">
+<meta name="twitter:image" content="https://toscanoconstructionllc.net/og.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"GeneralContractor","name":"Toscano Construction LLC","url":"https://toscanoconstructionllc.net/","telephone":"+1-844-465-7566","email":"info@toscanoconstructionllc.net","image":"https://toscanoconstructionllc.net/og.png","description":"General contracting and project management for multifamily owners, landlords, property managers, and homeowners — unit turns, remodeling, siding, painting, roofing, carpentry, and an in-house handyman team.","address":{"@type":"PostalAddress","addressLocality":"Plaistow","addressRegion":"NH","addressCountry":"US"},"areaServed":[{"@type":"Place","name":"Plaistow, NH"},{"@type":"Place","name":"Greater New England"}],"knowsAbout":["General contracting","Project management","Multifamily unit turns","Apartment renovations","Home remodeling","Siding","Interior painting","Exterior painting","Flooring","Roof repairs","Carpentry","Decks","Handyman services","Property maintenance","Punch lists","Commercial build-outs"]}
+{"@context":"https://schema.org","@type":"GeneralContractor","name":"Toscano Construction LLC","url":"https://toscanoconstructionllc.net/","telephone":"+1-844-465-7566","email":"info@toscanoconstructionllc.net","image":"https://toscanoconstructionllc.net/og.jpg","description":"General contracting and project management for multifamily owners, landlords, property managers, and homeowners — unit turns, remodeling, siding, painting, roofing, carpentry, and an in-house handyman team.","address":{"@type":"PostalAddress","addressLocality":"Plaistow","addressRegion":"NH","addressCountry":"US"},"areaServed":[{"@type":"Place","name":"Plaistow, NH"},{"@type":"Place","name":"Greater New England"}],"knowsAbout":["General contracting","Project management","Multifamily unit turns","Apartment renovations","Home remodeling","Siding","Interior painting","Exterior painting","Flooring","Roof repairs","Carpentry","Decks","Handyman services","Property maintenance","Punch lists","Commercial build-outs"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
@@ -37,7 +37,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="media/hero-poster.webp" fetchpriority="high">
+<link rel="preload" as="image" href="media/work/hero-build-1024.webp" imagesrcset="media/work/hero-build-1024.webp 1024w, media/work/hero-build.webp 1920w" imagesizes="100vw" fetchpriority="high">
 <script>/* motion flag: pre-animation states only apply when motion is allowed (removed again if GSAP fails to load) */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-motion');</script>
 <style>
@@ -281,9 +281,10 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   /* ================= FOR PROPERTY OWNERS ================= */
   .owners{padding:var(--section) 0;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
   .own-grid{display:grid;gap:var(--s7);margin-top:var(--s8)}
-  @media(min-width:980px){.own-grid{grid-template-columns:7fr 5fr;gap:var(--s9);align-items:start}}
-  .own-media{aspect-ratio:900/570}
-  .own-media img{object-position:50% 40%}
+  @media(min-width:980px){.own-grid{grid-template-columns:5fr 6fr;gap:var(--s9);align-items:start}}
+  .own-media{aspect-ratio:4/5}
+  @media(max-width:979px){.own-media{aspect-ratio:4/3}}
+  .own-media img{object-position:50% 30%}
   .own-copy .sub{margin-bottom:var(--s6)}
   .scope{list-style:none;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
   .scope li{display:flex;gap:var(--s3);align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);font-size:var(--fs-sm);color:var(--txt)}
@@ -319,7 +320,8 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   .proc-visual{position:relative;z-index:2;background:var(--bg);padding:var(--s3) 0 var(--s4)}
   .js-motion .proc-visual{position:sticky;top:calc(var(--nav-h) - 6px)}
   @media(min-width:980px){.proc-visual{order:2;padding:0}.js-motion .proc-visual{top:calc(var(--nav-h) + 28px)}}
-  .pv{position:relative;aspect-ratio:3/2;border:1px solid var(--line2);background:var(--ink-850);overflow:hidden}
+  .pv{position:relative;aspect-ratio:1/1;border:1px solid var(--line2);background:var(--ink-850);overflow:hidden}
+  @media(min-width:980px){.pv{aspect-ratio:3/4;width:100%;max-width:calc((100vh - var(--nav-h) - 72px) * .75);margin-left:auto}}
   .pv-photo{position:absolute;inset:0}
   .pv-photo img{width:100%;height:100%;object-fit:cover;filter:var(--img-filter)}
   .pv-svg{position:absolute;inset:0;width:100%;height:100%;opacity:.3;pointer-events:none}
@@ -327,6 +329,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   .pv-svg .l-detail *{stroke:var(--paper);stroke-width:1.2;fill:none;opacity:.85}
   .pv-svg .l-dims line,.pv-svg .l-dims path,.pv-svg .l-dims circle{stroke:var(--paper-2);stroke-width:1.3;fill:none}
   .pv-svg text{font-family:var(--mono);font-size:17px;letter-spacing:.12em;fill:var(--paper-2);stroke:none}
+  .pv-svg text.tag{font-size:14px;letter-spacing:.06em;fill:var(--paper)}
   .pv-scan{position:absolute;top:0;bottom:0;left:0;width:1px;background:var(--paper);opacity:0;z-index:3}
   .pv-read{position:absolute;top:0;left:0;right:0;z-index:4;display:flex;justify-content:space-between;padding:var(--s3) var(--s4);color:var(--paper)}
   .pv-read .label{color:var(--paper)}
@@ -367,6 +370,11 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   .wk-img img{position:absolute;left:0;top:-5%;width:100%;height:110%;object-fit:cover;filter:var(--img-filter);
     transition:scale var(--t-img) var(--ease),filter .6s var(--ease)}
   .wk:hover .wk-img img{scale:1.03;filter:var(--img-filter-hover)}
+  /* design card: architect's line drawing sits under the rendering; the rendering wipes in with scroll */
+  .wk-draw,.wk-render{position:absolute;inset:0;overflow:hidden}
+  .wk-draw{background:var(--ink-800)}
+  .wk-draw img{filter:invert(1) grayscale(1) contrast(1.1) !important;mix-blend-mode:screen;opacity:.9}
+  .wk-tag{position:absolute;left:12px;bottom:12px;z-index:3;color:var(--paper);background:rgba(var(--ink-rgb),.62);padding:5px 8px}
   .wk-cap{padding-top:var(--s4)}
   .wk-top{display:flex;justify-content:space-between;gap:var(--s3)}
   .wk-cap h3{font-size:clamp(20px,1.8vw,26px);letter-spacing:var(--track-title);margin:var(--s2) 0 var(--s3);transition:transform var(--t-base) var(--ease)}
@@ -381,17 +389,22 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
 
   /* before / after — static side-by-side by default; `.is-live` turns it into a draggable comparison */
   .ba-row{display:grid;gap:var(--s6);margin-top:var(--s9)}
-  @media(min-width:980px){.ba-row{grid-template-columns:4fr 8fr;gap:var(--s6);align-items:end}}
+  @media(min-width:980px){.ba-row{grid-template-columns:5fr 7fr;gap:var(--s8);align-items:end}}
+  .ba{width:100%}
+  @media(min-width:980px){.ba{max-width:calc((100vh - 160px) * .75 * 2);justify-self:end}.ba.is-live{max-width:calc((100vh - 160px) * .75)}}
+  .ba-during{margin:0 0 var(--s5);max-width:200px}
+  .ba-during img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:1px solid var(--line);filter:var(--img-filter)}
+  .ba-during figcaption{margin-top:var(--s2)}
   .ba-copy h3{font-size:clamp(24px,2.4vw,34px);letter-spacing:var(--track-head);margin:var(--s3) 0}
   .ba-copy p{font-weight:300;font-size:var(--fs-sm);line-height:1.7;color:var(--mut);max-width:40ch;margin-bottom:var(--s5)}
   .ba-stage{display:grid;grid-template-columns:1fr;gap:var(--s3)}
   @media(min-width:640px){.ba-stage{grid-template-columns:1fr 1fr}}
   .ba-fig{position:relative;margin:0;overflow:hidden;border:1px solid var(--line);background:var(--ink-800)}
-  .ba-fig img{width:100%;height:auto;aspect-ratio:980/570;object-fit:cover;filter:var(--img-filter);pointer-events:none;-webkit-user-drag:none;user-select:none}
+  .ba-fig img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;filter:var(--img-filter);pointer-events:none;-webkit-user-drag:none;user-select:none}
   .ba-fig figcaption{position:absolute;top:12px;left:14px;z-index:2;font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.14em;
     text-transform:uppercase;color:var(--paper);background:rgba(var(--ink-rgb),.6);padding:5px 8px}
   .ba-range,.ba-handle{display:none}
-  .ba.is-live .ba-stage{display:block;position:relative;aspect-ratio:980/570;border:1px solid var(--line);overflow:hidden;
+  .ba.is-live .ba-stage{display:block;position:relative;aspect-ratio:3/4;border:1px solid var(--line);overflow:hidden;
     cursor:ew-resize;touch-action:pan-y;user-select:none;-webkit-user-select:none}
   .ba.is-live .ba-fig{position:absolute;inset:0;border:0}
   .ba.is-live .ba-fig img{height:100%}
@@ -563,7 +576,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
 <!-- ================= HERO ================= -->
 <section class="hero-sec" id="top">
   <div class="hero-media" aria-hidden="true">
-    <video src="media/hero.mp4" poster="media/hero-poster.webp" autoplay muted loop playsinline preload="metadata"></video>
+    <img src="media/work/hero-build-1024.webp" srcset="media/work/hero-build-1024.webp 1024w, media/work/hero-build.webp 1920w" sizes="100vw" alt="" width="1920" height="1438" fetchpriority="high" decoding="async">
   </div>
   <div class="hero">
     <div class="kick">General Contractor · Plaistow, NH</div>
@@ -598,7 +611,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
       <!-- To swap a service photo: change the <img> in the matching .svc-item AND the matching .sm-img (same order). -->
       <ol class="svc-list">
         <li class="svc-item" data-name="Remodeling">
-          <div class="svc-photo"><img src="media/photos/kitchen-white-island-960.webp" srcset="media/photos/kitchen-white-island-960.webp 960w, media/photos/kitchen-white-island.webp 1800w" sizes="(min-width:1080px) 33vw, (min-width:720px) 50vw, 100vw" alt="Open-plan kitchen remodel with a waterfall quartz island" loading="lazy" decoding="async" width="960" height="640"></div>
+          <div class="svc-photo"><img src="media/work/unit-gut-960.webp" alt="Apartment unit taken down to the studs and subfloor for a full renovation" loading="lazy" decoding="async" width="960" height="1280"></div>
           <div class="svc-body">
             <div class="svc-idx">01</div><h3>Remodeling</h3>
             <p>Kitchens, baths, whole floors, whole units — planned tight, dust contained, and finished to the inch.</p>
@@ -607,7 +620,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
           </div>
         </li>
         <li class="svc-item" data-name="Siding">
-          <div class="svc-photo"><img src="media/photos/ba-before.webp" alt="Multifamily building mid-project with new siding and windows going on" loading="lazy" decoding="async" width="980" height="570"></div>
+          <div class="svc-photo"><img src="media/work/siding-facade.webp" alt="Finished multifamily facade with new panel siding and black-framed windows" loading="lazy" decoding="async" width="880" height="660"></div>
           <div class="svc-body">
             <div class="svc-idx">02</div><h3>Siding</h3>
             <p>Weather-tight, straight-lined siding that changes the whole face of a property — flashing and trim done right.</p>
@@ -616,7 +629,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
           </div>
         </li>
         <li class="svc-item" data-name="Carpentry &amp; Decks">
-          <div class="svc-photo"><img src="media/photos/framer-sky-960.webp" srcset="media/photos/framer-sky-960.webp 960w, media/photos/framer-sky.webp 1800w" sizes="(min-width:1080px) 33vw, (min-width:720px) 50vw, 100vw" alt="Carpenter setting a framed wall against a blue sky" loading="lazy" decoding="async" width="960" height="640"></div>
+          <div class="svc-photo"><img src="media/work/bath-during-960.webp" alt="New framing and a waterproofed wet wall ready for shower tile" loading="lazy" decoding="async" width="960" height="1280"></div>
           <div class="svc-body">
             <div class="svc-idx">03</div><h3>Carpentry &amp; Decks</h3>
             <p>Decks, stairs, railings, trim, and structural repairs — built square by our in-house carpenters.</p>
@@ -655,9 +668,9 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
 
       <div class="svc-media" aria-hidden="true">
         <div class="frame">
-          <div class="sm-img"><img src="media/photos/kitchen-white-island.webp" alt="" loading="lazy" decoding="async"></div>
-          <div class="sm-img"><img src="media/photos/ba-before.webp" alt="" loading="lazy" decoding="async"></div>
-          <div class="sm-img"><img src="media/photos/framer-sky.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="sm-img"><img src="media/work/unit-gut.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="sm-img"><img src="media/work/siding-facade.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="sm-img"><img src="media/work/bath-during-960.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/photos/paint-prep.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/photos/framing-roofline.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/photos/kitchen-white-galley.webp" alt="" loading="lazy" decoding="async"></div>
@@ -678,7 +691,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
     <h2 class="reveal">One contractor for <em>the entire property.</em></h2>
     <div class="own-grid">
       <div class="frame own-media" id="ownmedia">
-        <img src="media/photos/multifamily-exterior.webp" alt="Three-story multifamily building on a New England street, finished exterior" loading="lazy" decoding="async" width="900" height="570">
+        <img src="media/work/neighborhood-aerial-800.webp" srcset="media/work/neighborhood-aerial-800.webp 800w, media/work/neighborhood-aerial.webp 1350w" sizes="(min-width:980px) 42vw, 100vw" alt="Aerial view of a Greater Boston neighborhood of triple-deckers and multifamily homes, with the city skyline behind" loading="lazy" decoding="async" width="800" height="1000">
         <span class="regmark tl"></span><span class="regmark br"></span>
       </div>
       <div class="own-copy">
@@ -695,7 +708,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
     </div>
     <!-- Project metadata — facts about a real job, not marketing claims. Update from the job file. -->
     <div class="projmeta reveal">
-      <div class="projmeta-head"><span class="label">P—01 · Unit Renovations · Plaistow, NH</span><a class="tlink" href="#projects">See selected work</a></div>
+      <div class="projmeta-head"><span class="label">Unit Renovations · Plaistow, NH</span><a class="tlink" href="#projects">See selected work</a></div>
       <div class="projmeta-grid">
         <div class="pm"><b>06</b><span class="label">Units</span></div>
         <div class="pm"><b>Full interior</b><span class="label">Renovation</span></div>
@@ -714,7 +727,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
     <h2 class="reveal">The work is only <em>half the job.</em></h2>
     <div class="half-grid">
       <div class="frame half-media" id="halfmedia">
-        <img src="media/photos/paint-prep-960.webp" srcset="media/photos/paint-prep-960.webp 960w, media/photos/paint-prep.webp 1800w" sizes="(min-width:980px) 55vw, 100vw" alt="Kitchen fully protected with plastic sheeting and paper before painting" loading="lazy" decoding="async" width="960" height="640">
+        <img src="media/work/site-overhead-960.webp" srcset="media/work/site-overhead-960.webp 960w, media/work/site-overhead.webp 1600w" sizes="(min-width:980px) 55vw, 100vw" alt="Overhead view of an organized multifamily jobsite with excavation, staged materials and a neighboring triple-decker" loading="lazy" decoding="async" width="960" height="720">
       </div>
       <div class="half-copy">
         <p class="sub reveal">Most projects fail in the gaps between trades. Our in-house team handles carpentry, painting, and maintenance directly, and for specialty trades we manage a vetted network — so you hold one contract, one schedule, and one standard for the finished work.</p>
@@ -740,72 +753,70 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
         <div class="kick reveal">How It Works</div>
         <h2 class="reveal">From first call to <em>final walkthrough.</em></h2>
       </div>
-      <p class="sub reveal">Every project starts as a set of lines on paper. Scroll to watch one become a finished kitchen.</p>
+      <p class="sub reveal">Every project starts as a set of lines on paper. Scroll to watch one become a finished bathroom.</p>
     </div>
     <div class="proc">
       <div class="proc-visual">
         <div class="pv" id="pv">
           <!-- Final photo: swap this <img> for a finished Toscano project. The drawing below is traced to this photo. -->
-          <div class="pv-photo"><img src="media/photos/kitchen-walnut-960.webp" srcset="media/photos/kitchen-walnut-960.webp 960w, media/photos/kitchen-walnut.webp 1800w" sizes="(min-width:980px) 58vw, 100vw" alt="Finished kitchen remodel with walnut island, quartz countertop and white globe pendants" loading="lazy" decoding="async" width="960" height="640"></div>
-          <svg class="pv-svg" viewBox="0 0 1200 800" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <!-- Final photo: a finished Toscano bathroom. The drawing below is traced to this photo (viewBox = photo at half size). -->
+          <div class="pv-photo"><img src="media/work/bath-after-960.webp" srcset="media/work/bath-after-960.webp 960w, media/work/bath-after.webp 1536w" sizes="(min-width:980px) 40vw, 100vw" alt="Finished bathroom renovation with glass shower, herringbone marble floor, double vanity and brass fixtures" loading="lazy" decoding="async" width="960" height="1280"></div>
+          <svg class="pv-svg" viewBox="0 0 768 1024" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
             <g class="l-outline">
-              <line x1="175" y1="14" x2="1160" y2="14"/><line x1="175" y1="14" x2="175" y2="540"/>
-              <rect x="177" y="14" width="259" height="526"/><rect x="938" y="14" width="220" height="531"/>
-              <path d="M503 14 V255 H755 V14"/><rect x="498" y="255" width="262" height="48"/>
-              <rect x="437" y="48" width="66" height="342"/><rect x="755" y="48" width="167" height="342"/>
-              <line x1="425" y1="512" x2="938" y2="512"/>
-              <line x1="0" y1="540" x2="1200" y2="540"/><line x1="0" y1="598" x2="1200" y2="598"/><line x1="0" y1="615" x2="1200" y2="615"/>
-              <line x1="30" y1="615" x2="30" y2="800"/>
+              <line x1="12" y1="70" x2="158" y2="250"/><line x1="430" y1="288" x2="768" y2="40"/>
+              <path d="M158 250 L430 288 M158 250 V668 M430 288 V548"/>
+              <path d="M150 672 L382 626"/>
+              <path d="M258 296 H413 V486 H258 Z"/>
+              <path d="M96 210 L152 266 L178 738 M96 210 L104 880"/>
+              <line x1="24" y1="88" x2="108" y2="1024"/>
+              <path d="M380 585 L768 815 M428 546 L768 628 M382 588 V846 M384 846 L560 1024"/>
+              <path d="M490 322 L768 196 M490 322 V512 L768 612"/>
             </g>
             <g class="l-dims">
-              <line x1="322" y1="186" x2="935" y2="186"/>
-              <path d="M322 158 V196 M632 160 V196 M935 158 V196 M315 193 L329 179 M625 193 L639 179 M928 193 L942 179"/>
-              <text x="477" y="176" text-anchor="middle">EQ</text><text x="783" y="176" text-anchor="middle">EQ</text>
-              <line x1="30" y1="770" x2="1170" y2="770"/>
-              <path d="M30 752 V788 M1170 752 V788 M23 777 L37 763 M1163 777 L1177 763"/>
-              <text x="60" y="756">ISLAND · WALNUT BASE / QUARTZ TOP</text>
-              <line x1="1182" y1="14" x2="1182" y2="512"/>
-              <path d="M1175 21 L1189 7 M1175 519 L1189 505"/>
-              <text transform="translate(1174 263) rotate(-90)" text-anchor="middle">CLG — CTR</text>
-              <path d="M150 100 H266"/><circle cx="270" cy="100" r="4"/><text x="22" y="106">02 LIGHTING</text>
-              <path d="M150 300 H236"/><circle cx="240" cy="300" r="4"/><text x="22" y="306">01 CABINETRY</text>
-              <path d="M150 690 H196"/><circle cx="200" cy="690" r="4"/><text x="22" y="696">03 ISLAND</text>
-              <path d="M676 440 H760"/><circle cx="672" cy="440" r="4"/><text x="768" y="446">04 TILE</text>
+              <line x1="158" y1="232" x2="430" y2="232"/>
+              <path d="M158 220 V250 M430 220 V288 M152 238 L164 226 M424 238 L436 226"/>
+              <text x="294" y="222" text-anchor="middle">BACK WALL</text>
+              <line x1="238" y1="296" x2="238" y2="486"/>
+              <path d="M226 296 H250 M226 486 H250 M232 302 L244 290 M232 492 L244 480"/>
+              <text transform="translate(229 391) rotate(-90)" text-anchor="middle">WIN.</text>
+              <line x1="752" y1="628" x2="752" y2="1010"/>
+              <path d="M740 628 H764 M746 634 L758 622 M746 1016 L758 1004"/>
+              <text transform="translate(743 830) rotate(-90)" text-anchor="middle">CTR HT.</text>
+              <path d="M104 434 H134"/><circle cx="138" cy="434" r="4"/><text class="tag" x="6" y="440">01 SHOWER</text>
+              <circle cx="413" cy="372" r="4"/><text class="tag" x="422" y="378">02 TRIM</text>
+              <path d="M600 508 V640"/><circle cx="600" cy="646" r="4"/><text class="tag" x="556" y="496">03 VANITY</text>
+              <path d="M92 954 H150"/><circle cx="154" cy="954" r="4"/><text class="tag" x="6" y="960">04 TILE</text>
             </g>
             <g class="l-detail">
-              <rect x="183" y="22" width="114" height="196"/><rect x="303" y="22" width="128" height="196"/>
-              <rect x="195" y="34" width="90" height="172"/><rect x="315" y="34" width="104" height="172"/>
-              <rect x="183" y="226" width="114" height="306"/><rect x="303" y="226" width="128" height="306"/>
-              <rect x="195" y="238" width="90" height="282"/><rect x="315" y="238" width="104" height="282"/>
-              <path d="M288 190 V204 M312 190 V204"/>
-              <rect x="441" y="52" width="58" height="86"/><rect x="441" y="148" width="58" height="238"/>
-              <rect x="451" y="62" width="38" height="66"/><rect x="451" y="160" width="38" height="214"/>
-              <rect x="759" y="52" width="78" height="86"/><rect x="841" y="52" width="78" height="86"/>
-              <rect x="759" y="148" width="78" height="238"/><rect x="841" y="148" width="78" height="238"/>
-              <rect x="770" y="62" width="56" height="66"/><rect x="852" y="62" width="56" height="66"/>
-              <rect x="770" y="160" width="56" height="214"/><rect x="852" y="160" width="56" height="214"/>
-              <rect x="944" y="20" width="101" height="200"/><rect x="1048" y="20" width="104" height="200"/>
-              <rect x="944" y="226" width="101" height="310"/><rect x="1048" y="226" width="104" height="310"/>
-              <rect x="956" y="32" width="77" height="176"/><rect x="1060" y="32" width="80" height="176"/>
-              <rect x="956" y="238" width="77" height="286"/><rect x="1060" y="238" width="80" height="286"/>
-              <path d="M1038 432 V520 M1057 432 V520"/>
-              <path d="M498 268 H760 M498 272 H760 M498 283 H760 M498 288 H760"/>
-              <path d="M503 345 H755 M503 378 H755 M450 412 H935 M450 445 H935 M450 478 H935"/>
-              <path d="M515 310 V510 M580 310 V510 M645 310 V510 M710 310 V510 M775 390 V510 M840 390 V510 M905 390 V510"/>
-              <rect x="515" y="498" width="230" height="14"/>
-              <path d="M628 555 V372 Q628 358 640 358 Q652 358 652 372 V392"/>
-              <path d="M322 0 V48 M632 0 V54 M935 0 V48"/>
-              <circle cx="322" cy="100" r="52"/><circle cx="632" cy="104" r="50"/><circle cx="935" cy="100" r="52"/>
-              <path d="M312 615 V800 M358 615 V800 M538 615 V800 M568 615 V800 M722 615 V800 M742 615 V800 M948 615 V800 M975 615 V800"/>
-              <path d="M522 634 V700 M704 634 V700 M730 634 V700"/>
+              <path d="M276 318 H392 V468 H276 Z"/>
+              <path d="M276 394 H392 M315 318 V468 M354 318 V468 M276 356 H392 M276 432 H392 M252 478 H418"/>
+              <path d="M184 498 H278 M188 492 V504 M274 492 V504 M326 548 H360"/>
+              <path d="M392 536 H430 V548 H392 Z"/>
+              <ellipse cx="348" cy="604" rx="34" ry="12"/>
+              <path d="M316 606 Q318 660 340 668 V690 H372 V668 Q382 650 382 606"/>
+              <ellipse cx="468" cy="566" rx="42" ry="11"/><ellipse cx="680" cy="700" rx="86" ry="36"/>
+              <path d="M504 566 V526 Q504 518 496 518 H482 M760 668 V648"/>
+              <path d="M442 612 V900 M507 648 V960 M582 698 V1024 M640 734 V1024 M445 704 L505 736 M445 792 L505 832"/>
+              <circle cx="456" cy="668" r="4"/><circle cx="458" cy="742" r="4"/><circle cx="456" cy="828" r="4"/><circle cx="578" cy="858" r="5"/><circle cx="610" cy="900" r="5"/>
+              <path d="M236 88 L360 124 L330 186 L236 160 Z M252 120 L336 142 M250 134 L330 156 M248 148 L326 168"/>
+              <circle cx="307" cy="215" r="12"/>
+              <path d="M580 236 L752 96"/><circle cx="690" cy="160" r="18"/>
+              <circle cx="584" cy="250" r="10"/><circle cx="644" cy="212" r="10"/><circle cx="740" cy="152" r="10"/>
+              <path d="M130 300 H176 M130 330 H176 M131 360 H177 M131 390 H177 M132 420 H178 M132 450 H178 M133 480 H179 M133 510 H179 M134 540 H180 M134 570 H180 M135 600 H181 M135 630 H181"/>
+              <path d="M100 510 H146 V556 H100 Z M0 300 Q30 290 58 306"/>
+              <polyline points="150,720 190,700 230,720 270,700 310,720 350,700 390,720"/>
+              <polyline points="140,790 184,768 228,790 272,768 316,790 360,768 404,790 420,782"/>
+              <polyline points="130,860 178,836 226,860 274,836 322,860 370,836 418,860 460,840"/>
+              <polyline points="120,930 172,904 224,930 276,904 328,930 380,904 432,930 484,904 500,912"/>
+              <polyline points="110,1000 166,972 222,1000 278,972 334,1000 390,972 446,1000 502,972 540,990"/>
             </g>
           </svg>
           <div class="pv-scan" aria-hidden="true"></div>
-          <div class="pv-read" aria-hidden="true"><span class="label" id="pvstep">Step 04 / 04 · Deliver</span><span class="label">A-201</span></div>
+          <div class="pv-read" aria-hidden="true"><span class="label" id="pvstep">Step 04 / 04 · Deliver</span><span class="label">A-301</span></div>
           <div class="pv-block" aria-hidden="true">
             <span class="label">Toscano Construction LLC</span>
-            <b>Kitchen Elevation</b>
-            <span class="label">Sheet A-201 · Scale 1/4" = 1'-0"</span>
+            <b>Bathroom · Interior Elevation</b>
+            <span class="label">Sheet A-301 · Scale 1/2" = 1'-0"</span>
           </div>
         </div>
       </div>
@@ -829,49 +840,58 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
         <div class="kick reveal">Selected Work</div>
         <h2 class="reveal">Planned. Managed. <em>Delivered.</em></h2>
       </div>
-      <p class="sub reveal">Unit renovations, kitchens, build-outs, and exteriors — each one run start to finish by our team.</p>
+      <p class="sub reveal">Multifamily construction, full renovations, and projects in design — planned, scheduled, and run by one team.</p>
     </div>
 
     <div class="work-grid">
       <article class="wk wk-anchor">
-        <div class="wk-img"><img src="media/photos/kitchen-white-island-960.webp" srcset="media/photos/kitchen-white-island-960.webp 960w, media/photos/kitchen-white-island.webp 1800w" sizes="(min-width:980px) 64vw, 100vw" alt="Renovated unit kitchen with waterfall quartz island and white shaker cabinets" loading="lazy" decoding="async" width="960" height="640"></div>
+        <div class="wk-img"><img src="media/work/multifamily-finished-1024.webp" srcset="media/work/multifamily-finished-1024.webp 1024w, media/work/multifamily-finished.webp 1920w" sizes="(min-width:980px) 64vw, 100vw" alt="Aerial view of a finished four-story multifamily building on a dense Greater Boston street" loading="lazy" decoding="async" width="1024" height="540"></div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—01</span><span class="label">Unit Renovations</span></div>
-          <h3>Six-Unit Interior Renovation</h3>
-          <div class="wk-meta"><span>Plaistow, NH</span><span>06 units · Paint, flooring, carpentry</span><span>2026</span></div>
+          <div class="wk-top"><span class="label">P—01</span><span class="label">Multifamily</span></div>
+          <h3>Multifamily Building</h3>
+          <div class="wk-meta"><span>Greater Boston</span><span>Four stories</span><span>Complete</span></div>
         </div>
       </article>
       <article class="wk wk-side">
-        <div class="wk-img"><img src="media/photos/kitchen-white-galley-960.webp" srcset="media/photos/kitchen-white-galley-960.webp 960w, media/photos/kitchen-white-galley.webp 1800w" sizes="(min-width:980px) 32vw, 100vw" alt="Kitchen remodel with herringbone tile, pot filler and quartz waterfall counters" loading="lazy" decoding="async" width="960" height="640"></div>
+        <div class="wk-img"><img src="media/work/jobsite-core-960.webp" srcset="media/work/jobsite-core-960.webp 960w, media/work/jobsite-core.webp 1600w" sizes="(min-width:980px) 32vw, 100vw" alt="Crew on scaffolding laying CMU block for a building's elevator core" loading="lazy" decoding="async" width="960" height="718"></div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—02</span><span class="label">Kitchen Remodel</span></div>
-          <h3>Kitchen + Two-Bath Remodel</h3>
-          <div class="wk-meta"><span>Southern NH</span><span>Full floor</span><span>2026</span></div>
+          <div class="wk-top"><span class="label">P—02</span><span class="label">On Site</span></div>
+          <h3>Structure &amp; Masonry</h3>
+          <div class="wk-meta"><span>Greater Boston</span><span>Elevator core · CMU</span><span>In progress</span></div>
         </div>
       </article>
-      <article class="wk wk-side">
-        <div class="wk-img"><img src="media/photos/framing-interior-960.webp" srcset="media/photos/framing-interior-960.webp 960w, media/photos/framing-interior.webp 1333w" sizes="(min-width:980px) 32vw, 100vw" alt="Interior framing for a commercial build-out" loading="lazy" decoding="async" width="960" height="1440"></div>
+      <!-- Design → rendering: the architect's line drawing wipes into the rendering as you scroll. -->
+      <article class="wk wk-side wk-design">
+        <div class="wk-img">
+          <div class="wk-draw"><img src="media/work/revere-drawing.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1600" height="1000"></div>
+          <div class="wk-render"><img src="media/work/revere-rendering.webp" alt="Rendering of a four-story mixed-use building with ground-floor retail on a Revere street corner" loading="lazy" decoding="async" width="1600" height="1200"></div>
+          <span class="wk-tag label">Drawing → Rendering</span>
+        </div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—03</span><span class="label">Commercial Build-Out</span></div>
-          <h3>Retail Build-Out</h3>
-          <div class="wk-meta"><span>Greater Boston</span><span>4,800 SF</span><span>2026</span></div>
+          <div class="wk-top"><span class="label">P—03</span><span class="label">In Design</span></div>
+          <h3>Mixed-Use, Revere</h3>
+          <div class="wk-meta"><span>Revere, MA</span><span>Retail + residential</span><span>Rendering</span></div>
         </div>
       </article>
     </div>
 
-    <!-- BEFORE / AFTER (unit turn) — HIDDEN until a real pair arrives. To publish: add media/photos/unit-turn-before.webp + unit-turn-after.webp
-         (same spot, same angle), fill in the location, then delete the `hidden` attribute below. Side by side without JS / reduced motion; draggable otherwise. -->
-    <div class="ba-row" hidden>
+    <!-- BEFORE / AFTER — a real renovation. Side by side without JS / with reduced motion; draggable otherwise.
+         For a cleaner slider, shoot the next pair from the exact same spot. -->
+    <div class="ba-row">
       <div class="ba-copy">
-        <div class="wk-top"><span class="label">P—04</span><span class="label">Unit Turn</span></div>
+        <div class="wk-top"><span class="label">P—04</span><span class="label">Bathroom Renovation</span></div>
         <h3 class="reveal">Before &amp; after.</h3>
-        <p class="reveal">One unit, start to finish — paint, flooring, fixtures, and punch list, turned and handed back ready to rent.<span class="live-only"> Drag to compare.</span></p>
-        <div class="wk-meta"><span>LOCATION</span><span>Paint · Flooring · Fixtures</span><span>YEAR</span></div>
+        <p class="reveal">One bathroom, taken to the studs — new framing and waterproofing, a glass shower, herringbone tile, and a double vanity.<span class="live-only"> Drag to compare.</span></p>
+        <figure class="ba-during reveal">
+          <img src="media/work/bath-during-960.webp" alt="During: shower wall framed and waterproofed before tile" loading="lazy" decoding="async" width="960" height="1280">
+          <figcaption class="label">During — framing &amp; waterproofing</figcaption>
+        </figure>
+        <div class="wk-meta"><span>Residential</span><span>Full gut to finish</span></div>
       </div>
       <div class="ba" data-ba>
         <div class="ba-stage">
-          <figure class="ba-fig ba-before"><img src="media/photos/unit-turn-before.webp" alt="Before: apartment unit at move-out, before the turn" width="980" height="570" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
-          <figure class="ba-fig ba-after"><img src="media/photos/unit-turn-after.webp" alt="After: the same unit after paint, flooring and fixtures" width="980" height="570" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
+          <figure class="ba-fig ba-before"><img src="media/work/bath-before-960.webp" srcset="media/work/bath-before-960.webp 960w, media/work/bath-before.webp 1536w" sizes="(min-width:980px) 40vw, 100vw" alt="Before: bathroom stripped to the subfloor with old wallpaper and plumbing exposed" width="960" height="1280" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
+          <figure class="ba-fig ba-after"><img src="media/work/bath-after-960.webp" srcset="media/work/bath-after-960.webp 960w, media/work/bath-after.webp 1536w" sizes="(min-width:980px) 40vw, 100vw" alt="After: finished bathroom with glass shower, herringbone marble floor and double vanity" width="960" height="1280" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
           <input class="ba-range" type="range" min="0" max="100" step="1" value="50" aria-label="Before and after comparison: move to reveal more of the before or after photo">
           <div class="ba-handle" aria-hidden="true"><div class="ba-knob"><i></i><i></i></div></div>
         </div>
@@ -1323,7 +1343,7 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
 
 /* PRIMARY 1 — hero: framed image opens to full bleed, headline lands in three stages */
 (function(){
-  const media = document.querySelector('.hero-media'), vid = media.querySelector('video');
+  const media = document.querySelector('.hero-media'), vid = media.querySelector('img, video');
   gsap.timeline({defaults:{ease:M.ease}})
     .to(media,{clipPath:'inset(0% 0% 0% 0%)', duration:1.6, ease:'power3.inOut'},0)
     .fromTo(vid,{scale:1.12},{scale:1, duration:2.2, ease:'power2.out'},0)
@@ -1399,7 +1419,12 @@ mm.add('(min-width: 980px)', ()=>{
 gsap.utils.toArray('.wk-img').forEach(box=>{
   const img = box.querySelector('img');
   gsap.fromTo(box,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)', duration:M.wipe, ease:M.wipeEase, scrollTrigger:{trigger:box, start:'top 88%'}});
-  gsap.fromTo(img,{yPercent:-4},{yPercent:4, ease:'none', scrollTrigger:{trigger:box, start:'top bottom', end:'bottom top', scrub:M.scrub}});
+  gsap.fromTo(box.querySelectorAll('img'),{yPercent:-4},{yPercent:4, ease:'none', scrollTrigger:{trigger:box, start:'top bottom', end:'bottom top', scrub:M.scrub}});
+});
+/* design card: the line drawing is revealed first, then the rendering wipes across it as the card scrolls up */
+gsap.utils.toArray('.wk-design .wk-render').forEach(r=>{
+  gsap.fromTo(r,{clipPath:'inset(0% 0% 0% 100%)'},{clipPath:'inset(0% 0% 0% 0%)', ease:'none',
+    scrollTrigger:{trigger:r.parentElement, start:'top 55%', end:'bottom 45%', scrub:M.scrub}});
 });
 
 /* service-area map draws itself (once) */
