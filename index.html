@@ -247,7 +247,11 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
 
   /* ================= SERVICES — sticky image system ================= */
   .services{padding:var(--section) 0}
-  .svc-wrap{margin-top:var(--s8)}
+  .umbrella{display:grid;gap:var(--s4);margin-top:var(--s8);padding:var(--s6) 0;border-top:1px solid var(--line2);border-bottom:1px solid var(--line)}
+  @media(min-width:980px){.umbrella{grid-template-columns:7fr 5fr;gap:var(--s8);align-items:end;padding:var(--s7) 0}}
+  .umb-head h3{font-size:clamp(28px,3.2vw,48px);letter-spacing:var(--track-head);line-height:1.05;margin-top:var(--s3)}
+  .umb-copy p{font-weight:300;font-size:var(--fs-lead);line-height:1.7;color:var(--mut);max-width:46ch;margin-bottom:var(--s4)}
+  .svc-wrap{margin-top:var(--s7)}
   .svc-list{list-style:none;display:grid;gap:var(--grid-gap)}
   @media(min-width:720px){.svc-list{grid-template-columns:1fr 1fr}}
   @media(min-width:1080px){.svc-list{grid-template-columns:repeat(3,1fr)}}
@@ -626,11 +630,23 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
       <p class="sub reveal">Hire us once and the whole project is handled — planning, permits, scheduling, crews, and cleanup. These are the trades we run every week.</p>
     </div>
 
+    <!-- umbrella service: general contracting & project management sits over every trade below -->
+    <div class="umbrella">
+      <div class="umb-head reveal">
+        <span class="label">00 · The umbrella</span>
+        <h3>General Contracting &amp; Project Management</h3>
+      </div>
+      <div class="umb-copy reveal">
+        <p>We hold the contract, set the schedule, and manage every trade below — one team from the first walkthrough to the final punch list.</p>
+        <span class="label">The trades we run under it ↓</span>
+      </div>
+    </div>
+
     <div class="svc-wrap">
       <!-- To swap a service photo: change the <img> in the matching .svc-item AND the matching .sm-img (same order). -->
       <ol class="svc-list">
         <li class="svc-item" data-name="Remodeling">
-          <div class="svc-photo"><img src="media/work/unit-gut-960.webp" alt="Apartment unit taken down to the studs and subfloor for a full renovation" loading="lazy" decoding="async" width="960" height="1280"></div>
+          <div class="svc-photo"><img src="media/work/bath-after-960.webp" alt="Finished bathroom remodel with glass shower, herringbone marble floor and double vanity" loading="lazy" decoding="async" width="960" height="1280"></div>
           <div class="svc-body">
             <div class="svc-idx">01</div><h3>Remodeling</h3>
             <p>Kitchens, baths, whole floors, whole units — planned tight, dust contained, and finished to the inch.</p>
@@ -638,10 +654,19 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
             <a class="tlink" href="#contact">Get an estimate</a>
           </div>
         </li>
+        <li class="svc-item" data-name="Unit Turns &amp; Property Improvements">
+          <div class="svc-photo"><img src="media/work/unit-gut-960.webp" alt="Apartment unit taken down to the studs and subfloor for a full renovation" loading="lazy" decoding="async" width="960" height="1280"></div>
+          <div class="svc-body">
+            <div class="svc-idx">02</div><h3>Unit Turns &amp; Property Improvements</h3>
+            <p>Vacant-unit turnovers and building-wide upgrades — paint, flooring, fixtures, and punch lists, run on one schedule.</p>
+            <div class="svc-scope label">Turnovers · Upgrades · Punch lists</div>
+            <a class="tlink" href="#contact">Get an estimate</a>
+          </div>
+        </li>
         <li class="svc-item" data-name="Siding">
           <div class="svc-photo"><img src="media/work/siding-facade.webp" alt="Finished multifamily facade with new panel siding and black-framed windows" loading="lazy" decoding="async" width="880" height="660"></div>
           <div class="svc-body">
-            <div class="svc-idx">02</div><h3>Siding</h3>
+            <div class="svc-idx">03</div><h3>Siding</h3>
             <p>Weather-tight, straight-lined siding that changes the whole face of a property — flashing and trim done right.</p>
             <div class="svc-scope label">Siding · Trim · Flashing</div>
             <a class="tlink" href="#contact">Get an estimate</a>
@@ -650,7 +675,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
         <li class="svc-item" data-name="Carpentry &amp; Decks">
           <div class="svc-photo"><img src="media/work/deck-composite-960.webp" srcset="media/work/deck-composite-960.webp 960w, media/work/deck-composite.webp 1600w" sizes="(min-width:1080px) 33vw, (min-width:720px) 50vw, 100vw" alt="Composite deck with black aluminum railing and wide steps, backing onto woods" loading="lazy" decoding="async" width="960" height="546"></div>
           <div class="svc-body">
-            <div class="svc-idx">03</div><h3>Carpentry &amp; Decks</h3>
+            <div class="svc-idx">04</div><h3>Carpentry &amp; Decks</h3>
             <p>Decks, stairs, railings, trim, and structural repairs — built square by our in-house carpenters.</p>
             <div class="svc-scope label">Decks · Stairs · Railings · Trim</div>
             <a class="tlink" href="#contact">Get an estimate</a>
@@ -659,7 +684,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
         <li class="svc-item" data-name="Painting">
           <div class="svc-photo"><img src="media/work/paint-crew-960.webp" srcset="media/work/paint-crew-960.webp 960w, media/work/paint-crew.webp 1586w" sizes="(min-width:1080px) 33vw, (min-width:720px) 50vw, 100vw" alt="Toscano crew finishing drywall and rolling paint in a bright great room, floors protected" loading="lazy" decoding="async" width="960" height="600"></div>
           <div class="svc-body">
-            <div class="svc-idx">04</div><h3>Painting</h3>
+            <div class="svc-idx">05</div><h3>Painting</h3>
             <p>Interior and exterior, residential and commercial — crisp lines, clean prep, and colors that hold up.</p>
             <div class="svc-scope label">Interior · Exterior · Commercial</div>
             <a class="tlink" href="#contact">Get an estimate</a>
@@ -668,7 +693,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
         <li class="svc-item" data-name="Roofing">
           <div class="svc-photo"><img src="media/photos/framing-roofline-960.webp" srcset="media/photos/framing-roofline-960.webp 960w, media/photos/framing-roofline.webp 1800w" sizes="(min-width:1080px) 33vw, (min-width:720px) 50vw, 100vw" alt="Framed two-story structure with a finished roofline and edge safety rails" loading="lazy" decoding="async" width="960" height="640"></div>
           <div class="svc-body">
-            <div class="svc-idx">05</div><h3>Roofing</h3>
+            <div class="svc-idx">06</div><h3>Roofing</h3>
             <p>Roof repairs and improvements — leaks found, flashing fixed, and full replacements managed end to end.</p>
             <div class="svc-scope label">Repairs · Flashing · Replacements</div>
             <a class="tlink" href="#contact">Get an estimate</a>
@@ -677,7 +702,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
         <li class="svc-item" data-name="Handyman &amp; Maintenance">
           <div class="svc-photo"><img src="media/work/install-crew-960.webp" srcset="media/work/install-crew-960.webp 960w, media/work/install-crew.webp 1374w" sizes="(min-width:1080px) 33vw, (min-width:720px) 50vw, 100vw" alt="Toscano crew installing kitchen cabinets and trim" loading="lazy" decoding="async" width="960" height="800"></div>
           <div class="svc-body">
-            <div class="svc-idx">06</div><h3>Handyman &amp; Maintenance</h3>
+            <div class="svc-idx">07</div><h3>Handyman &amp; Maintenance</h3>
             <p>Our in-house handyman team handles the small stuff — repairs, punch lists, upgrades, and ongoing property maintenance.</p>
             <div class="svc-scope label">Repairs · Punch lists · Upkeep</div>
             <a class="tlink" href="#contact">Get an estimate</a>
@@ -687,6 +712,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
 
       <div class="svc-media" aria-hidden="true">
         <div class="frame">
+          <div class="sm-img"><img src="media/work/bath-after.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/unit-gut.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/siding-facade.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/deck-composite.webp" alt="" loading="lazy" decoding="async"></div>
@@ -694,7 +720,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
           <div class="sm-img"><img src="media/photos/framing-roofline.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/install-crew.webp" alt="" loading="lazy" decoding="async"></div>
           <span class="regmark tl"></span><span class="regmark tr"></span>
-          <div class="sm-bar"><span class="label" id="smname">Remodeling</span><span class="label" id="smcount">01 / 06</span></div>
+          <div class="sm-bar"><span class="label" id="smname">Remodeling</span><span class="label" id="smcount">01 / 07</span></div>
         </div>
       </div>
     </div>
