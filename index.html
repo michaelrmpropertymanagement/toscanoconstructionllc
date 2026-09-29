@@ -236,6 +236,13 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   .hero-creds .coords::before{display:none}
   @media(max-width:700px){.hero-creds .coords{margin-left:0;width:100%}}
   .js-motion .hero .kick,.js-motion .hero .lead,.js-motion .hero .btnrow,.js-motion .hero-creds{opacity:0;transform:translateY(16px)}
+
+  /* capability line under the hero */
+  .capline{background:var(--ink-900);border-top:1px solid var(--rule-dk);border-bottom:1px solid var(--rule-dk)}
+  .capline ul{list-style:none;max-width:var(--container);margin:0 auto;padding:var(--s5) var(--gutter);display:grid;grid-template-columns:1fr 1fr;gap:var(--s3) var(--s5);
+    font-family:var(--mono);font-size:var(--fs-label);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--paper-2)}
+  .capline li{display:flex;align-items:center;gap:var(--s5)}
+  @media(min-width:900px){.capline ul{display:flex;justify-content:center;gap:0}.capline li{padding:2px clamp(20px,3.2vw,48px)}.capline li+li{border-left:1px solid var(--rule-dk-2)}}
   .js-motion #heroline .ln>span{transform:translateY(105%)}
 
   /* ================= SERVICES — sticky image system ================= */
@@ -588,7 +595,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   <div class="hero">
     <div class="kick">General Contractor · Plaistow, NH</div>
     <h1 id="heroline"><span class="ln"><span>Built right.</span></span><span class="ln"><span>Managed <em>start to finish.</em></span></span></h1>
-    <p class="lead">General contracting and project management for multifamily owners, landlords, property managers, and homeowners taking on larger renovations. We plan the work, run every trade, and hand you a finished result.</p>
+    <p class="lead">General contracting and project management for multifamily owners, landlords, property managers, and homeowners. We plan the work, run every trade, and deliver the finished result.</p>
     <div class="btnrow">
       <a class="btn-solid" href="#contact"><span>Get a Free Estimate</span></a>
       <a class="btn-ghost" href="#projects"><span>View Our Work</span></a>
@@ -601,6 +608,11 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
     </ul>
   </div>
 </section>
+
+<!-- capability line: what Toscano does, at a glance -->
+<div class="capline" aria-label="Capabilities">
+  <ul><li>General Contracting</li><li>Project Management</li><li>Remodeling</li><li>Property Improvements</li></ul>
+</div>
 
 <!-- ================= SERVICES — sticky image system (desktop) / photo cards (mobile, reduced motion) ================= -->
 <section class="services" id="services">
