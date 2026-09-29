@@ -269,6 +269,11 @@ document.documentElement.classList.add('js');</script>
   .svc-media{display:none}
   .svcnote{margin-top:var(--s7);font-size:var(--fs-sm);font-weight:300;color:var(--dim)}
   .svcnote b{color:var(--mut);font-weight:500}
+  .pm-line{display:grid;gap:var(--s5);margin-top:var(--s8);padding-top:var(--s7);border-top:1px solid var(--line2)}
+  @media(min-width:980px){.pm-line{grid-template-columns:7fr 5fr;gap:var(--s8);align-items:end}}
+  .pm-big{font-family:var(--display);font-weight:500;font-size:clamp(30px,3.6vw,54px);line-height:1.04;letter-spacing:var(--track-head);color:var(--txt);text-wrap:balance}
+  .pm-big em{font-family:var(--serif);font-style:italic;font-size:1.08em;letter-spacing:-.01em}
+  .pm-sub{font-weight:300;font-size:var(--fs-lead);line-height:1.7;color:var(--mut);max-width:48ch}
 
   @media(min-width:980px){
     .js-motion .svc-wrap{display:grid;grid-template-columns:5fr 7fr;gap:var(--s9);align-items:start}
@@ -737,6 +742,11 @@ document.documentElement.classList.add('js');</script>
       </div>
     </div>
     <p class="svcnote reveal"><b>Don't see your project?</b> If it improves a property, we can probably run it — ask us.</p>
+    <!-- project-management statement: what separates a GC from a single-trade contractor -->
+    <div class="pm-line">
+      <p class="pm-big reveal">One project. One schedule. <em>One point of contact.</em></p>
+      <p class="pm-sub reveal">A trade contractor handles their piece. We hold the whole job — scope, estimate, schedule, crews, inspections, and cleanup — so you're never the one coordinating it.</p>
+    </div>
   </div>
 </section>
 
@@ -831,12 +841,14 @@ document.documentElement.classList.add('js');</script>
       <div class="half-copy">
         <p class="sub reveal">Most projects fail in the gaps between trades. Our in-house team handles carpentry, painting, and maintenance directly, and for specialty trades we manage a vetted network — so you hold one contract, one schedule, and one standard for the finished work.</p>
         <ol class="half-list">
-          <li class="reveal"><span>01</span><div><b>Planning</b><p>Scope, sequence, and materials defined before work starts.</p></div></li>
-          <li class="reveal"><span>02</span><div><b>Scheduling</b><p>Fixed milestones, with trades booked in the right order.</p></div></li>
-          <li class="reveal"><span>03</span><div><b>Trade coordination</b><p>Our crew and vetted specialty subs, run as one team.</p></div></li>
-          <li class="reveal"><span>04</span><div><b>Communication</b><p>One point of contact and daily updates on your job.</p></div></li>
-          <li class="reveal"><span>05</span><div><b>Clean jobsites</b><p>Finishes protected, and the site left broom-ready every workday.</p></div></li>
-          <li class="reveal"><span>06</span><div><b>Follow-through</b><p>A final walkthrough, with the punch list closed before we call it done.</p></div></li>
+          <li class="reveal"><span>01</span><div><b>Scope</b><p>We walk the property and define exactly what's included — before anything starts.</p></div></li>
+          <li class="reveal"><span>02</span><div><b>Estimating</b><p>A detailed, fixed, line-item proposal — no allowance games.</p></div></li>
+          <li class="reveal"><span>03</span><div><b>Scheduling</b><p>Fixed milestones, with trades booked in the right order.</p></div></li>
+          <li class="reveal"><span>04</span><div><b>Trade coordination</b><p>Our crew and vetted specialty subs, run as one team.</p></div></li>
+          <li class="reveal"><span>05</span><div><b>Site supervision</b><p>A project manager who always knows what's next on your job.</p></div></li>
+          <li class="reveal"><span>06</span><div><b>Communication</b><p>One point of contact and daily updates.</p></div></li>
+          <li class="reveal"><span>07</span><div><b>Cleanup</b><p>Finishes protected, and the site left broom-ready every workday.</p></div></li>
+          <li class="reveal"><span>08</span><div><b>Final walkthrough</b><p>The punch list closed before we call it done.</p></div></li>
         </ol>
       </div>
     </div>
