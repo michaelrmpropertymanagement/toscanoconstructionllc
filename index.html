@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="color-scheme" content="only dark">
 <title>Toscano Construction LLC — General Contractor &amp; Project Management · Plaistow, NH</title>
-<meta name="description" content="Toscano Construction LLC — general contracting and project management for multifamily owners, landlords, property managers, and homeowners. Unit turns, remodeling, siding, painting, roofing, carpentry, and an in-house handyman team. Plaistow, NH &amp; Greater New England.">
+<meta name="description" content="Construction concierge, general contracting &amp; project management. We bid, vet, negotiate, and manage property projects for owners, landlords, and homeowners — Plaistow, NH &amp; Greater New England.">
 <meta name="theme-color" content="#141413">
 <link rel="canonical" href="https://toscanoconstructionllc.net/">
 <meta property="og:type" content="website">
@@ -21,12 +21,13 @@
 <meta name="twitter:description" content="General contracting &amp; project management for multifamily owners, landlords, property managers, and homeowners. Licensed &amp; insured.">
 <meta name="twitter:image" content="https://toscanoconstructionllc.net/og.jpg">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"GeneralContractor","name":"Toscano Construction LLC","url":"https://toscanoconstructionllc.net/","telephone":"+1-844-465-7566","email":"info@toscanoconstructionllc.net","image":"https://toscanoconstructionllc.net/og.jpg","description":"General contracting and project management for multifamily owners, landlords, property managers, and homeowners — unit turns, remodeling, siding, painting, roofing, carpentry, and an in-house handyman team.","address":{"@type":"PostalAddress","addressLocality":"Plaistow","addressRegion":"NH","addressCountry":"US"},"areaServed":[{"@type":"Place","name":"Plaistow, NH"},{"@type":"Place","name":"Greater New England"}],"knowsAbout":["General contracting","Project management","Multifamily unit turns","Apartment renovations","Home remodeling","Siding","Interior painting","Exterior painting","Flooring","Roof repairs","Carpentry","Decks","Handyman services","Property maintenance","Punch lists","Commercial build-outs"]}
+{"@context":"https://schema.org","@type":"GeneralContractor","name":"Toscano Construction LLC","url":"https://toscanoconstructionllc.net/","telephone":"+1-844-465-7566","email":"info@toscanoconstructionllc.net","image":"https://toscanoconstructionllc.net/og.jpg","description":"General contracting and project management for multifamily owners, landlords, property managers, and homeowners — unit turns, remodeling, siding, painting, roofing, carpentry, and an in-house handyman team.","address":{"@type":"PostalAddress","addressLocality":"Plaistow","addressRegion":"NH","addressCountry":"US"},"areaServed":[{"@type":"Place","name":"Plaistow, NH"},{"@type":"Place","name":"Greater New England"}],"knowsAbout":["Construction concierge","Contractor bidding and vetting","General contracting","Project management","Multifamily unit turns","Apartment renovations","Home remodeling","Siding","Interior painting","Exterior painting","Flooring","Roof repairs","Carpentry","Decks","Handyman services","Property maintenance","Punch lists","Commercial build-outs"]}
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Are you licensed and insured?","acceptedAnswer":{"@type":"Answer","text":"Fully licensed and fully insured — every trade, every site, every day. Certificates of insurance are available on request before any work begins."}},
 {"@type":"Question","name":"Do you work with landlords and property managers?","acceptedAnswer":{"@type":"Answer","text":"Yes — unit turns, apartment renovations, punch lists, and ongoing maintenance are core work for us. You get one point of contact who schedules the unit, coordinates every trade, and keeps you updated until it's done."}},
+{"@type":"Question","name":"What is the Toscano Construction Concierge?","acceptedAnswer":{"@type":"Answer","text":"It's our full-service option: you tell us what needs to get done, and we handle the process — walking the property, bringing in bids from our vetted contractor network, negotiating pricing, scheduling and coordinating the trades, and overseeing the work through the final punch list. You get one point of contact the whole way."}},
 {"@type":"Question","name":"Do you handle small jobs?","acceptedAnswer":{"@type":"Answer","text":"Yes — that's exactly what our in-house handyman team is for. Repairs, punch lists, maintenance, and the small projects most contractors won't return a call about."}},
 {"@type":"Question","name":"Do you use subcontractors?","acceptedAnswer":{"@type":"Answer","text":"Our in-house crew handles carpentry, painting, maintenance, and general work directly. For specialty trades we manage a vetted subcontractor network — but you hold one contract, one schedule, and one point of contact: us."}},
 {"@type":"Question","name":"Is the estimate really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. We walk the property, hear the plan, and come back with a detailed, line-item proposal — no cost, no obligation, and a straight answer on whether the budget and timeline are realistic."}},
@@ -140,6 +141,7 @@ document.documentElement.classList.add('js');</script>
   .logo-nav{height:50px;width:auto;transition:height .3s var(--ease)}
   .links{display:none;gap:28px;font-family:var(--mono);font-size:var(--fs-label);letter-spacing:.12em;text-transform:uppercase}
   @media(min-width:980px){.links{display:flex}}
+  @media(min-width:980px) and (max-width:1180px){.links{gap:20px}}
   .links a{color:var(--paper-2);text-decoration:none;position:relative;padding-bottom:4px;transition:color var(--t-fast)}
   .links a::after{content:"";position:absolute;left:0;bottom:0;width:100%;height:1px;background:var(--paper);
     transform:scaleX(0);transform-origin:right;transition:transform var(--t-base) var(--ease)}
@@ -246,6 +248,23 @@ document.documentElement.classList.add('js');</script>
   @media(min-width:900px){.capline ul{display:flex;justify-content:center;gap:0}.capline li{padding:2px clamp(20px,3.2vw,48px)}.capline li+li{border-left:1px solid var(--rule-dk-2)}}
   .js-motion #heroline .ln>span{transform:translateY(105%)}
 
+  /* ================= CONSTRUCTION CONCIERGE ================= */
+  .concierge{padding:var(--section) 0;background:var(--bg2);border-bottom:1px solid var(--line)}
+  .cc-verbs{font-family:var(--display);font-weight:500;font-size:clamp(34px,5.4vw,84px);line-height:1.02;letter-spacing:var(--track-display);
+    color:var(--txt);margin:var(--s8) 0;text-wrap:balance}
+  .cc-verbs span{transition:opacity .45s var(--ease)}
+  .js-motion .cc-verbs span{opacity:.16}
+  .js-motion .cc-verbs span.on{opacity:1}
+  .cc-grid{display:grid;gap:var(--s7)}
+  @media(min-width:980px){.cc-grid{grid-template-columns:7fr 5fr;gap:var(--s9);align-items:start}}
+  .cc-label{display:block;margin-bottom:var(--s4)}
+  .cc-list{list-style:none;display:grid;grid-template-columns:1fr;column-gap:var(--s6);border-top:1px solid var(--line)}
+  @media(min-width:640px){.cc-list{grid-template-columns:1fr 1fr}}
+  .cc-list li{display:flex;gap:var(--s3);align-items:baseline;padding:14px 0;border-bottom:1px solid var(--line);font-size:var(--fs-sm);color:var(--txt)}
+  .cc-list li span{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;color:var(--dim);min-width:24px}
+  .cc-one{font-family:var(--display);font-weight:500;font-size:clamp(22px,2vw,30px);line-height:1.2;letter-spacing:var(--track-head);color:var(--txt);margin-bottom:var(--s4)}
+  .cc-note{font-weight:300;font-size:var(--fs-sm);line-height:1.7;color:var(--mut);margin-bottom:var(--s6);max-width:44ch}
+
   /* ================= SERVICES — sticky image system ================= */
   .services{padding:var(--section) 0}
   .umbrella{display:grid;gap:var(--s4);margin-top:var(--s8);padding:var(--s6) 0;border-top:1px solid var(--line2);border-bottom:1px solid var(--line)}
@@ -269,11 +288,6 @@ document.documentElement.classList.add('js');</script>
   .svc-media{display:none}
   .svcnote{margin-top:var(--s7);font-size:var(--fs-sm);font-weight:300;color:var(--dim)}
   .svcnote b{color:var(--mut);font-weight:500}
-  .pm-line{display:grid;gap:var(--s5);margin-top:var(--s8);padding-top:var(--s7);border-top:1px solid var(--line2)}
-  @media(min-width:980px){.pm-line{grid-template-columns:7fr 5fr;gap:var(--s8);align-items:end}}
-  .pm-big{font-family:var(--display);font-weight:500;font-size:clamp(30px,3.6vw,54px);line-height:1.04;letter-spacing:var(--track-head);color:var(--txt);text-wrap:balance}
-  .pm-big em{font-family:var(--serif);font-style:italic;font-size:1.08em;letter-spacing:-.01em}
-  .pm-sub{font-weight:300;font-size:var(--fs-lead);line-height:1.7;color:var(--mut);max-width:48ch}
 
   @media(min-width:980px){
     .js-motion .svc-wrap{display:grid;grid-template-columns:5fr 7fr;gap:var(--s9);align-items:start}
@@ -621,7 +635,7 @@ document.documentElement.classList.add('js');</script>
 <nav class="nav" id="nav" aria-label="Primary">
   <a class="brand" href="#top"><img class="logo-nav" src="logo-white.png" alt="Toscano Construction LLC" width="108" height="50"></a>
   <div class="links">
-    <a href="#services">Services</a><a href="#owners">Property Owners</a><a href="#process">Process</a>
+    <a href="#concierge">Concierge</a><a href="#services">Services</a><a href="#owners">Property Owners</a><a href="#process">Process</a>
     <a href="#projects">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
   </div>
   <div class="navright">
@@ -631,12 +645,13 @@ document.documentElement.classList.add('js');</script>
 </nav>
 
 <div class="mmenu" id="mmenu" role="dialog" aria-modal="true" aria-label="Site menu">
-  <a href="#services"><span>01</span><em>Services</em></a>
-  <a href="#owners"><span>02</span><em>Property Owners</em></a>
-  <a href="#process"><span>03</span><em>Process</em></a>
-  <a href="#projects"><span>04</span><em>Work</em></a>
-  <a href="#about"><span>05</span><em>About</em></a>
-  <a href="#contact"><span>06</span><em>Contact</em></a>
+  <a href="#concierge"><span>01</span><em>Concierge</em></a>
+  <a href="#services"><span>02</span><em>Services</em></a>
+  <a href="#owners"><span>03</span><em>Property Owners</em></a>
+  <a href="#process"><span>04</span><em>Process</em></a>
+  <a href="#projects"><span>05</span><em>Work</em></a>
+  <a href="#about"><span>06</span><em>About</em></a>
+  <a href="#contact"><span>07</span><em>Contact</em></a>
   <div class="mfoot">(844) 465-7566 · Plaistow, NH &amp; Greater New England</div>
 </div>
 
@@ -651,7 +666,7 @@ document.documentElement.classList.add('js');</script>
     <h1 id="heroline"><span class="ln"><span>Built right.</span></span><span class="ln"><span>Managed <em>start to finish.</em></span></span></h1>
     <p class="lead">General contracting and project management for multifamily owners, landlords, property managers, and homeowners. We plan the work, run every trade, and deliver the finished result.</p>
     <div class="btnrow">
-      <a class="btn-solid" href="#contact"><span>Get a Free Estimate</span></a>
+      <a class="btn-solid" href="#contact"><span>Start Your Project</span></a>
       <a class="btn-ghost" href="#projects"><span>View Our Work</span></a>
     </div>
   </div>
@@ -665,13 +680,58 @@ document.documentElement.classList.add('js');</script>
 
 <!-- capability line: what Toscano does, at a glance -->
 <div class="capline" aria-label="Capabilities">
-  <ul><li>General Contracting</li><li>Project Management</li><li>Remodeling</li><li>Property Improvements</li></ul>
+  <ul><li>Construction Concierge</li><li>General Contracting</li><li>Project Management</li><li>Property Improvements</li></ul>
 </div>
+
+<!-- ================= CONSTRUCTION CONCIERGE — the positioning: give us the project, we run the process ================= -->
+<section class="concierge" id="concierge">
+  <div class="wrap">
+    <div class="dimhead" data-dim="01 · Construction Concierge"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="sec-head">
+      <div>
+        <div class="kick reveal">Toscano Construction Concierge</div>
+        <h2 class="reveal">You tell us what needs to get done. <em>We handle the rest.</em></h2>
+      </div>
+      <p class="sub reveal">Why spend your time chasing contractors, scheduling five estimates, and comparing bids? Give us the project — we run the process.</p>
+    </div>
+
+    <p class="cc-verbs" aria-label="We bid. We vet. We negotiate. We coordinate. We manage.">
+      <span aria-hidden="true">We bid.</span> <span aria-hidden="true">We vet.</span> <span aria-hidden="true">We negotiate.</span> <span aria-hidden="true">We coordinate.</span> <span aria-hidden="true">We manage.</span>
+    </p>
+
+    <div class="cc-grid">
+      <div>
+        <span class="label cc-label">What we handle for you</span>
+        <ol class="cc-list">
+          <li><span>01</span>Project walkthroughs &amp; scoping</li>
+          <li><span>02</span>Finding &amp; vetting contractors</li>
+          <li><span>03</span>Multiple competitive bids</li>
+          <li><span>04</span>Price negotiation</li>
+          <li><span>05</span>Contractor &amp; subcontractor coordination</li>
+          <li><span>06</span>Scheduling trades</li>
+          <li><span>07</span>Material &amp; finish coordination</li>
+          <li><span>08</span>Project oversight</li>
+          <li><span>09</span>Progress updates &amp; photos</li>
+          <li><span>10</span>Quality-control walkthroughs</li>
+          <li><span>11</span>Punch lists &amp; project closeout</li>
+        </ol>
+      </div>
+      <div class="cc-aside">
+        <p class="cc-one reveal">One point of contact from the initial walkthrough through project completion.</p>
+        <p class="cc-note reveal">We use our network of vetted contractors and specialty trades, our bidding process, and our project-management experience to get the job done at competitive pricing — without you managing the moving pieces.</p>
+        <div class="btnrow reveal">
+          <a class="btn-solid" href="#cform" data-focus="f-name" data-type="Construction Concierge — Bids &amp; Management"><span>Tell Us What You Need Done</span></a>
+          <a class="btn-ghost" href="#cform" data-focus="f-name" data-type="Construction Concierge — Bids &amp; Management"><span>Get Competitive Bids</span></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ================= SERVICES — sticky image system (desktop) / photo cards (mobile, reduced motion) ================= -->
 <section class="services" id="services">
   <div class="wrap">
-    <div class="dimhead" data-dim="01 · What We Do"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="02 · What We Do"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">What We Take On</div>
@@ -774,19 +834,14 @@ document.documentElement.classList.add('js');</script>
         </div>
       </div>
     </div>
-    <p class="svcnote reveal"><b>Don't see your project?</b> If it improves a property, we can probably run it — ask us.</p>
-    <!-- project-management statement: what separates a GC from a single-trade contractor -->
-    <div class="pm-line">
-      <p class="pm-big reveal">One project. One schedule. <em>One point of contact.</em></p>
-      <p class="pm-sub reveal">A trade contractor handles their piece. We hold the whole job — scope, estimate, schedule, crews, inspections, and cleanup — so you're never the one coordinating it.</p>
-    </div>
+    <p class="svcnote reveal"><b>The work we manage:</b> Kitchens · Bathrooms · Full remodels · Flooring · Painting · Carpentry · Trim · Electrical · Plumbing · Roofing · Decks · Masonry · Paving · Retaining walls · Turnovers · Property improvements · Repairs &amp; more. If it improves a property, we can run it.</p>
   </div>
 </section>
 
 <!-- ================= FOR PROPERTY OWNERS ================= -->
 <section class="owners" id="owners">
   <div class="wrap">
-    <div class="dimhead" data-dim="02 · For Property Owners"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="03 · For Property Owners"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="kick reveal">For Property Owners</div>
     <h2 class="reveal">One contractor for <em>the entire property.</em></h2>
     <div class="own-grid">
@@ -822,7 +877,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= RESIDENTIAL / COMMERCIAL ================= -->
 <section class="forwho" id="forwho">
   <div class="wrap">
-    <div class="dimhead" data-dim="03 · Who We Work For">
+    <div class="dimhead" data-dim="04 · Who We Work For">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="kick reveal">Homes &amp; Businesses</div>
@@ -864,7 +919,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= LIGHT CONTRAST — how we work ================= -->
 <section class="half tone-bone" id="about">
   <div class="wrap">
-    <div class="dimhead" data-dim="04 · How We Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="05 · How We Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="kick reveal">About Toscano</div>
     <h2 class="reveal">The work is only <em>half the job.</em></h2>
     <div class="half-grid">
@@ -891,7 +946,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= PROCESS — drawing becomes the finished room ================= -->
 <section class="process" id="process">
   <div class="wrap">
-    <div class="dimhead" data-dim="05 · Method"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="06 · Method"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">How It Works</div>
@@ -978,7 +1033,7 @@ document.documentElement.classList.add('js');</script>
 <!-- Each project is one <article class="wk">: swap the <img>, then edit the number, category, title and meta line. -->
 <section class="projects" id="projects">
   <div class="wrap">
-    <div class="dimhead" data-dim="06 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="07 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">Selected Work</div>
@@ -1106,7 +1161,7 @@ document.documentElement.classList.add('js');</script>
 <!-- TEAM — hidden until real photos, names and titles arrive. To show it: add photos to each .pslot, fill in names, delete `hidden`. -->
 <section class="team" id="team" hidden>
   <div class="wrap">
-    <div class="dimhead" data-dim="07 · The Crew">
+    <div class="dimhead" data-dim="The Crew">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="kick reveal">Meet the Team</div>
@@ -1169,7 +1224,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= SERVICE AREA ================= -->
 <section class="area" id="area">
   <div class="wrap">
-    <div class="dimhead" data-dim="07 · Service Area">
+    <div class="dimhead" data-dim="08 · Service Area">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="grid">
@@ -1259,7 +1314,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FAQ ================= -->
 <section class="faqs tone-bone" id="faq">
   <div class="wrap">
-    <div class="dimhead" data-dim="08 · FAQ">
+    <div class="dimhead" data-dim="09 · FAQ">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="kick center reveal">Straight Answers</div>
@@ -1272,6 +1327,10 @@ document.documentElement.classList.add('js');</script>
       <div class="qa">
         <button class="qq" aria-expanded="false" aria-controls="faqa-7">Do you work with landlords and property managers?<i class="plus" aria-hidden="true"></i></button>
         <div class="qa-a" id="faqa-7"><p>Yes — unit turns, apartment renovations, punch lists, and ongoing maintenance are core work for us. You get one point of contact who schedules the unit, coordinates every trade, and keeps you updated until it's done.</p></div>
+      </div>
+      <div class="qa">
+        <button class="qq" aria-expanded="false" aria-controls="faqa-8">What is the Toscano Construction Concierge?<i class="plus" aria-hidden="true"></i></button>
+        <div class="qa-a" id="faqa-8"><p>It's our full-service option: you tell us what needs to get done, and we handle the process — walking the property, bringing in bids from our vetted contractor network, negotiating pricing, scheduling and coordinating the trades, and overseeing the work through the final punch list. You get one point of contact the whole way.</p></div>
       </div>
       <div class="qa">
         <button class="qq" aria-expanded="false" aria-controls="faqa-2">Do you handle small jobs?<i class="plus" aria-hidden="true"></i></button>
@@ -1300,13 +1359,13 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FINAL CTA + CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="dimhead" data-dim="09 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="10 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="grid">
       <div>
         <div class="kick reveal">Ready When You Are</div>
         <h2 class="reveal">Let's build it <em>right.</em></h2>
         <p class="sub reveal">Tell us what you're planning. We'll walk the property, define the scope, and give you a straightforward path forward.</p>
-        <a class="btn-solid reveal" href="#cform" data-focus="f-name"><span>Get a Free Estimate</span></a>
+        <a class="btn-solid reveal" href="#cform" data-focus="f-name"><span>Tell Us What You Need Done</span></a>
         <div class="cinfo">
           <div class="row reveal"><span>Phone</span><b><a href="tel:+18444657566">(844) 465-7566</a></b></div>
           <div class="row reveal"><span>Email</span><b><a href="mailto:info@toscanoconstructionllc.net">info@toscanoconstructionllc.net</a></b></div>
@@ -1321,7 +1380,7 @@ document.documentElement.classList.add('js');</script>
         <div class="cfield"><label for="f-contact">Phone or Email</label><input id="f-contact" type="text" name="contact" placeholder="How do we reach you?" autocomplete="email" required></div>
         <div class="cfield"><label for="f-type">Project Type</label>
           <select id="f-type" name="type">
-            <option>Multifamily / Unit Turns</option><option>Home Remodeling</option><option>Painting — Interior / Exterior</option><option>Siding</option>
+            <option>Multifamily / Unit Turns</option><option>Construction Concierge — Bids &amp; Management</option><option>Home Remodeling</option><option>Painting — Interior / Exterior</option><option>Siding</option>
             <option>Roof Repairs &amp; Improvements</option><option>Carpentry &amp; Decks</option>
             <option>Handyman / Maintenance</option><option>Commercial / Office</option><option>Other</option>
           </select>
@@ -1350,7 +1409,7 @@ document.documentElement.classList.add('js');</script>
       </div>
       <nav class="foot-col" aria-label="Footer">
         <span class="label">Navigate</span>
-        <a href="#services">Services</a><a href="#owners">Property Owners</a><a href="#process">Process</a>
+        <a href="#concierge">Concierge</a><a href="#services">Services</a><a href="#owners">Property Owners</a><a href="#process">Process</a>
         <a href="#projects">Work</a><a href="#about">About</a><a href="#contact">Contact</a>
       </nav>
       <div class="foot-col">
@@ -1434,6 +1493,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     const target = document.querySelector(id); if(!target) return;
     e.preventDefault();
     target.scrollIntoView({behavior: reduced ? 'auto' : 'smooth', block: id === '#cform' ? 'center' : 'start'});
+    if(a.dataset.type){ const sel = document.getElementById('f-type'); if(sel && [...sel.options].some(o=>o.text === a.dataset.type)) sel.value = a.dataset.type; }
     const f = a.dataset.focus && document.getElementById(a.dataset.focus);
     if(f) setTimeout(()=>f.focus({preventScroll:true}), reduced ? 0 : 700);
   });
@@ -1585,6 +1645,16 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
     .to(['.hero .lead','.hero .btnrow','.hero-creds'],{opacity:1, y:0, duration:.8, stagger:.1},1.05);
   gsap.to(vid,{yPercent:6, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
   gsap.to('.hero',{y:-40, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
+})();
+
+/* concierge: "We bid. We vet. We negotiate. We coordinate. We manage." — each phrase lights up as the line scrolls through */
+(function(){
+  const line = document.querySelector('.cc-verbs'); if(!line) return;
+  const words = [...line.querySelectorAll('span')];
+  ScrollTrigger.create({trigger:line, start:'top 85%', end:'bottom 50%', onUpdate:s=>{
+    const n = Math.ceil(s.progress * words.length);
+    words.forEach((w,i)=>w.classList.toggle('on', i < n));
+  }, onLeave:()=>words.forEach(w=>w.classList.add('on'))});
 })();
 
 /* PRIMARY 2 — services: sticky image; each service wipes its photo in as it reaches the frame */
