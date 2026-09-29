@@ -418,17 +418,29 @@ document.documentElement.classList.add('js');</script>
   .feat-toggle{display:none;background:none;border:0;border-bottom:1px solid var(--line2);cursor:pointer;padding:0 0 4px}
   .js .feat-toggle{display:inline-flex}
   .feat-details{display:grid;grid-template-columns:1fr;gap:var(--s5);margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--line)}
-  @media(min-width:560px){.feat-details{grid-template-columns:1fr 150px}}
-  .feat-details .ba-during{margin:0;max-width:150px}
+  .feat-details[hidden]{display:none}
   .feat-trades{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s3)}
   .feat-trades li{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--txt);border:1px solid var(--line2);padding:6px 10px}
   .feat + .work-grid{margin-top:var(--s8)}
+  /* featured project: plan → demo → framing → finish */
+  .prog{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-top:var(--s2)}
+  @media(max-width:420px){.prog{grid-template-columns:repeat(2,1fr)}}
+  .prog-step{margin:0}
+  .prog-img{aspect-ratio:3/4;overflow:hidden;border:1px solid var(--line);background:var(--ink-850)}
+  .prog-img img{width:100%;height:100%;object-fit:cover;filter:var(--img-filter)}
+  .prog-step figcaption{margin-top:6px}
+  .plan-svg{width:100%;height:100%;display:block}
+  .plan-svg .l-outline *{stroke:var(--paper);stroke-width:4;fill:none}
+  .plan-svg .l-detail *{stroke:var(--paper);stroke-width:2.4;fill:none;opacity:.8}
+  .feat-details:not([hidden]) .prog-step{animation:progIn .6s var(--ease) both}
+  .feat-details:not([hidden]) .prog-step:nth-child(2){animation-delay:.08s}
+  .feat-details:not([hidden]) .prog-step:nth-child(3){animation-delay:.16s}
+  .feat-details:not([hidden]) .prog-step:nth-child(4){animation-delay:.24s}
+  @keyframes progIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion: reduce){.feat-details .prog-step{animation:none !important}}
   /* before / after — static side-by-side by default; `.is-live` turns it into a draggable comparison */
   .ba{width:100%}
   @media(min-width:980px){.ba{max-width:calc((100vh - 160px) * .75 * 2);justify-self:end}.ba.is-live{max-width:calc((100vh - 160px) * .75)}}
-  .ba-during{margin:0 0 var(--s5);max-width:200px}
-  .ba-during img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:1px solid var(--line);filter:var(--img-filter)}
-  .ba-during figcaption{margin-top:var(--s2)}
   .ba-stage{display:grid;grid-template-columns:1fr;gap:var(--s3)}
   @media(min-width:640px){.ba-stage{grid-template-columns:1fr 1fr}}
   .ba-fig{position:relative;margin:0;overflow:hidden;border:1px solid var(--line);background:var(--ink-800)}
@@ -984,10 +996,46 @@ document.documentElement.classList.add('js');</script>
             <span class="label">Trades involved</span>
             <ul class="feat-trades"><li>Demolition</li><li>Framing</li><li>Plumbing</li><li>Waterproofing</li><li>Tile</li><li>Glass shower</li><li>Vanity &amp; cabinetry</li><li>Lighting</li><li>Paint</li></ul>
           </div>
-          <figure class="ba-during">
-            <img src="media/work/bath-during-960.webp" alt="During: shower wall framed and waterproofed before tile" loading="lazy" decoding="async" width="960" height="1280">
-            <figcaption class="label">During — framing &amp; waterproofing</figcaption>
-          </figure>
+          <div class="prog" aria-label="Project progression">
+            <figure class="prog-step"><div class="prog-img prog-plan"><svg class="plan-svg" viewBox="0 0 768 1024" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+              <g class="l-outline">
+                <line x1="12" y1="70" x2="158" y2="250"/><line x1="430" y1="288" x2="768" y2="40"/>
+                <path d="M158 250 L430 288 M158 250 V668 M430 288 V548"/>
+                <path d="M150 672 L382 626"/>
+                <path d="M258 296 H413 V486 H258 Z"/>
+                <path d="M96 210 L152 266 L178 738 M96 210 L104 880"/>
+                <line x1="24" y1="88" x2="108" y2="1024"/>
+                <path d="M380 585 L768 815 M428 546 L768 628 M382 588 V846 M384 846 L560 1024"/>
+                <path d="M490 322 L768 196 M490 322 V512 L768 612"/>
+              </g>
+              <g class="l-detail">
+                <path d="M276 318 H392 V468 H276 Z"/>
+                <path d="M276 394 H392 M315 318 V468 M354 318 V468 M276 356 H392 M276 432 H392 M252 478 H418"/>
+                <path d="M184 498 H278 M188 492 V504 M274 492 V504 M326 548 H360"/>
+                <path d="M392 536 H430 V548 H392 Z"/>
+                <ellipse cx="348" cy="604" rx="34" ry="12"/>
+                <path d="M316 606 Q318 660 340 668 V690 H372 V668 Q382 650 382 606"/>
+                <ellipse cx="468" cy="566" rx="42" ry="11"/><ellipse cx="680" cy="700" rx="86" ry="36"/>
+                <path d="M504 566 V526 Q504 518 496 518 H482 M760 668 V648"/>
+                <path d="M442 612 V900 M507 648 V960 M582 698 V1024 M640 734 V1024 M445 704 L505 736 M445 792 L505 832"/>
+                <circle cx="456" cy="668" r="4"/><circle cx="458" cy="742" r="4"/><circle cx="456" cy="828" r="4"/><circle cx="578" cy="858" r="5"/><circle cx="610" cy="900" r="5"/>
+                <path d="M236 88 L360 124 L330 186 L236 160 Z M252 120 L336 142 M250 134 L330 156 M248 148 L326 168"/>
+                <circle cx="307" cy="215" r="12"/>
+                <path d="M580 236 L752 96"/><circle cx="690" cy="160" r="18"/>
+                <circle cx="584" cy="250" r="10"/><circle cx="644" cy="212" r="10"/><circle cx="740" cy="152" r="10"/>
+                <path d="M130 300 H176 M130 330 H176 M131 360 H177 M131 390 H177 M132 420 H178 M132 450 H178 M133 480 H179 M133 510 H179 M134 540 H180 M134 570 H180 M135 600 H181 M135 630 H181"/>
+                <path d="M100 510 H146 V556 H100 Z M0 300 Q30 290 58 306"/>
+                <polyline points="150,720 190,700 230,720 270,700 310,720 350,700 390,720"/>
+                <polyline points="140,790 184,768 228,790 272,768 316,790 360,768 404,790 420,782"/>
+                <polyline points="130,860 178,836 226,860 274,836 322,860 370,836 418,860 460,840"/>
+                <polyline points="120,930 172,904 224,930 276,904 328,930 380,904 432,930 484,904 500,912"/>
+                <polyline points="110,1000 166,972 222,1000 278,972 334,1000 390,972 446,1000 502,972 540,990"/>
+              </g>
+            </svg></div><figcaption class="label">01 · Plan</figcaption></figure>
+            <figure class="prog-step"><div class="prog-img"><img src="media/work/bath-before-960.webp" alt="Demo: bathroom stripped to the subfloor" loading="lazy" decoding="async" width="960" height="1280"></div><figcaption class="label">02 · Demo</figcaption></figure>
+            <figure class="prog-step"><div class="prog-img"><img src="media/work/bath-during-960.webp" alt="Framing: new shower wall framed and waterproofed" loading="lazy" decoding="async" width="960" height="1280"></div><figcaption class="label">03 · Framing</figcaption></figure>
+            <figure class="prog-step"><div class="prog-img"><img src="media/work/bath-after-960.webp" alt="Finish: completed bathroom" loading="lazy" decoding="async" width="960" height="1280"></div><figcaption class="label">04 · Finish</figcaption></figure>
+          </div>
         </div>
       </div>
     </article>
