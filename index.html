@@ -524,7 +524,11 @@ document.documentElement.classList.add('js');</script>
   .upd h3{font-size:var(--fs-4);letter-spacing:var(--track-title);margin:var(--s2) 0 var(--s2);text-transform:none}
   .upd p{font-weight:300;font-size:var(--fs-sm);line-height:1.65;color:var(--mut)}
   /* ================= SERVICE AREA ================= */
-  .area{padding:var(--section) 0;border-top:1px solid var(--line)}
+  .area{padding:var(--section) 0;border-top:1px solid var(--line);overflow:hidden}
+  .area-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
+  .area-bg img{width:100%;height:100%;object-fit:cover;object-position:50% 30%;opacity:.2;filter:grayscale(1) contrast(1.1)}
+  .area-bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,var(--bg) 0%,rgba(20,20,19,.55) 40%,var(--bg) 100%)}
+  .area .wrap{position:relative;z-index:1}
   .area .grid{display:grid;grid-template-columns:1fr;gap:var(--s7);align-items:center}
   @media(min-width:940px){.area .grid{grid-template-columns:.9fr 1.1fr;gap:var(--s8)}}
   .area .rows{margin-top:var(--s6);border-top:1px solid var(--line)}
@@ -846,7 +850,7 @@ document.documentElement.classList.add('js');</script>
     <h2 class="reveal">One contractor for <em>the entire property.</em></h2>
     <div class="own-grid">
       <div class="frame own-media" id="ownmedia">
-        <img src="media/work/neighborhood-aerial-800.webp" srcset="media/work/neighborhood-aerial-800.webp 800w, media/work/neighborhood-aerial.webp 1350w" sizes="(min-width:980px) 42vw, 100vw" alt="Aerial view of a Greater Boston neighborhood of triple-deckers and multifamily homes, with the city skyline behind" loading="lazy" decoding="async" width="800" height="1000">
+        <img src="media/work/triple-porches-800.webp" srcset="media/work/triple-porches-800.webp 800w, media/work/triple-porches.webp 1078w" sizes="(min-width:980px) 42vw, 100vw" alt="Renovated New England three-family home with stacked white porches, gray siding and new windows" loading="lazy" decoding="async" width="800" height="998">
         <span class="regmark tl"></span><span class="regmark br"></span>
       </div>
       <div class="own-copy">
@@ -1116,19 +1120,44 @@ document.documentElement.classList.add('js');</script>
       </div>
     </article>
 
+    <!-- Project cards. Captions describe what the photos show; confirm location/scope with the owner and update. -->
     <div class="work-grid">
       <article class="wk">
-        <div class="wk-img"><img src="media/work/multifamily-finished-1024.webp" srcset="media/work/multifamily-finished-1024.webp 1024w, media/work/multifamily-finished.webp 1920w" sizes="(min-width:980px) 32vw, 100vw" alt="Aerial view of a finished four-story multifamily building on a dense Greater Boston street" loading="lazy" decoding="async" width="1024" height="540"></div>
+        <div class="wk-img"><img src="media/work/mf-navy-corner-960.webp" srcset="media/work/mf-navy-corner-960.webp 960w, media/work/mf-navy-corner.webp 1536w" sizes="(min-width:980px) 32vw, 100vw" alt="Three-story corner multifamily building with navy and gray siding, black windows and a wood entry door" loading="lazy" decoding="async" width="960" height="720"></div>
         <div class="wk-cap">
           <div class="wk-top"><span class="label">P—02</span><span class="label">Multifamily</span></div>
-          <h3>Multifamily Building</h3>
-          <div class="wk-meta"><span>Greater Boston</span><span>Four stories</span><span>Complete</span></div>
+          <h3>Corner Three-Family</h3>
+          <div class="wk-meta"><span>Greater Boston</span><span>Siding · Windows · Trim</span><span>Complete</span></div>
+        </div>
+      </article>
+      <article class="wk">
+        <div class="wk-img"><img src="media/work/mf-dusk-960.webp" srcset="media/work/mf-dusk-960.webp 960w, media/work/mf-dusk.webp 1600w" sizes="(min-width:980px) 32vw, 100vw" alt="Victorian three-family home at dusk with blue siding, turret bay and stacked porches" loading="lazy" decoding="async" width="960" height="646"></div>
+        <div class="wk-cap">
+          <div class="wk-top"><span class="label">P—03</span><span class="label">Multifamily</span></div>
+          <h3>Victorian Three-Decker</h3>
+          <div class="wk-meta"><span>Greater Boston</span><span>Exterior · Porches</span><span>Complete</span></div>
+        </div>
+      </article>
+      <article class="wk">
+        <div class="wk-img"><img src="media/work/mf-two-family-960.webp" alt="Pair of renovated three-family homes with white bays, navy and gray siding and new front steps" loading="lazy" decoding="async" width="960" height="684"></div>
+        <div class="wk-cap">
+          <div class="wk-top"><span class="label">P—04</span><span class="label">Multifamily</span></div>
+          <h3>Side-by-Side Three-Families</h3>
+          <div class="wk-meta"><span>Greater Boston</span><span>Siding · Windows · Entries</span><span>Complete</span></div>
+        </div>
+      </article>
+      <article class="wk">
+        <div class="wk-img"><img src="media/work/mf-modern-960.webp" alt="Modern three-story multifamily with light siding, black windows and ground-floor garage" loading="lazy" decoding="async" width="1024" height="684"></div>
+        <div class="wk-cap">
+          <div class="wk-top"><span class="label">P—05</span><span class="label">Multifamily</span></div>
+          <h3>Modern Three-Unit</h3>
+          <div class="wk-meta"><span>Greater Boston</span><span>Exterior envelope</span><span>Complete</span></div>
         </div>
       </article>
       <article class="wk">
         <div class="wk-img"><img src="media/work/jobsite-core-960.webp" srcset="media/work/jobsite-core-960.webp 960w, media/work/jobsite-core.webp 1600w" sizes="(min-width:980px) 32vw, 100vw" alt="Crew on scaffolding laying CMU block for a building's elevator core" loading="lazy" decoding="async" width="960" height="718"></div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—03</span><span class="label">On Site</span></div>
+          <div class="wk-top"><span class="label">P—06</span><span class="label">On Site</span></div>
           <h3>Structure &amp; Masonry</h3>
           <div class="wk-meta"><span>Greater Boston</span><span>Elevator core · CMU</span><span>In progress</span></div>
         </div>
@@ -1141,7 +1170,7 @@ document.documentElement.classList.add('js');</script>
           <span class="wk-tag label">Drawing → Rendering</span>
         </div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—04</span><span class="label">In Design</span></div>
+          <div class="wk-top"><span class="label">P—07</span><span class="label">In Design</span></div>
           <h3>Mixed-Use, Revere</h3>
           <div class="wk-meta"><span>Revere, MA</span><span>Retail + residential</span><span>Rendering</span></div>
         </div>
@@ -1223,6 +1252,7 @@ document.documentElement.classList.add('js');</script>
 
 <!-- ================= SERVICE AREA ================= -->
 <section class="area" id="area">
+  <div class="area-bg" aria-hidden="true"><img src="media/work/skyline.webp" alt="" loading="lazy" decoding="async" width="1920" height="1280"></div>
   <div class="wrap">
     <div class="dimhead" data-dim="08 · Service Area">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
