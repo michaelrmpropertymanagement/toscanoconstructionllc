@@ -279,6 +279,7 @@ document.documentElement.classList.add('js');</script>
   .svc-photo{aspect-ratio:4/3;border-bottom:1px solid var(--line);overflow:hidden}
   .svc-photo img{width:100%;height:100%;object-fit:cover;filter:var(--img-filter);transition:scale var(--t-img) var(--ease)}
   .svc-item:hover .svc-photo img{scale:1.03}
+  .svc-photo video,.sm-img video{width:100%;height:100%;object-fit:cover;display:block;filter:var(--img-filter)}
   .svc-body{padding:var(--s6)}
   .svc-idx{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.14em;color:var(--dim);display:flex;gap:var(--s3);align-items:center}
   .svc-idx::after{content:"";height:1px;width:18px;background:var(--line2);transition:width var(--t-base) var(--ease),background var(--t-base)}
@@ -769,7 +770,7 @@ document.documentElement.classList.add('js');</script>
           </div>
         </li>
         <li class="svc-item" data-name="Unit Turns &amp; Property Improvements">
-          <div class="svc-photo"><img src="media/work/unit-gut-960.webp" alt="Apartment unit taken down to the studs and subfloor for a full renovation" loading="lazy" decoding="async" width="960" height="1280"></div>
+          <div class="svc-photo"><video src="media/work/unit-turn-loop.mp4" poster="media/work/unit-turn-poster.webp" muted loop playsinline preload="none" data-inview aria-label="Walkthrough of a turned, rent-ready apartment unit"></video></div>
           <div class="svc-body">
             <div class="svc-idx">02</div><h3>Unit Turns &amp; Property Improvements</h3>
             <p>Vacant-unit turnovers and building-wide upgrades — paint, flooring, fixtures, and punch lists, run on one schedule.</p>
@@ -827,7 +828,7 @@ document.documentElement.classList.add('js');</script>
       <div class="svc-media" aria-hidden="true">
         <div class="frame">
           <div class="sm-img"><img src="media/work/bath-after.webp" alt="" loading="lazy" decoding="async"></div>
-          <div class="sm-img"><img src="media/work/unit-gut.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="sm-img"><video src="media/work/unit-turn-loop.mp4" poster="media/work/unit-turn-poster.webp" muted loop playsinline preload="none" data-inview aria-hidden="true"></video></div>
           <div class="sm-img"><img src="media/work/siding-facade.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/deck-composite.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/paint-crew.webp" alt="" loading="lazy" decoding="async"></div>
@@ -1516,6 +1517,17 @@ document.querySelectorAll('.qa').forEach(qa=>{
   new IntersectionObserver(es=>es.forEach(en=>{ en.isIntersecting ? vid.play().catch(()=>{}) : vid.pause(); }),{threshold:.1}).observe(vid);
 })();
 
+/* silent loops (e.g. the unit-turn walkthrough): play only while on screen; poster only under reduced motion */
+(function(){
+  const vids = document.querySelectorAll('video[data-inview]');
+  if(!vids.length || reduced || !('IntersectionObserver' in window)) return;
+  const io = new IntersectionObserver(es=>es.forEach(en=>{
+    const v = en.target;
+    if(en.isIntersecting){ if(v.preload === 'none') v.preload = 'auto'; v.play().catch(()=>{}); } else v.pause();
+  }),{threshold:.25});
+  vids.forEach(v=>io.observe(v));
+})();
+
 /* anchor links (+ focus the form when a CTA points at it) */
 document.querySelectorAll('a[href^="#"]').forEach(a=>{
   a.addEventListener('click', e=>{
@@ -1704,9 +1716,9 @@ mm.add('(min-width: 980px)', ()=>{
     if(i === 0) return;
     gsap.fromTo(imgs[i],{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)', ease:'none',
       scrollTrigger:{trigger:it, start:'top 88%', end:'top 52%', scrub:M.scrub}});
-    gsap.fromTo(imgs[i].querySelector('img'),{scale:1.12},{scale:1, ease:'none',
+    gsap.fromTo(imgs[i].querySelector('img, video'),{scale:1.12},{scale:1, ease:'none',
       scrollTrigger:{trigger:it, start:'top 88%', end:'top 30%', scrub:M.scrub}});
-    gsap.to(imgs[i-1].querySelector('img'),{scale:.96, opacity:.6, ease:'none',
+    gsap.to(imgs[i-1].querySelector('img, video'),{scale:.96, opacity:.6, ease:'none',
       scrollTrigger:{trigger:it, start:'top 88%', end:'top 52%', scrub:M.scrub}});
   });
   return ()=>items.forEach(it=>it.classList.remove('is-active'));
