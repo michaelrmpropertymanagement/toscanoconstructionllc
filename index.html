@@ -499,6 +499,16 @@ document.documentElement.classList.add('js');</script>
   .tm .info span{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--dim);display:block;margin-top:6px}
   .teamnote{margin-top:var(--s7);font-size:var(--fs-sm);font-weight:300;color:var(--dim);text-align:center}
 
+  /* project updates feed */
+  .updates{padding:var(--section) 0;border-top:1px solid var(--line)}
+  .upd-grid{display:grid;grid-template-columns:1fr;gap:var(--s7) var(--grid-gap);margin-top:var(--s8)}
+  @media(min-width:720px){.upd-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(min-width:1080px){.upd-grid{grid-template-columns:repeat(3,1fr)}}
+  .upd-img{aspect-ratio:4/3;overflow:hidden;border:1px solid var(--line);background:var(--ink-800)}
+  .upd-img img{width:100%;height:100%;object-fit:cover;filter:var(--img-filter)}
+  .upd-top{display:flex;justify-content:space-between;gap:var(--s3);margin-top:var(--s4)}
+  .upd h3{font-size:var(--fs-4);letter-spacing:var(--track-title);margin:var(--s2) 0 var(--s2);text-transform:none}
+  .upd p{font-weight:300;font-size:var(--fs-sm);line-height:1.65;color:var(--mut)}
   /* ================= SERVICE AREA ================= */
   .area{padding:var(--section) 0;border-top:1px solid var(--line)}
   .area .grid{display:grid;grid-template-columns:1fr;gap:var(--s7);align-items:center}
@@ -1137,6 +1147,25 @@ document.documentElement.classList.add('js');</script>
   </div>
 </section>
 
+<!-- ================= PROJECT UPDATES (hidden until the first update is added) =================
+     To post an update, add an entry to the JSON list in #updates-data below (newest first; the 3 newest show):
+       {"date":"2026-10-02","title":"Framing complete","type":"Unit renovation","area":"Southern NH",
+        "note":"Rough electrical and plumbing underway.","img":"media/updates/your-photo.webp","alt":"Describe the photo"}
+     Keep it to real jobs and real dates. The section appears automatically once the list has an entry. -->
+<section class="updates" id="updates" hidden aria-labelledby="updates-title">
+  <div class="wrap">
+    <div class="sec-head">
+      <div>
+        <div class="kick reveal">From the Jobsite</div>
+        <h2 class="reveal" id="updates-title">Recent project <em>updates.</em></h2>
+      </div>
+      <p class="sub reveal">Where our crews are right now — short notes from active jobs.</p>
+    </div>
+    <div class="upd-grid" id="upd-grid"></div>
+  </div>
+</section>
+<script type="application/json" id="updates-data">[]</script>
+
 <!-- ================= SERVICE AREA ================= -->
 <section class="area" id="area">
   <div class="wrap">
@@ -1476,6 +1505,27 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     if(window.ScrollTrigger) ScrollTrigger.refresh();
   });
 })();
+
+/* project updates: renders the newest 3 entries from #updates-data; section stays hidden while the list is empty.
+   renderUpdates(list) is global so a social-media or CMS feed can call it later with the same fields. */
+function renderUpdates(list){
+  const sec = document.getElementById('updates'), grid = document.getElementById('upd-grid');
+  if(!sec || !grid || !Array.isArray(list) || !list.length) return;
+  const fmt = d=>{ const t = new Date(d+'T00:00:00Z'); return isNaN(t) ? d : t.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}); };
+  const el = (tag, cls, text)=>{ const n = document.createElement(tag); if(cls) n.className = cls; if(text) n.textContent = text; return n; };
+  grid.textContent = '';
+  list.slice(0,3).forEach(u=>{
+    const card = el('article','upd reveal');
+    if(u.img){ const f = el('div','upd-img'), im = el('img'); im.src = u.img; im.alt = u.alt || ''; im.loading = 'lazy'; im.decoding = 'async'; f.appendChild(im); card.appendChild(f); }
+    const top = el('div','upd-top'); top.appendChild(el('span','label', fmt(u.date || ''))); top.appendChild(el('span','label', u.type || '')); card.appendChild(top);
+    card.appendChild(el('h3','', u.title || ''));
+    if(u.area) card.appendChild(el('div','label', u.area));
+    if(u.note){ const p = el('p','', u.note); p.style.marginTop = '8px'; card.appendChild(p); }
+    grid.appendChild(card);
+  });
+  sec.hidden = false;
+}
+(function(){ try{ renderUpdates(JSON.parse(document.getElementById('updates-data').textContent || '[]')); }catch(_){} })();
 
 /* ============ MOTION SUITE (GSAP + ScrollTrigger) ============ */
 function staticMode(){ root.classList.remove('js-motion'); }
