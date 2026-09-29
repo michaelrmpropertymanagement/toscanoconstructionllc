@@ -40,7 +40,8 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <link rel="preload" as="image" href="media/work/hero-build-1024.webp" imagesrcset="media/work/hero-build-1024.webp 1024w, media/work/hero-build.webp 1920w" imagesizes="100vw" fetchpriority="high">
 <script>/* motion flag: pre-animation states only apply when motion is allowed (removed again if GSAP fails to load) */
-if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-motion');</script>
+if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-motion');
+document.documentElement.classList.add('js');</script>
 <style>
   /* =====================================================================
      TOSCANO — VISUAL SYSTEM
@@ -374,14 +375,10 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   .projects{padding:var(--section) 0;background:var(--bg2);border-top:1px solid var(--line)}
   .work-grid{display:grid;gap:var(--s7) var(--grid-gap);margin-top:var(--s8)}
   @media(min-width:980px){
-    .work-grid{grid-template-columns:repeat(12,1fr);gap:var(--s7) var(--s6)}
-    .wk-anchor{grid-column:1 / span 8;grid-row:1 / span 2}
-    .wk-side{grid-column:9 / span 4}
+    .work-grid{grid-template-columns:repeat(3,1fr);gap:var(--s7) var(--s6)}
   }
   .wk{position:relative}
   .wk-img{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink-800);aspect-ratio:4/3}
-  .wk-anchor .wk-img{aspect-ratio:4/3}
-  @media(min-width:980px){.wk-anchor .wk-img{aspect-ratio:auto;height:calc(100% - 118px);min-height:520px}}
   .wk-img img{position:absolute;left:0;top:-5%;width:100%;height:110%;object-fit:cover;filter:var(--img-filter);
     transition:scale var(--t-img) var(--ease),filter .6s var(--ease)}
   .wk:hover .wk-img img{scale:1.03;filter:var(--img-filter-hover)}
@@ -393,7 +390,6 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   .wk-cap{padding-top:var(--s4)}
   .wk-top{display:flex;justify-content:space-between;gap:var(--s3)}
   .wk-cap h3{font-size:clamp(20px,1.8vw,26px);letter-spacing:var(--track-title);margin:var(--s2) 0 var(--s3);transition:transform var(--t-base) var(--ease)}
-  .wk-anchor .wk-cap h3{font-size:clamp(24px,2.4vw,34px)}
   .wk:hover .wk-cap h3{transform:translateX(4px)}
   .wk-meta{display:flex;flex-wrap:wrap;gap:6px 0;border-top:1px solid var(--line);padding-top:var(--s3)}
   .wk-meta span{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
@@ -402,16 +398,32 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
     padding-top:var(--s5);border-top:1px solid var(--line)}
   .work-foot p{font-weight:300;color:var(--mut);font-size:var(--fs-sm)}
 
+  /* featured project — the portfolio centerpiece */
+  .feat{display:grid;gap:var(--s7);margin-top:var(--s8);padding-bottom:var(--s8);border-bottom:1px solid var(--line)}
+  @media(min-width:980px){.feat{grid-template-columns:7fr 5fr;gap:var(--s9);align-items:center}}
+  .feat-media{display:flex;justify-content:center}
+  .feat-flag{color:var(--txt);display:inline-flex;align-items:center;gap:10px}
+  .feat-flag::before{content:"";width:8px;height:8px;background:var(--accent)}
+  .feat-info h3{font-size:clamp(28px,3vw,44px);letter-spacing:var(--track-head);line-height:1.05;margin:var(--s4) 0}
+  .feat-info>p{font-weight:300;font-size:var(--fs-lead);line-height:1.7;color:var(--mut);max-width:44ch;margin-bottom:var(--s6)}
+  .feat-meta{border-top:1px solid var(--line);margin-bottom:var(--s5)}
+  .feat-meta div{display:grid;grid-template-columns:110px 1fr;gap:var(--s4);padding:12px 0;border-bottom:1px solid var(--line);align-items:baseline}
+  .feat-meta dt{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--dim)}
+  .feat-meta dd{font-size:var(--fs-sm);color:var(--txt)}
+  .feat-toggle{display:none;background:none;border:0;border-bottom:1px solid var(--line2);cursor:pointer;padding:0 0 4px}
+  .js .feat-toggle{display:inline-flex}
+  .feat-details{display:grid;grid-template-columns:1fr;gap:var(--s5);margin-top:var(--s5);padding-top:var(--s5);border-top:1px solid var(--line)}
+  @media(min-width:560px){.feat-details{grid-template-columns:1fr 150px}}
+  .feat-details .ba-during{margin:0;max-width:150px}
+  .feat-trades{list-style:none;display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s3)}
+  .feat-trades li{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--txt);border:1px solid var(--line2);padding:6px 10px}
+  .feat + .work-grid{margin-top:var(--s8)}
   /* before / after — static side-by-side by default; `.is-live` turns it into a draggable comparison */
-  .ba-row{display:grid;gap:var(--s6);margin-top:var(--s9)}
-  @media(min-width:980px){.ba-row{grid-template-columns:5fr 7fr;gap:var(--s8);align-items:end}}
   .ba{width:100%}
   @media(min-width:980px){.ba{max-width:calc((100vh - 160px) * .75 * 2);justify-self:end}.ba.is-live{max-width:calc((100vh - 160px) * .75)}}
   .ba-during{margin:0 0 var(--s5);max-width:200px}
   .ba-during img{width:100%;height:auto;aspect-ratio:3/4;object-fit:cover;border:1px solid var(--line);filter:var(--img-filter)}
   .ba-during figcaption{margin-top:var(--s2)}
-  .ba-copy h3{font-size:clamp(24px,2.4vw,34px);letter-spacing:var(--track-head);margin:var(--s3) 0}
-  .ba-copy p{font-weight:300;font-size:var(--fs-sm);line-height:1.7;color:var(--mut);max-width:40ch;margin-bottom:var(--s5)}
   .ba-stage{display:grid;grid-template-columns:1fr;gap:var(--s3)}
   @media(min-width:640px){.ba-stage{grid-template-columns:1fr 1fr}}
   .ba-fig{position:relative;margin:0;overflow:hidden;border:1px solid var(--line);background:var(--ink-800)}
@@ -434,7 +446,7 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
   .ba-knob i:last-child{transform:rotate(-135deg)}
   .ba.is-live .ba-range:focus-visible ~ .ba-handle .ba-knob{outline:1px solid var(--paper);outline-offset:4px}
   .ba-hint{margin-top:var(--s3)}
-  .ba:not(.is-live) .ba-hint,.ba-row:not(.is-live) .live-only{display:none}
+  .ba:not(.is-live) .ba-hint,.feat:not(.is-live) .live-only{display:none}
 
   /* ================= RESIDENTIAL / COMMERCIAL ================= */
   .forwho{padding:var(--section) 0;border-top:1px solid var(--line)}
@@ -930,60 +942,74 @@ if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentEle
       <p class="sub reveal">Multifamily construction, full renovations, and projects in design — planned, scheduled, and run by one team.</p>
     </div>
 
+    <!-- FEATURED PROJECT — the centerpiece of the portfolio. Facts shown are what the photos document.
+         PLACEHOLDER (internal): add Location and Year rows to .feat-meta once confirmed by the owner. -->
+    <article class="feat" id="featured">
+      <div class="feat-media">
+        <!-- before / after: side by side without JS or with reduced motion; draggable otherwise -->
+        <div class="ba" data-ba>
+          <div class="ba-stage">
+            <figure class="ba-fig ba-before"><img src="media/work/bath-before-960.webp" srcset="media/work/bath-before-960.webp 960w, media/work/bath-before.webp 1536w" sizes="(min-width:980px) 40vw, 100vw" alt="Before: bathroom stripped to the subfloor with old wallpaper and plumbing exposed" width="960" height="1280" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
+            <figure class="ba-fig ba-after"><img src="media/work/bath-after-960.webp" srcset="media/work/bath-after-960.webp 960w, media/work/bath-after.webp 1536w" sizes="(min-width:980px) 40vw, 100vw" alt="After: finished bathroom with glass shower, herringbone marble floor and double vanity" width="960" height="1280" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
+            <input class="ba-range" type="range" min="0" max="100" step="1" value="50" aria-label="Before and after comparison: move to reveal more of the before or after photo">
+            <div class="ba-handle" aria-hidden="true"><div class="ba-knob"><i></i><i></i></div></div>
+          </div>
+          <div class="ba-hint label">Drag the divider · or use arrow keys</div>
+        </div>
+      </div>
+      <div class="feat-info">
+        <div class="wk-top"><span class="label feat-flag">Featured Project</span><span class="label">P—01</span></div>
+        <h3 class="reveal">Full-Gut Bathroom Renovation</h3>
+        <p class="reveal">One bathroom, taken to the studs and rebuilt — new framing and waterproofing, a glass shower, herringbone tile, and a double vanity.<span class="live-only"> Drag the photo to compare.</span></p>
+        <dl class="feat-meta reveal">
+          <div><dt>Category</dt><dd>Residential renovation</dd></div>
+          <div><dt>Scope</dt><dd>Full gut to finish</dd></div>
+          <div><dt>Status</dt><dd>Complete</dd></div>
+        </dl>
+        <button class="tlink feat-toggle" type="button" aria-expanded="false" aria-controls="feat-details">View details</button>
+        <div class="feat-details" id="feat-details">
+          <div>
+            <span class="label">Trades involved</span>
+            <ul class="feat-trades"><li>Demolition</li><li>Framing</li><li>Plumbing</li><li>Waterproofing</li><li>Tile</li><li>Glass shower</li><li>Vanity &amp; cabinetry</li><li>Lighting</li><li>Paint</li></ul>
+          </div>
+          <figure class="ba-during">
+            <img src="media/work/bath-during-960.webp" alt="During: shower wall framed and waterproofed before tile" loading="lazy" decoding="async" width="960" height="1280">
+            <figcaption class="label">During — framing &amp; waterproofing</figcaption>
+          </figure>
+        </div>
+      </div>
+    </article>
+
     <div class="work-grid">
-      <article class="wk wk-anchor">
-        <div class="wk-img"><img src="media/work/multifamily-finished-1024.webp" srcset="media/work/multifamily-finished-1024.webp 1024w, media/work/multifamily-finished.webp 1920w" sizes="(min-width:980px) 64vw, 100vw" alt="Aerial view of a finished four-story multifamily building on a dense Greater Boston street" loading="lazy" decoding="async" width="1024" height="540"></div>
+      <article class="wk">
+        <div class="wk-img"><img src="media/work/multifamily-finished-1024.webp" srcset="media/work/multifamily-finished-1024.webp 1024w, media/work/multifamily-finished.webp 1920w" sizes="(min-width:980px) 32vw, 100vw" alt="Aerial view of a finished four-story multifamily building on a dense Greater Boston street" loading="lazy" decoding="async" width="1024" height="540"></div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—01</span><span class="label">Multifamily</span></div>
+          <div class="wk-top"><span class="label">P—02</span><span class="label">Multifamily</span></div>
           <h3>Multifamily Building</h3>
           <div class="wk-meta"><span>Greater Boston</span><span>Four stories</span><span>Complete</span></div>
         </div>
       </article>
-      <article class="wk wk-side">
+      <article class="wk">
         <div class="wk-img"><img src="media/work/jobsite-core-960.webp" srcset="media/work/jobsite-core-960.webp 960w, media/work/jobsite-core.webp 1600w" sizes="(min-width:980px) 32vw, 100vw" alt="Crew on scaffolding laying CMU block for a building's elevator core" loading="lazy" decoding="async" width="960" height="718"></div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—02</span><span class="label">On Site</span></div>
+          <div class="wk-top"><span class="label">P—03</span><span class="label">On Site</span></div>
           <h3>Structure &amp; Masonry</h3>
           <div class="wk-meta"><span>Greater Boston</span><span>Elevator core · CMU</span><span>In progress</span></div>
         </div>
       </article>
       <!-- Design → rendering: the architect's line drawing wipes into the rendering as you scroll. -->
-      <article class="wk wk-side wk-design">
+      <article class="wk wk-design">
         <div class="wk-img">
           <div class="wk-draw"><img src="media/work/revere-drawing.webp" alt="" aria-hidden="true" loading="lazy" decoding="async" width="1600" height="1000"></div>
           <div class="wk-render"><img src="media/work/revere-rendering.webp" alt="Rendering of a four-story mixed-use building with ground-floor retail on a Revere street corner" loading="lazy" decoding="async" width="1600" height="1200"></div>
           <span class="wk-tag label">Drawing → Rendering</span>
         </div>
         <div class="wk-cap">
-          <div class="wk-top"><span class="label">P—03</span><span class="label">In Design</span></div>
+          <div class="wk-top"><span class="label">P—04</span><span class="label">In Design</span></div>
           <h3>Mixed-Use, Revere</h3>
           <div class="wk-meta"><span>Revere, MA</span><span>Retail + residential</span><span>Rendering</span></div>
         </div>
       </article>
-    </div>
-
-    <!-- BEFORE / AFTER — a real renovation. Side by side without JS / with reduced motion; draggable otherwise.
-         For a cleaner slider, shoot the next pair from the exact same spot. -->
-    <div class="ba-row">
-      <div class="ba-copy">
-        <div class="wk-top"><span class="label">P—04</span><span class="label">Bathroom Renovation</span></div>
-        <h3 class="reveal">Before &amp; after.</h3>
-        <p class="reveal">One bathroom, taken to the studs — new framing and waterproofing, a glass shower, herringbone tile, and a double vanity.<span class="live-only"> Drag to compare.</span></p>
-        <figure class="ba-during reveal">
-          <img src="media/work/bath-during-960.webp" alt="During: shower wall framed and waterproofed before tile" loading="lazy" decoding="async" width="960" height="1280">
-          <figcaption class="label">During — framing &amp; waterproofing</figcaption>
-        </figure>
-        <div class="wk-meta"><span>Residential</span><span>Full gut to finish</span></div>
-      </div>
-      <div class="ba" data-ba>
-        <div class="ba-stage">
-          <figure class="ba-fig ba-before"><img src="media/work/bath-before-960.webp" srcset="media/work/bath-before-960.webp 960w, media/work/bath-before.webp 1536w" sizes="(min-width:980px) 40vw, 100vw" alt="Before: bathroom stripped to the subfloor with old wallpaper and plumbing exposed" width="960" height="1280" loading="lazy" decoding="async"><figcaption>Before</figcaption></figure>
-          <figure class="ba-fig ba-after"><img src="media/work/bath-after-960.webp" srcset="media/work/bath-after-960.webp 960w, media/work/bath-after.webp 1536w" sizes="(min-width:980px) 40vw, 100vw" alt="After: finished bathroom with glass shower, herringbone marble floor and double vanity" width="960" height="1280" loading="lazy" decoding="async"><figcaption>After</figcaption></figure>
-          <input class="ba-range" type="range" min="0" max="100" step="1" value="50" aria-label="Before and after comparison: move to reveal more of the before or after photo">
-          <div class="ba-handle" aria-hidden="true"><div class="ba-knob"><i></i><i></i></div></div>
-        </div>
-        <div class="ba-hint label">Drag the divider · or use arrow keys</div>
-      </div>
     </div>
 
     <div class="work-foot">
@@ -1320,7 +1346,7 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
   if(reduced) return;
   document.querySelectorAll('[data-ba]').forEach(ba=>{
     const stage = ba.querySelector('.ba-stage'), range = ba.querySelector('.ba-range');
-    ba.classList.add('is-live'); ba.closest('.ba-row')?.classList.add('is-live');
+    ba.classList.add('is-live'); ba.closest('.feat')?.classList.add('is-live');
     const set = v=>{ v = Math.max(0, Math.min(100, v)); ba.style.setProperty('--pos', v+'%'); range.value = Math.round(v);
       range.setAttribute('aria-valuetext', Math.round(v)+'% before, '+(100-Math.round(v))+'% after'); };
     const fromX = x=>{ const r = stage.getBoundingClientRect(); set((x - r.left) / r.width * 100); };
@@ -1342,6 +1368,18 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{
     ['pointerup','pointercancel','lostpointercapture'].forEach(t=>stage.addEventListener(t, end));
     stage.addEventListener('click', e=>{ if(e.pointerType !== 'mouse') fromX(e.clientX); });
     range.addEventListener('input', ()=>set(+range.value));
+  });
+})();
+
+/* featured project: "View details" toggle (details stay visible when JS is off) */
+(function(){
+  const btn = document.querySelector('.feat-toggle'), panel = document.getElementById('feat-details');
+  if(!btn || !panel) return;
+  panel.hidden = true;
+  btn.addEventListener('click', ()=>{
+    const open = panel.hidden; panel.hidden = !open;
+    btn.setAttribute('aria-expanded', open); btn.textContent = open ? 'Hide details' : 'View details';
+    if(window.ScrollTrigger) ScrollTrigger.refresh();
   });
 })();
 
@@ -1471,6 +1509,11 @@ gsap.utils.toArray('.wk-img').forEach(box=>{
   gsap.fromTo(box,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)', duration:M.wipe, ease:M.wipeEase, scrollTrigger:{trigger:box, start:'top 88%'}});
   gsap.fromTo(box.querySelectorAll('img'),{yPercent:-4},{yPercent:4, ease:'none', scrollTrigger:{trigger:box, start:'top bottom', end:'bottom top', scrub:M.scrub}});
 });
+/* featured project: the image frame opens as it scrolls in */
+(function(){
+  const m = document.querySelector('.feat-media'); if(!m) return;
+  gsap.fromTo(m,{clipPath:'inset(6% 8% 6% 8%)'},{clipPath:'inset(0% 0% 0% 0%)', ease:'none', scrollTrigger:{trigger:m, start:'top 92%', end:'top 45%', scrub:M.scrub}});
+})();
 /* design card: the line drawing is revealed first, then the rendering wipes across it as the card scrolls up */
 gsap.utils.toArray('.wk-design .wk-render').forEach(r=>{
   gsap.fromTo(r,{clipPath:'inset(0% 0% 0% 100%)'},{clipPath:'inset(0% 0% 0% 0%)', ease:'none',
