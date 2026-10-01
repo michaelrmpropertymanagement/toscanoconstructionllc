@@ -391,11 +391,10 @@ document.documentElement.classList.add('js');</script>
   .js-motion .pstep.is-active .no{color:var(--txt);-webkit-text-stroke-color:var(--txt)}
   .js-motion .pstep.is-active h3,.js-motion .pstep.is-active p{opacity:1}
 
-  /* ================= BUILD FILMS ================= */
-  .films{padding:var(--section) 0;border-top:1px solid var(--line)}
-  .film{margin:var(--s8) 0 0}
+  /* ================= BUILD FILMS (placed inside owners + how-we-work) ================= */
+  .film{margin:var(--s9) 0 0;padding-top:var(--s7);border-top:1px solid var(--line)}
+  .film-kick{margin-bottom:var(--s5)}
   .film + .film{margin-top:var(--s8)}
-  @media(min-width:980px){.films .wrap{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--s6);align-items:start}.films .dimhead,.films .sec-head{grid-column:1 / -1}.film + .film{margin-top:var(--s8)}}
   .film-frame{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line2);background:var(--ink-850)}
   .film-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .film-tag{left:auto;right:12px;top:12px;bottom:auto}
@@ -898,6 +897,27 @@ document.documentElement.classList.add('js');</script>
         <div class="pm"><b>2026</b><span class="label">Year</span></div>
       </div>
     </div>
+    <!-- unit build visualization (Revere proposed unit) -->
+    <figure class="film" data-film
+      data-src="media/films/framing-to-finish.mp4" data-src-sm="media/films/framing-to-finish-960.mp4"
+      data-phases="0:Framing &amp; rough-in|3.3:Insulation &amp; drywall|5:Cabinetry &amp; island|7.5:Finished">
+      <div class="kick film-kick reveal">Unit renovation · start to finish</div>
+      <div class="film-frame">
+        <video class="film-video" muted playsinline preload="none" controls
+          poster="media/films/framing-to-finish-start.webp" data-end-poster="media/films/framing-to-finish-end.webp"
+          aria-label="Visualization: an open, framed unit is insulated, drywalled, floored, and fitted with cabinetry until it becomes a finished kitchen and living room">
+          <source src="media/films/framing-to-finish.mp4" type="video/mp4">
+        </video>
+        <span class="wk-tag label film-tag">AI visualization · Proposed unit</span>
+        <div class="film-hud" aria-hidden="true"><span class="label film-phase">Framing &amp; rough-in</span><span class="film-bar"><i></i></span></div>
+        <button class="film-replay" type="button" hidden><span>Replay</span></button>
+      </div>
+      <figcaption class="film-cap">
+        <div class="wk-top"><span class="label">F—01</span><span class="label">Revere, MA</span></div>
+        <h3>Proposed Unit · Framing to Finish</h3>
+        <div class="wk-meta"><span>Framing</span><span>Rough-in</span><span>Drywall</span><span>Flooring</span><span>Cabinetry</span><span>Finish</span></div>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -967,6 +987,27 @@ document.documentElement.classList.add('js');</script>
         </ol>
       </div>
     </div>
+    <!-- bathroom build visualization: every trade, in order -->
+    <figure class="film" data-film
+      data-src="media/films/bath-framing-to-finish.mp4" data-src-sm="media/films/bath-framing-to-finish-960.mp4"
+      data-phases="0:Framing &amp; plumbing rough-in|2.6:Insulation|4.2:Drywall &amp; tile|5:Flooring|5.8:Vanity &amp; cabinetry|7.5:Fixtures &amp; glass|8.6:Finished">
+      <div class="kick film-kick reveal">Every trade, in the right order</div>
+      <div class="film-frame">
+        <video class="film-video" muted playsinline preload="none" controls
+          poster="media/films/bath-framing-to-finish-start.webp" data-end-poster="media/films/bath-framing-to-finish-end.webp"
+          aria-label="Visualization: a framed bathroom with plumbing rough-in is insulated, drywalled, tiled, floored, and fitted with a vanity and glass shower until it is finished">
+          <source src="media/films/bath-framing-to-finish.mp4" type="video/mp4">
+        </video>
+        <span class="wk-tag label film-tag">AI visualization · Bathroom renovation</span>
+        <div class="film-hud" aria-hidden="true"><span class="label film-phase">Framing &amp; plumbing rough-in</span><span class="film-bar"><i></i></span></div>
+        <button class="film-replay" type="button" hidden><span>Replay</span></button>
+      </div>
+      <figcaption class="film-cap">
+        <div class="wk-top"><span class="label">F—02</span><span class="label">Residential</span></div>
+        <h3>Bathroom Renovation · Framing to Finish</h3>
+        <div class="wk-meta"><span>Framing</span><span>Plumbing</span><span>Insulation</span><span>Tile</span><span>Flooring</span><span>Vanity</span><span>Glass shower</span></div>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
@@ -1056,65 +1097,11 @@ document.documentElement.classList.add('js');</script>
   </div>
 </section>
 
-<!-- ================= BUILD FILMS — visualizations of the build sequence. Add more films by copying a <figure class="film">. ================= -->
-<section class="films" id="films">
-  <div class="wrap">
-    <div class="dimhead" data-dim="07 · Build Films"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
-    <div class="sec-head">
-      <div>
-        <div class="kick reveal">Build Visualization</div>
-        <h2 class="reveal">From framing <em>to finished.</em></h2>
-      </div>
-      <p class="sub reveal">How an open shell becomes a finished unit — every trade, in the right order, on one schedule.</p>
-    </div>
-
-    <figure class="film" data-film
-      data-src="media/films/framing-to-finish.mp4" data-src-sm="media/films/framing-to-finish-960.mp4"
-      data-phases="0:Framing &amp; rough-in|3.3:Insulation &amp; drywall|5:Cabinetry &amp; island|7.5:Finished">
-      <div class="film-frame">
-        <video class="film-video" muted playsinline preload="none" controls
-          poster="media/films/framing-to-finish-start.webp" data-end-poster="media/films/framing-to-finish-end.webp"
-          aria-label="Visualization: an open, framed unit is insulated, drywalled, floored, and fitted with cabinetry until it becomes a finished kitchen and living room">
-          <source src="media/films/framing-to-finish.mp4" type="video/mp4">
-        </video>
-        <span class="wk-tag label film-tag">AI visualization · Proposed unit</span>
-        <div class="film-hud" aria-hidden="true"><span class="label film-phase">Framing &amp; rough-in</span><span class="film-bar"><i></i></span></div>
-        <button class="film-replay" type="button" hidden><span>Replay</span></button>
-      </div>
-      <figcaption class="film-cap">
-        <div class="wk-top"><span class="label">F—01</span><span class="label">Revere, MA</span></div>
-        <h3>Proposed Unit · Framing to Finish</h3>
-        <div class="wk-meta"><span>Framing</span><span>Rough-in</span><span>Drywall</span><span>Flooring</span><span>Cabinetry</span><span>Finish</span></div>
-      </figcaption>
-    </figure>
-
-    <figure class="film" data-film
-      data-src="media/films/bath-framing-to-finish.mp4" data-src-sm="media/films/bath-framing-to-finish-960.mp4"
-      data-phases="0:Framing &amp; plumbing rough-in|2.6:Insulation|4.2:Drywall &amp; tile|5:Flooring|5.8:Vanity &amp; cabinetry|7.5:Fixtures &amp; glass|8.6:Finished">
-      <div class="film-frame">
-        <video class="film-video" muted playsinline preload="none" controls
-          poster="media/films/bath-framing-to-finish-start.webp" data-end-poster="media/films/bath-framing-to-finish-end.webp"
-          aria-label="Visualization: a framed bathroom with plumbing rough-in is insulated, drywalled, tiled, floored, and fitted with a vanity and glass shower until it is finished">
-          <source src="media/films/bath-framing-to-finish.mp4" type="video/mp4">
-        </video>
-        <span class="wk-tag label film-tag">AI visualization · Bathroom renovation</span>
-        <div class="film-hud" aria-hidden="true"><span class="label film-phase">Framing &amp; plumbing rough-in</span><span class="film-bar"><i></i></span></div>
-        <button class="film-replay" type="button" hidden><span>Replay</span></button>
-      </div>
-      <figcaption class="film-cap">
-        <div class="wk-top"><span class="label">F—02</span><span class="label">Residential</span></div>
-        <h3>Bathroom Renovation · Framing to Finish</h3>
-        <div class="wk-meta"><span>Framing</span><span>Plumbing</span><span>Insulation</span><span>Tile</span><span>Flooring</span><span>Vanity</span><span>Glass shower</span></div>
-      </figcaption>
-    </figure>
-  </div>
-</section>
-
 <!-- ================= SELECTED WORK ================= -->
 <!-- Each project is one <article class="wk">: swap the <img>, then edit the number, category, title and meta line. -->
 <section class="projects" id="projects">
   <div class="wrap">
-    <div class="dimhead" data-dim="08 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="07 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">Selected Work</div>
@@ -1331,7 +1318,7 @@ document.documentElement.classList.add('js');</script>
 <section class="area" id="area">
   <div class="area-bg" aria-hidden="true"><img src="media/work/skyline.webp" alt="" loading="lazy" decoding="async" width="1920" height="1280"></div>
   <div class="wrap">
-    <div class="dimhead" data-dim="09 · Service Area">
+    <div class="dimhead" data-dim="08 · Service Area">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="grid">
@@ -1421,7 +1408,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FAQ ================= -->
 <section class="faqs tone-bone" id="faq">
   <div class="wrap">
-    <div class="dimhead" data-dim="10 · FAQ">
+    <div class="dimhead" data-dim="09 · FAQ">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="kick center reveal">Straight Answers</div>
@@ -1466,7 +1453,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FINAL CTA + CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="dimhead" data-dim="11 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="10 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="grid">
       <div>
         <div class="kick reveal">Ready When You Are</div>
