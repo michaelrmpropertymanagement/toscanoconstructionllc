@@ -394,7 +394,8 @@ document.documentElement.classList.add('js');</script>
   /* ================= BUILD FILMS ================= */
   .films{padding:var(--section) 0;border-top:1px solid var(--line)}
   .film{margin:var(--s8) 0 0}
-  .film + .film{margin-top:var(--s9)}
+  .film + .film{margin-top:var(--s8)}
+  @media(min-width:980px){.films .wrap{display:grid;grid-template-columns:1fr 1fr;column-gap:var(--s6);align-items:start}.films .dimhead,.films .sec-head{grid-column:1 / -1}.film + .film{margin-top:var(--s8)}}
   .film-frame{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line2);background:var(--ink-850)}
   .film-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
   .film-tag{left:auto;right:12px;top:12px;bottom:auto}
@@ -1084,6 +1085,26 @@ document.documentElement.classList.add('js');</script>
         <div class="wk-top"><span class="label">F—01</span><span class="label">Revere, MA</span></div>
         <h3>Proposed Unit · Framing to Finish</h3>
         <div class="wk-meta"><span>Framing</span><span>Rough-in</span><span>Drywall</span><span>Flooring</span><span>Cabinetry</span><span>Finish</span></div>
+      </figcaption>
+    </figure>
+
+    <figure class="film" data-film
+      data-src="media/films/bath-framing-to-finish.mp4" data-src-sm="media/films/bath-framing-to-finish-960.mp4"
+      data-phases="0:Framing &amp; plumbing rough-in|2.6:Insulation|4.2:Drywall &amp; tile|5:Flooring|5.8:Vanity &amp; cabinetry|7.5:Fixtures &amp; glass|8.6:Finished">
+      <div class="film-frame">
+        <video class="film-video" muted playsinline preload="none" controls
+          poster="media/films/bath-framing-to-finish-start.webp" data-end-poster="media/films/bath-framing-to-finish-end.webp"
+          aria-label="Visualization: a framed bathroom with plumbing rough-in is insulated, drywalled, tiled, floored, and fitted with a vanity and glass shower until it is finished">
+          <source src="media/films/bath-framing-to-finish.mp4" type="video/mp4">
+        </video>
+        <span class="wk-tag label film-tag">AI visualization · Bathroom renovation</span>
+        <div class="film-hud" aria-hidden="true"><span class="label film-phase">Framing &amp; plumbing rough-in</span><span class="film-bar"><i></i></span></div>
+        <button class="film-replay" type="button" hidden><span>Replay</span></button>
+      </div>
+      <figcaption class="film-cap">
+        <div class="wk-top"><span class="label">F—02</span><span class="label">Residential</span></div>
+        <h3>Bathroom Renovation · Framing to Finish</h3>
+        <div class="wk-meta"><span>Framing</span><span>Plumbing</span><span>Insulation</span><span>Tile</span><span>Flooring</span><span>Vanity</span><span>Glass shower</span></div>
       </figcaption>
     </figure>
   </div>
