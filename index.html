@@ -391,6 +391,27 @@ document.documentElement.classList.add('js');</script>
   .js-motion .pstep.is-active .no{color:var(--txt);-webkit-text-stroke-color:var(--txt)}
   .js-motion .pstep.is-active h3,.js-motion .pstep.is-active p{opacity:1}
 
+  /* ================= BUILD FILMS ================= */
+  .films{padding:var(--section) 0;border-top:1px solid var(--line)}
+  .film{margin:var(--s8) 0 0}
+  .film + .film{margin-top:var(--s9)}
+  .film-frame{position:relative;aspect-ratio:16/9;overflow:hidden;border:1px solid var(--line2);background:var(--ink-850)}
+  .film-video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+  .film-tag{left:auto;right:12px;top:12px;bottom:auto}
+  .film-hud{position:absolute;left:0;right:0;bottom:0;z-index:3;display:none;align-items:center;gap:var(--s4);
+    padding:var(--s4) var(--s5);background:linear-gradient(to top,rgba(var(--ink-rgb),.72),transparent)}
+  .film.is-live .film-hud{display:flex}
+  .film-phase{color:var(--paper);min-width:200px}
+  .film-bar{flex:1;height:1px;background:rgba(238,234,226,.3);position:relative}
+  .film-bar i{position:absolute;left:0;top:0;bottom:0;width:0;background:var(--paper)}
+  .film-replay{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:4;border:1px solid var(--paper);background:rgba(var(--ink-rgb),.6);
+    color:var(--paper);font-family:var(--mono);font-size:var(--fs-label);letter-spacing:var(--track-label);text-transform:uppercase;padding:14px 22px;cursor:pointer;
+    transition:background var(--t-fast),color var(--t-fast)}
+  .film-replay:hover{background:var(--paper);color:var(--ink-900)}
+  .film-cap{padding-top:var(--s4);max-width:760px}
+  .film-cap h3{font-size:clamp(20px,1.8vw,26px);letter-spacing:var(--track-title);margin:var(--s2) 0 var(--s3)}
+  @media(max-width:600px){.film-phase{min-width:0}.film-tag{font-size:9px;padding:4px 6px}}
+
   /* ================= SELECTED WORK ================= */
   .projects{padding:var(--section) 0;background:var(--bg2);border-top:1px solid var(--line)}
   .work-grid{display:grid;gap:var(--s7) var(--grid-gap);margin-top:var(--s8)}
@@ -1034,11 +1055,45 @@ document.documentElement.classList.add('js');</script>
   </div>
 </section>
 
+<!-- ================= BUILD FILMS — visualizations of the build sequence. Add more films by copying a <figure class="film">. ================= -->
+<section class="films" id="films">
+  <div class="wrap">
+    <div class="dimhead" data-dim="07 · Build Films"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="sec-head">
+      <div>
+        <div class="kick reveal">Build Visualization</div>
+        <h2 class="reveal">From framing <em>to finished.</em></h2>
+      </div>
+      <p class="sub reveal">How an open shell becomes a finished unit — every trade, in the right order, on one schedule.</p>
+    </div>
+
+    <figure class="film" data-film
+      data-src="media/films/framing-to-finish.mp4" data-src-sm="media/films/framing-to-finish-960.mp4"
+      data-phases="0:Framing &amp; rough-in|3.3:Insulation &amp; drywall|5:Cabinetry &amp; island|7.5:Finished">
+      <div class="film-frame">
+        <video class="film-video" muted playsinline preload="none" controls
+          poster="media/films/framing-to-finish-start.webp" data-end-poster="media/films/framing-to-finish-end.webp"
+          aria-label="Visualization: an open, framed unit is insulated, drywalled, floored, and fitted with cabinetry until it becomes a finished kitchen and living room">
+          <source src="media/films/framing-to-finish.mp4" type="video/mp4">
+        </video>
+        <span class="wk-tag label film-tag">AI visualization · Proposed unit</span>
+        <div class="film-hud" aria-hidden="true"><span class="label film-phase">Framing &amp; rough-in</span><span class="film-bar"><i></i></span></div>
+        <button class="film-replay" type="button" hidden><span>Replay</span></button>
+      </div>
+      <figcaption class="film-cap">
+        <div class="wk-top"><span class="label">F—01</span><span class="label">Revere, MA</span></div>
+        <h3>Proposed Unit · Framing to Finish</h3>
+        <div class="wk-meta"><span>Framing</span><span>Rough-in</span><span>Drywall</span><span>Flooring</span><span>Cabinetry</span><span>Finish</span></div>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
 <!-- ================= SELECTED WORK ================= -->
 <!-- Each project is one <article class="wk">: swap the <img>, then edit the number, category, title and meta line. -->
 <section class="projects" id="projects">
   <div class="wrap">
-    <div class="dimhead" data-dim="07 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="08 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">Selected Work</div>
@@ -1255,7 +1310,7 @@ document.documentElement.classList.add('js');</script>
 <section class="area" id="area">
   <div class="area-bg" aria-hidden="true"><img src="media/work/skyline.webp" alt="" loading="lazy" decoding="async" width="1920" height="1280"></div>
   <div class="wrap">
-    <div class="dimhead" data-dim="08 · Service Area">
+    <div class="dimhead" data-dim="09 · Service Area">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="grid">
@@ -1345,7 +1400,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FAQ ================= -->
 <section class="faqs tone-bone" id="faq">
   <div class="wrap">
-    <div class="dimhead" data-dim="09 · FAQ">
+    <div class="dimhead" data-dim="10 · FAQ">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="kick center reveal">Straight Answers</div>
@@ -1390,7 +1445,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FINAL CTA + CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="dimhead" data-dim="10 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="11 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="grid">
       <div>
         <div class="kick reveal">Ready When You Are</div>
@@ -1526,6 +1581,33 @@ document.querySelectorAll('.qa').forEach(qa=>{
     if(en.isIntersecting){ if(v.preload === 'none') v.preload = 'auto'; v.play().catch(()=>{}); } else v.pause();
   }),{threshold:.25});
   vids.forEach(v=>io.observe(v));
+})();
+
+/* build films: play once when scrolled into view, hold the final frame, offer Replay; phase label + progress follow the video.
+   Without JS the native controls stay; with reduced motion the finished frame shows and the visitor can press play. */
+(function(){
+  document.querySelectorAll('[data-film]').forEach(fig=>{
+    const v = fig.querySelector('video'), phaseEl = fig.querySelector('.film-phase'), bar = fig.querySelector('.film-bar i'), replay = fig.querySelector('.film-replay');
+    const pickSource = ()=>{ if(fig.dataset.srcSm && matchMedia('(max-width: 700px)').matches){ v.querySelector('source').src = fig.dataset.srcSm; v.load(); } };
+    const phases = (fig.dataset.phases || '').split('|').filter(Boolean).map(p=>{ const i = p.indexOf(':'); return [parseFloat(p.slice(0,i)), p.slice(i+1)]; });
+    const sync = ()=>{
+      if(v.duration) bar.style.width = (v.currentTime / v.duration * 100) + '%';
+      let label = phases.length ? phases[0][1] : ''; phases.forEach(([t,l])=>{ if(v.currentTime >= t) label = l; });
+      if(phaseEl.textContent !== label) phaseEl.textContent = label;
+    };
+    ['timeupdate','seeked'].forEach(t=>v.addEventListener(t, sync));
+    v.addEventListener('ended', ()=>{ replay.hidden = false; });
+    replay.addEventListener('click', ()=>{ replay.hidden = true; v.currentTime = 0; v.play().catch(()=>{}); });
+    if(reduced){ v.poster = v.dataset.endPoster || v.poster; return; }      // keep native controls; no autoplay
+    v.removeAttribute('controls'); fig.classList.add('is-live');
+    const start = ()=>{ pickSource(); v.preload = 'auto'; v.play().catch(()=>{ replay.hidden = false; }); };
+    if(!('IntersectionObserver' in window)){ start(); return; }
+    let started = false;
+    new IntersectionObserver(es=>es.forEach(en=>{
+      if(en.isIntersecting){ if(!started){ started = true; start(); } else if(!v.ended && v.currentTime > 0) v.play().catch(()=>{}); }
+      else if(!v.paused) v.pause();
+    }),{threshold:.45}).observe(v);
+  });
 })();
 
 /* anchor links (+ focus the form when a CTA points at it) */
