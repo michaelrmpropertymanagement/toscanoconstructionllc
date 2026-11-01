@@ -545,6 +545,40 @@ document.documentElement.classList.add('js');</script>
   .upd-top{display:flex;justify-content:space-between;gap:var(--s3);margin-top:var(--s4)}
   .upd h3{font-size:var(--fs-4);letter-spacing:var(--track-title);margin:var(--s2) 0 var(--s2);text-transform:none}
   .upd p{font-weight:300;font-size:var(--fs-sm);line-height:1.65;color:var(--mut)}
+  /* ================= GALLERY ================= */
+  .gallery{padding:var(--section) 0;background:var(--bg2);border-top:1px solid var(--line)}
+  .g-filters{display:flex;flex-wrap:wrap;gap:8px;margin-top:var(--s7)}
+  .g-filter{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--mut);
+    background:transparent;border:1px solid var(--line2);padding:10px 16px;cursor:pointer;transition:color var(--t-fast),border-color var(--t-fast),background var(--t-fast)}
+  .g-filter:hover{color:var(--txt);border-color:var(--txt)}
+  .g-filter.is-on{background:var(--txt);color:var(--bg);border-color:var(--txt)}
+  .g-grid{columns:2;column-gap:10px;margin-top:var(--s6)}
+  @media(min-width:720px){.g-grid{columns:3;column-gap:var(--s4)}}
+  .g-item{display:block;break-inside:avoid;margin:0 0 10px;position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink-800);cursor:zoom-in}
+  @media(min-width:720px){.g-item{margin-bottom:var(--s4)}}
+  .g-item img{width:100%;height:auto;display:block;filter:var(--img-filter);transition:scale var(--t-img) var(--ease),filter .6s var(--ease)}
+  .g-item:hover img{scale:1.03;filter:var(--img-filter-hover)}
+  .g-cap{position:absolute;left:0;right:0;bottom:0;padding:22px 12px 10px;color:var(--paper);background:linear-gradient(to top,rgba(var(--ink-rgb),.78),transparent);
+    opacity:0;transform:translateY(6px);transition:opacity var(--t-base) var(--ease),transform var(--t-base) var(--ease)}
+  .g-item:hover .g-cap,.g-item:focus-visible .g-cap{opacity:1;transform:none}
+  @media(hover:none){.g-cap{opacity:1;transform:none;font-size:9px}}
+  .g-item.is-hidden{display:none}
+  .g-more{display:flex;justify-content:center;margin-top:var(--s6)}
+  .g-more[hidden]{display:none}
+  .g-box{border:0;padding:0;margin:0;width:100vw;height:100vh;max-width:none;max-height:none;background:rgba(15,15,14,.96);color:var(--paper)}
+  .g-box[open]{display:flex;align-items:center;justify-content:center}
+  .g-box::backdrop{background:rgba(15,15,14,.9)}
+  .g-fig{margin:0;max-width:min(1400px,88vw);display:flex;flex-direction:column;gap:12px;align-items:center}
+  .g-fig img{max-width:100%;max-height:82vh;width:auto;height:auto;object-fit:contain;display:block}
+  .g-fig figcaption{color:var(--paper-2);text-align:center}
+  .g-close,.g-nav{position:absolute;background:rgba(20,20,19,.6);border:1px solid var(--rule-dk-2);color:var(--paper);cursor:pointer;
+    font-size:26px;line-height:1;width:48px;height:48px;display:flex;align-items:center;justify-content:center;transition:border-color var(--t-fast)}
+  .g-close:hover,.g-nav:hover{border-color:var(--paper)}
+  .g-close{top:16px;right:16px}
+  .g-prev{left:16px;top:50%;transform:translateY(-50%)}
+  .g-next{right:16px;top:50%;transform:translateY(-50%)}
+  @media(max-width:600px){.g-prev,.g-next{top:auto;bottom:20px;transform:none}.g-fig img{max-height:72vh}}
+
   /* ================= SERVICE AREA ================= */
   .area{padding:var(--section) 0;border-top:1px solid var(--line);overflow:hidden}
   .area-bg{position:absolute;inset:0;z-index:0;pointer-events:none}
@@ -1314,11 +1348,64 @@ document.documentElement.classList.add('js');</script>
 </section>
 <script type="application/json" id="updates-data">[]</script>
 
+<!-- ================= GALLERY — more of the work. Each photo is one <a class="g-item" data-cat="…">; thumbnails show, the href opens full size. ================= -->
+<section class="gallery" id="gallery">
+  <div class="wrap">
+    <div class="dimhead" data-dim="08 · Gallery"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="sec-head">
+      <div>
+        <div class="kick reveal">Gallery</div>
+        <h2 class="reveal">More of <em>the work.</em></h2>
+      </div>
+      <p class="sub reveal">Multifamily exteriors, renovations, decks and outdoor work, and jobs in progress — tap any photo to see it full size.</p>
+    </div>
+    <div class="g-filters" role="group" aria-label="Filter photos">
+      <button type="button" class="g-filter is-on" data-filter="all" aria-pressed="true">All</button>
+      <button type="button" class="g-filter" data-filter="multifamily" aria-pressed="false">Multifamily</button>
+      <button type="button" class="g-filter" data-filter="renovations" aria-pressed="false">Renovations</button>
+      <button type="button" class="g-filter" data-filter="outdoor" aria-pressed="false">Decks &amp; Outdoor</button>
+      <button type="button" class="g-filter" data-filter="onsite" aria-pressed="false">On Site</button>
+    </div>
+    <div class="g-grid" id="g-grid">
+      <a class="g-item" href="media/work/mf-navy-corner.webp" data-cat="multifamily"><img src="media/work/mf-navy-corner-960.webp" alt="Corner three-family · Siding, windows, trim" loading="lazy" decoding="async" width="960" height="720"><span class="g-cap label">Corner three-family · Siding, windows, trim</span></a>
+      <a class="g-item" href="media/gallery/deck-tiered.webp" data-cat="outdoor"><img src="media/gallery/deck-tiered-960.webp" alt="Tiered deck · Lighting &amp; fire pit" loading="lazy" decoding="async" width="960" height="640"><span class="g-cap label">Tiered deck · Lighting &amp; fire pit</span></a>
+      <a class="g-item" href="media/work/bath-after.webp" data-cat="renovations"><img src="media/work/bath-after-960.webp" alt="Bathroom renovation · Finished" loading="lazy" decoding="async" width="960" height="1280"><span class="g-cap label">Bathroom renovation · Finished</span></a>
+      <a class="g-item" href="media/work/mf-dusk.webp" data-cat="multifamily"><img src="media/work/mf-dusk-960.webp" alt="Victorian three-decker · Exterior &amp; porches" loading="lazy" decoding="async" width="960" height="646"><span class="g-cap label">Victorian three-decker · Exterior &amp; porches</span></a>
+      <a class="g-item" href="media/work/hero-build.webp" data-cat="onsite"><img src="media/work/hero-build-1024.webp" alt="Multifamily · Envelope in progress" loading="lazy" decoding="async" width="1024" height="766"><span class="g-cap label">Multifamily · Envelope in progress</span></a>
+      <a class="g-item" href="media/gallery/stone-stairs.webp" data-cat="outdoor"><img src="media/gallery/stone-stairs-960.webp" alt="Stone stairs · Retaining walls" loading="lazy" decoding="async" width="960" height="754"><span class="g-cap label">Stone stairs · Retaining walls</span></a>
+      <a class="g-item" href="media/gallery/mf-porches.webp" data-cat="multifamily"><img src="media/gallery/mf-porches-960.webp" alt="Three-family · Porches &amp; siding" loading="lazy" decoding="async" width="960" height="638"><span class="g-cap label">Three-family · Porches &amp; siding</span></a>
+      <a class="g-item" href="media/work/unit-gut.webp" data-cat="renovations"><img src="media/work/unit-gut-960.webp" alt="Unit renovation · Down to the studs" loading="lazy" decoding="async" width="960" height="1280"><span class="g-cap label">Unit renovation · Down to the studs</span></a>
+      <a class="g-item" href="media/work/deck-composite.webp" data-cat="outdoor"><img src="media/work/deck-composite-960.webp" alt="Composite deck · Aluminum railing" loading="lazy" decoding="async" width="960" height="546"><span class="g-cap label">Composite deck · Aluminum railing</span></a>
+      <a class="g-item" href="media/work/mf-two-family-960.webp" data-cat="multifamily"><img src="media/work/mf-two-family-960.webp" alt="Side-by-side three-families" loading="lazy" decoding="async" width="960" height="684"><span class="g-cap label">Side-by-side three-families</span></a>
+      <a class="g-item" href="media/work/jobsite-core.webp" data-cat="onsite"><img src="media/work/jobsite-core-960.webp" alt="Masonry · Elevator core" loading="lazy" decoding="async" width="960" height="718"><span class="g-cap label">Masonry · Elevator core</span></a>
+      <a class="g-item" href="media/gallery/outdoor-fireplace.webp" data-cat="outdoor"><img src="media/gallery/outdoor-fireplace-960.webp" alt="Outdoor fireplace · Paver patio" loading="lazy" decoding="async" width="960" height="562"><span class="g-cap label">Outdoor fireplace · Paver patio</span></a>
+      <a class="g-item" href="media/work/bath-during-960.webp" data-cat="renovations"><img src="media/work/bath-during-960.webp" alt="Bathroom renovation · Framing &amp; waterproofing" loading="lazy" decoding="async" width="960" height="1280"><span class="g-cap label">Bathroom renovation · Framing &amp; waterproofing</span></a>
+      <a class="g-item" href="media/work/multifamily-finished.webp" data-cat="multifamily"><img src="media/work/multifamily-finished-1024.webp" alt="Four-story multifamily · Greater Boston" loading="lazy" decoding="async" width="1024" height="540"><span class="g-cap label">Four-story multifamily · Greater Boston</span></a>
+      <a class="g-item" href="media/gallery/patio-lakeside.webp" data-cat="outdoor"><img src="media/gallery/patio-lakeside-960.webp" alt="Paver patio · Fire pit &amp; seat wall" loading="lazy" decoding="async" width="960" height="642"><span class="g-cap label">Paver patio · Fire pit &amp; seat wall</span></a>
+      <a class="g-item" href="media/work/site-overhead.webp" data-cat="onsite"><img src="media/work/site-overhead-960.webp" alt="Site work · Foundation &amp; staging" loading="lazy" decoding="async" width="960" height="720"><span class="g-cap label">Site work · Foundation &amp; staging</span></a>
+      <a class="g-item" href="media/gallery/wall-lit.webp" data-cat="outdoor"><img src="media/gallery/wall-lit-960.webp" alt="Retaining wall · Built-in lighting" loading="lazy" decoding="async" width="960" height="720"><span class="g-cap label">Retaining wall · Built-in lighting</span></a>
+      <a class="g-item" href="media/work/bath-before.webp" data-cat="renovations"><img src="media/work/bath-before-960.webp" alt="Bathroom renovation · Before" loading="lazy" decoding="async" width="960" height="1280"><span class="g-cap label">Bathroom renovation · Before</span></a>
+      <a class="g-item" href="media/work/mf-modern-960.webp" data-cat="multifamily"><img src="media/work/mf-modern-960.webp" alt="Modern three-unit · Exterior envelope" loading="lazy" decoding="async" width="1024" height="684"><span class="g-cap label">Modern three-unit · Exterior envelope</span></a>
+      <a class="g-item" href="media/gallery/deck-aerial.webp" data-cat="outdoor"><img src="media/gallery/deck-aerial-960.webp" alt="Elevated deck · Stairs &amp; pavers" loading="lazy" decoding="async" width="960" height="720"><span class="g-cap label">Elevated deck · Stairs &amp; pavers</span></a>
+      <a class="g-item" href="media/work/neighborhood-aerial.webp" data-cat="onsite"><img src="media/work/neighborhood-aerial-800.webp" alt="Greater Boston · Site in context" loading="lazy" decoding="async" width="800" height="1000"><span class="g-cap label">Greater Boston · Site in context</span></a>
+    </div>
+    <div class="g-more"><button type="button" class="btn-ghost arrow" id="g-more"><span>Show all photos</span></button></div>
+  </div>
+</section>
+
+<!-- gallery viewer -->
+<dialog class="g-box" id="g-box" aria-label="Photo viewer">
+  <button type="button" class="g-close" aria-label="Close">×</button>
+  <button type="button" class="g-nav g-prev" aria-label="Previous photo">‹</button>
+  <figure class="g-fig"><img alt=""><figcaption class="label"></figcaption></figure>
+  <button type="button" class="g-nav g-next" aria-label="Next photo">›</button>
+</dialog>
+
 <!-- ================= SERVICE AREA ================= -->
 <section class="area" id="area">
   <div class="area-bg" aria-hidden="true"><img src="media/work/skyline.webp" alt="" loading="lazy" decoding="async" width="1920" height="1280"></div>
   <div class="wrap">
-    <div class="dimhead" data-dim="08 · Service Area">
+    <div class="dimhead" data-dim="09 · Service Area">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="grid">
@@ -1408,7 +1495,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FAQ ================= -->
 <section class="faqs tone-bone" id="faq">
   <div class="wrap">
-    <div class="dimhead" data-dim="09 · FAQ">
+    <div class="dimhead" data-dim="10 · FAQ">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="kick center reveal">Straight Answers</div>
@@ -1453,7 +1540,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FINAL CTA + CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="dimhead" data-dim="10 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="11 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="grid">
       <div>
         <div class="kick reveal">Ready When You Are</div>
@@ -1616,6 +1703,52 @@ document.querySelectorAll('.qa').forEach(qa=>{
       else if(!v.paused) v.pause();
     }),{threshold:.45}).observe(v);
   });
+})();
+
+/* gallery: category filters, "show all", and a full-screen viewer (arrows / swipe / Esc). Without JS each photo is a plain link. */
+(function(){
+  const grid = document.getElementById('g-grid'); if(!grid) return;
+  const items = [...grid.querySelectorAll('.g-item')], more = document.getElementById('g-more'), LIMIT = 9;
+  let filter = 'all', expanded = false;
+  const apply = ()=>{
+    let n = 0;
+    items.forEach(it=>{
+      const match = filter === 'all' || it.dataset.cat === filter;
+      const show = match && (filter !== 'all' || expanded || n < LIMIT);
+      if(match) n++;
+      it.classList.toggle('is-hidden', !show);
+    });
+    more.parentElement.hidden = !(filter === 'all' && !expanded && n > LIMIT);
+    if(window.ScrollTrigger) ScrollTrigger.refresh();
+  };
+  document.querySelectorAll('.g-filter').forEach(b=>b.addEventListener('click', ()=>{
+    filter = b.dataset.filter;
+    document.querySelectorAll('.g-filter').forEach(x=>{ const on = x === b; x.classList.toggle('is-on', on); x.setAttribute('aria-pressed', on); });
+    apply();
+  }));
+  more.addEventListener('click', ()=>{ expanded = true; apply(); });
+  more.querySelector('span').textContent = 'Show all ' + items.length + ' photos';
+  apply();
+
+  const box = document.getElementById('g-box'); if(!box || typeof box.showModal !== 'function') return;
+  const img = box.querySelector('img'), cap = box.querySelector('figcaption');
+  let list = [], idx = 0;
+  const show = i=>{ idx = (i + list.length) % list.length; const it = list[idx];
+    img.src = it.getAttribute('href'); img.alt = it.querySelector('img').alt; cap.textContent = it.querySelector('.g-cap').textContent + '  ·  ' + (idx+1) + ' / ' + list.length; };
+  items.forEach(it=>it.addEventListener('click', e=>{
+    e.preventDefault();
+    list = items.filter(x=>!x.classList.contains('is-hidden'));
+    show(list.indexOf(it)); box.showModal(); document.body.style.overflow = 'hidden';
+  }));
+  box.addEventListener('close', ()=>{ document.body.style.overflow = ''; img.removeAttribute('src'); });
+  box.querySelector('.g-close').addEventListener('click', ()=>box.close());
+  box.querySelector('.g-prev').addEventListener('click', ()=>show(idx-1));
+  box.querySelector('.g-next').addEventListener('click', ()=>show(idx+1));
+  box.addEventListener('click', e=>{ if(e.target === box) box.close(); });
+  box.addEventListener('keydown', e=>{ if(e.key === 'ArrowRight') show(idx+1); else if(e.key === 'ArrowLeft') show(idx-1); });
+  let x0 = null;
+  box.addEventListener('touchstart', e=>{ x0 = e.touches[0].clientX; }, {passive:true});
+  box.addEventListener('touchend', e=>{ if(x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if(Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1)); x0 = null; });
 })();
 
 /* anchor links (+ focus the form when a CTA points at it) */
