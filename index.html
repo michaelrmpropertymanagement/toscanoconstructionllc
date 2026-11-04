@@ -238,7 +238,19 @@ document.documentElement.classList.add('js');</script>
   .hero-creds .coords{margin-left:auto;color:var(--paper-3)}
   .hero-creds .coords::before{display:none}
   @media(max-width:700px){.hero-creds .coords{margin-left:0;width:100%}}
-  .js-motion .hero .kick,.js-motion .hero .lead,.js-motion .hero .btnrow,.js-motion .hero-creds{opacity:0;transform:translateY(16px)}
+  .js-motion .hero .kick,.js-motion .hero .lead,.js-motion .hero .btnrow,.js-motion .hero-creds,.js-motion .hero-phase{opacity:0;transform:translateY(16px)}
+  /* hero sequence readout: envelope → cladding → finished. Static state shows all three; motion lights them in turn. */
+  .hero-end{opacity:0}
+  .hero-phase{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);padding-bottom:var(--s4);
+    font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-2)}
+  .hp{transition:color .5s var(--ease)}
+  .js-motion .hp{color:var(--paper-3)}
+  .js-motion .hp.on{color:var(--paper)}
+  .hp-bar{display:none;flex:1 1 80px;height:1px;background:rgba(238,234,226,.22);position:relative;min-width:60px}
+  .js-motion .hp-bar{display:block}
+  .hp-bar b{position:absolute;inset:0;background:var(--paper);transform:scaleX(0);transform-origin:left}
+  .hp-tag{color:var(--paper-3);margin-left:auto}
+  @media(max-width:700px){.hp-tag{display:none}}
 
   /* capability line under the hero */
   .capline{background:var(--ink-900);border-top:1px solid var(--rule-dk);border-bottom:1px solid var(--rule-dk)}
@@ -759,7 +771,10 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= HERO ================= -->
 <section class="hero-sec" id="top">
   <div class="hero-media" aria-hidden="true">
-    <img src="media/work/hero-build-1024.webp" srcset="media/work/hero-build-1024.webp 1024w, media/work/hero-build.webp 1920w" sizes="100vw" alt="" width="1920" height="1438" fetchpriority="high" decoding="async">
+    <!-- start state (poster): the building mid-construction. end state: the same building finished — loaded after the page is in, then crossfaded in by the hero sequence.
+         Phase 4 adds <video class="hero-film"> between them; the sequence below then follows the film's time instead of a timer. -->
+    <img class="hero-start" src="media/work/hero-build-1024.webp" srcset="media/work/hero-build-1024.webp 1024w, media/work/hero-build.webp 1920w" sizes="100vw" alt="" width="1920" height="1438" fetchpriority="high" decoding="async">
+    <img class="hero-end" data-src="media/work/multifamily-finished-1024.webp" data-srcset="media/work/multifamily-finished-1024.webp 1024w, media/work/multifamily-finished.webp 1920w" sizes="100vw" alt="" width="1920" height="1012" decoding="async">
   </div>
   <div class="hero">
     <div class="kick">General Contractor · Plaistow, NH</div>
@@ -771,6 +786,11 @@ document.documentElement.classList.add('js');</script>
     </div>
   </div>
   <div class="hero-foot">
+    <div class="hero-phase" aria-hidden="true">
+      <span class="hp on">01 Envelope</span><span class="hp">02 Cladding</span><span class="hp">03 Finished</span>
+      <i class="hp-bar"><b></b></i>
+      <span class="hp-tag">Four-story multifamily · Greater Boston</span>
+    </div>
     <ul class="hero-creds" aria-label="Credentials">
       <li>Licensed &amp; Insured</li><li>In-House Crew</li><li>One Point of Contact</li>
       <li class="coords" aria-hidden="true">42.84° N · 71.09° W</li>
@@ -1276,7 +1296,7 @@ document.documentElement.classList.add('js');</script>
     <!-- Project cards. Captions describe what the photos show; confirm location/scope with the owner and update. -->
     <div class="work-grid">
       <article class="wk">
-        <div class="wk-img"><img src="media/work/mf-navy-corner-960.webp" srcset="media/work/mf-navy-corner-960.webp 960w, media/work/mf-navy-corner.webp 1536w" sizes="(min-width:980px) 32vw, 100vw" alt="Three-story corner multifamily building with navy and gray siding, black windows and a wood entry door" loading="lazy" decoding="async" width="960" height="720"></div>
+        <div class="wk-img"><img src="media/work/mf-navy-corner-960.webp" srcset="media/work/mf-navy-corner-960.webp 960w, media/work/mf-navy-corner.webp 1536w" sizes="(min-width:980px) 50vw, 100vw" alt="Three-story corner multifamily building with navy and gray siding, black windows and a wood entry door" loading="lazy" decoding="async" width="960" height="720"></div>
         <div class="wk-cap">
           <div class="wk-top"><span class="label">P—02</span><span class="label">Multifamily</span></div>
           <h3>Corner Three-Family</h3>
@@ -1284,7 +1304,7 @@ document.documentElement.classList.add('js');</script>
         </div>
       </article>
       <article class="wk">
-        <div class="wk-img"><img src="media/work/mf-dusk-960.webp" srcset="media/work/mf-dusk-960.webp 960w, media/work/mf-dusk.webp 1600w" sizes="(min-width:980px) 32vw, 100vw" alt="Victorian three-family home at dusk with blue siding, turret bay and stacked porches" loading="lazy" decoding="async" width="960" height="646"></div>
+        <div class="wk-img"><img src="media/work/mf-dusk-960.webp" srcset="media/work/mf-dusk-960.webp 960w, media/work/mf-dusk.webp 1600w" sizes="(min-width:980px) 50vw, 100vw" alt="Victorian three-family home at dusk with blue siding, turret bay and stacked porches" loading="lazy" decoding="async" width="960" height="646"></div>
         <div class="wk-cap">
           <div class="wk-top"><span class="label">P—03</span><span class="label">Multifamily</span></div>
           <h3>Victorian Three-Decker</h3>
@@ -1308,7 +1328,7 @@ document.documentElement.classList.add('js');</script>
         </div>
       </article>
       <article class="wk">
-        <div class="wk-img"><img src="media/work/jobsite-core-960.webp" srcset="media/work/jobsite-core-960.webp 960w, media/work/jobsite-core.webp 1600w" sizes="(min-width:980px) 32vw, 100vw" alt="Crew on scaffolding laying CMU block for a building's elevator core" loading="lazy" decoding="async" width="960" height="718"></div>
+        <div class="wk-img"><img src="media/work/jobsite-core-960.webp" srcset="media/work/jobsite-core-960.webp 960w, media/work/jobsite-core.webp 1600w" sizes="(min-width:980px) 50vw, 100vw" alt="Crew on scaffolding laying CMU block for a building's elevator core" loading="lazy" decoding="async" width="960" height="718"></div>
         <div class="wk-cap">
           <div class="wk-top"><span class="label">P—06</span><span class="label">On Site</span></div>
           <h3>Structure &amp; Masonry</h3>
@@ -1954,15 +1974,32 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
 
 /* PRIMARY 1 — hero: framed image opens to full bleed, headline lands in three stages */
 (function(){
-  const media = document.querySelector('.hero-media'), vid = media.querySelector('img, video');
+  const media = document.querySelector('.hero-media'), vid = media.querySelector('.hero-start'), layers = media.querySelectorAll('img, video');
   gsap.timeline({defaults:{ease:M.ease}})
     .to(media,{clipPath:'inset(0% 0% 0% 0%)', duration:1.6, ease:'power3.inOut'},0)
     .fromTo(vid,{scale:1.12},{scale:1, duration:2.2, ease:'power2.out'},0)
     .to('.hero .kick',{opacity:1, y:0, duration:.7},.35)
     .to('#heroline .ln:nth-child(1)>span',{y:0, duration:1},.45)
     .to('#heroline .ln:nth-child(2)>span',{y:0, duration:1},.68)
-    .to(['.hero .lead','.hero .btnrow','.hero-creds'],{opacity:1, y:0, duration:.8, stagger:.1},1.05);
-  gsap.to(vid,{yPercent:6, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
+    .to(['.hero .lead','.hero .btnrow','.hero-phase','.hero-creds'],{opacity:1, y:0, duration:.8, stagger:.1},1.05);
+  gsap.to(layers,{yPercent:6, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
+  /* hero sequence (stills version): once the headline has landed, the readout ticks envelope → cladding → finished and the
+     finished photo crossfades over the construction photo. The finished photo is only requested after the page has loaded,
+     so it never competes with the poster (the LCP). Phase 4 swaps the timer for the hero film's timeline. */
+  (function(){
+    const endImg = media.querySelector('.hero-end'), phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b');
+    if(!endImg || !phases.length) return;
+    const setPhase = n=>phases.forEach((p,i)=>p.classList.toggle('on', i === n));
+    const seq = gsap.timeline({paused:true})
+      .to(bar,{scaleX:1, duration:9, ease:'none'},0)
+      .call(()=>setPhase(1), [], 3)
+      .call(()=>setPhase(2), [], 6)
+      .fromTo(endImg,{opacity:0, scale:1.08},{opacity:1, scale:1, duration:2.2, ease:'power2.inOut'},6);
+    const begin = ()=>gsap.delayedCall(2.4, ()=>seq.play());
+    const fetchEnd = ()=>{ endImg.srcset = endImg.dataset.srcset; endImg.src = endImg.dataset.src;
+      if(endImg.complete) begin(); else endImg.addEventListener('load', begin, {once:true}); };
+    if(document.readyState === 'complete') fetchEnd(); else window.addEventListener('load', fetchEnd, {once:true});
+  })();
   gsap.to('.hero',{y:-40, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
   /* stitch into the next section: the frame settles back and dims as the capline arrives, then the capline items step in */
   gsap.to(media,{scale:.965, opacity:.5, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'35% top', end:'bottom top', scrub:M.scrub}});
