@@ -446,8 +446,14 @@ document.documentElement.classList.add('js');</script>
   /* ================= SELECTED WORK ================= */
   .projects{padding:var(--section) 0;background:var(--bg2);border-top:1px solid var(--line)}
   .work-grid{display:grid;gap:var(--s7) var(--grid-gap);margin-top:var(--s8)}
+  /* editorial grid: two cards per row at alternating widths (7/5, 5/7, 6/6); the aspect ratios keep each row level */
   @media(min-width:980px){
-    .work-grid{grid-template-columns:repeat(3,1fr);gap:var(--s7) var(--s6)}
+    .work-grid{grid-template-columns:repeat(12,1fr);gap:var(--s8) var(--s6);align-items:start}
+    .wk{grid-column:span 6}
+    .wk:nth-child(6n+1),.wk:nth-child(6n+4){grid-column:span 7}
+    .wk:nth-child(6n+2),.wk:nth-child(6n+3){grid-column:span 5}
+    .work-grid .wk-img{aspect-ratio:3/2}
+    .work-grid .wk:nth-child(6n+2) .wk-img,.work-grid .wk:nth-child(6n+3) .wk-img{aspect-ratio:21/20}
   }
   .wk{position:relative}
   .wk-img{position:relative;overflow:hidden;border:1px solid var(--line);background:var(--ink-800);aspect-ratio:4/3}
@@ -463,8 +469,11 @@ document.documentElement.classList.add('js');</script>
   .wk-top{display:flex;justify-content:space-between;gap:var(--s3)}
   .wk-cap h3{font-size:clamp(20px,1.8vw,26px);letter-spacing:var(--track-title);margin:var(--s2) 0 var(--s3);transition:transform var(--t-base) var(--ease)}
   .wk:hover .wk-cap h3{transform:translateX(4px)}
-  .wk-meta{display:flex;flex-wrap:wrap;gap:6px 0;border-top:1px solid var(--line);padding-top:var(--s3)}
-  .wk-meta span{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--dim)}
+  .wk-meta{display:flex;flex-wrap:wrap;gap:6px 0;border-top:1px solid var(--line);padding-top:var(--s3);position:relative}
+  .wk-meta::before{content:"";position:absolute;left:0;top:-1px;height:1px;width:100%;background:var(--txt);transform:scaleX(0);transform-origin:left;transition:transform var(--t-slow) var(--ease)}
+  .wk:hover .wk-meta::before{transform:scaleX(1)}
+  .wk-meta span{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);transition:color var(--t-base) var(--ease)}
+  .wk:hover .wk-meta span{color:var(--mut)}
   .wk-meta span+span::before{content:"·";margin:0 10px;color:var(--line2)}
   .work-foot{display:flex;flex-wrap:wrap;gap:var(--s5);justify-content:space-between;align-items:center;margin-top:var(--s8);
     padding-top:var(--s5);border-top:1px solid var(--line)}
@@ -2057,9 +2066,10 @@ mm.add('(min-width: 980px)', ()=>{
 })();
 
 /* PRIMARY 4 — selected work: photos wipe up once, then re-crop slightly with scroll */
-gsap.utils.toArray('.wk-img').forEach(box=>{
-  const img = box.querySelector('img');
-  gsap.fromTo(box,{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)', duration:M.wipe, ease:M.wipeEase, scrollTrigger:{trigger:box, start:'top 88%'}});
+gsap.utils.toArray('.wk-img').forEach((box,i)=>{
+  /* left-column cards open from the left edge, right-column cards from the right; below 980px everything opens from the bottom */
+  const wide = matchMedia('(min-width: 980px)').matches, from = !wide ? 'inset(100% 0% 0% 0%)' : (i % 2 ? 'inset(0% 0% 0% 100%)' : 'inset(0% 100% 0% 0%)');
+  gsap.fromTo(box,{clipPath:from},{clipPath:'inset(0% 0% 0% 0%)', duration:M.wipe, ease:M.wipeEase, scrollTrigger:{trigger:box, start:'top 88%'}});
   gsap.fromTo(box.querySelectorAll('img'),{yPercent:-4},{yPercent:4, ease:'none', scrollTrigger:{trigger:box, start:'top bottom', end:'bottom top', scrub:M.scrub}});
 });
 /* featured project: the image frame opens as it scrolls in */
