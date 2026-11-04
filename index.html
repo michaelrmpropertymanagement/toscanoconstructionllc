@@ -247,6 +247,8 @@ document.documentElement.classList.add('js');</script>
   .capline li{display:flex;align-items:center;gap:var(--s5)}
   @media(min-width:900px){.capline ul{display:flex;justify-content:center;gap:0}.capline li{padding:2px clamp(20px,3.2vw,48px)}.capline li+li{border-left:1px solid var(--rule-dk-2)}}
   .js-motion #heroline .ln>span{transform:translateY(105%)}
+  .js-motion .capline li{opacity:0;transform:translateY(10px)}
+  .hero-media{transform-origin:50% 100%}
 
   /* ================= CONSTRUCTION CONCIERGE ================= */
   .concierge{padding:var(--section) 0;background:var(--bg2);border-bottom:1px solid var(--line)}
@@ -1659,13 +1661,12 @@ document.querySelectorAll('.qa').forEach(qa=>{
   });
 })();
 
-/* hero video: plays only while on screen; poster only under reduced motion */
-(function(){
-  const vid = document.querySelector('.hero-media video'); if(!vid) return;
-  if(reduced){ vid.removeAttribute('autoplay'); vid.pause(); return; }
-  if(!('IntersectionObserver' in window)) return;
-  new IntersectionObserver(es=>es.forEach(en=>{ en.isIntersecting ? vid.play().catch(()=>{}) : vid.pause(); }),{threshold:.1}).observe(vid);
-})();
+/* one video at a time: whenever any video starts, every other video on the page pauses
+   (the unit-turn loop, both build films, and the hero film once it exists). Capture phase, since `play` doesn't bubble. */
+document.addEventListener('play', e=>{
+  const v = e.target; if(!v || v.tagName !== 'VIDEO') return;
+  document.querySelectorAll('video').forEach(o=>{ if(o !== v && !o.paused) o.pause(); });
+}, true);
 
 /* silent loops (e.g. the unit-turn walkthrough): play only while on screen; poster only under reduced motion */
 (function(){
@@ -1910,6 +1911,10 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
     .to(['.hero .lead','.hero .btnrow','.hero-creds'],{opacity:1, y:0, duration:.8, stagger:.1},1.05);
   gsap.to(vid,{yPercent:6, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
   gsap.to('.hero',{y:-40, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
+  /* stitch into the next section: the frame settles back and dims as the capline arrives, then the capline items step in */
+  gsap.to(media,{scale:.965, opacity:.5, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'35% top', end:'bottom top', scrub:M.scrub}});
+  gsap.to(['.hero .lead','.hero .btnrow','.hero-foot'],{opacity:0, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'45% top', end:'90% top', scrub:M.scrub}});
+  gsap.to('.capline li',{opacity:1, y:0, duration:.7, ease:M.ease, stagger:.09, scrollTrigger:{trigger:'.capline', start:'top 96%'}});
 })();
 
 /* concierge: "We bid. We vet. We negotiate. We coordinate. We manage." — each phrase lights up as the line scrolls through */
