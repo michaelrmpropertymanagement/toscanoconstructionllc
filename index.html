@@ -39,7 +39,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="media/work/hero-film-start-960.webp" imagesrcset="media/work/hero-film-start-960.webp 960w, media/work/hero-film-start-1920.webp 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="media/work/hero-stage-1-framing-960.webp" imagesrcset="media/work/hero-stage-1-framing-960.webp 960w, media/work/hero-stage-1-framing-1920.webp 1920w" imagesizes="100vw" fetchpriority="high">
 <script>/* motion flag: pre-animation states only apply when motion is allowed (removed again if GSAP fails to load) */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-motion');
 document.documentElement.classList.add('js');</script>
@@ -239,11 +239,11 @@ document.documentElement.classList.add('js');</script>
   .hero-creds .coords::before{display:none}
   @media(max-width:700px){.hero-creds .coords{margin-left:0;width:100%}}
   .js-motion .hero .kick,.js-motion .hero .lead,.js-motion .hero .btnrow,.js-motion .hero-creds,.js-motion .hero-phase{opacity:0;transform:translateY(16px)}
-  /* hero sequence readout: framing → dried in → exterior build-out → finished. Static state shows all four; motion lights
-     them in step with the hero film. The film sits between the poster (its own first frame) and the finished still (Anchor A),
-     fades in once it is actually playing, and is never loaded without .js-motion. */
-  .hero-end,.hero-film{opacity:0}
-  html:not(.js-motion) .hero-film{display:none}
+  /* hero sequence readout: framing → dried in → exterior build-out → built. Static state shows all four and the built plate;
+     motion lights them as the stacked plates are revealed. Stage plates start hidden and are only shown by the choreography. */
+  .hs-stage{opacity:0;will-change:clip-path,transform}
+  html:not(.js-motion) .hs-stage{display:none}
+  html:not(.js-motion) .hero-end{display:block}
   .hero-phase{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);padding-bottom:var(--s4);
     font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-2)}
   .hp{transition:color .5s var(--ease)}
@@ -776,13 +776,19 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= HERO ================= -->
 <section class="hero-sec" id="top">
   <div class="hero-media" aria-hidden="true">
-    <!-- hero film: a six-unit multifamily going from raw framed shell → dried in → finished (AI visualization built from the finished still).
-         .hero-start = the film's own first frame (the LCP poster). .hero-film = the film, requested only after load, when the hero
-         is on screen and not on data-saver (960w source under 900px). .hero-end = the finished still (Anchor A), crossfaded over
-         the film's last frame; also the static image under reduced motion. -->
-    <img class="hero-start" src="media/work/hero-film-start-960.webp" srcset="media/work/hero-film-start-960.webp 960w, media/work/hero-film-start-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
-    <video class="hero-film" muted playsinline preload="none" disablepictureinpicture disableremoteplayback tabindex="-1" width="1920" height="1080" data-src="media/work/hero-film-1920.mp4" data-src-sm="media/work/hero-film-960.mp4"></video>
-    <img class="hero-end" data-src="media/work/hero-finished-1024.webp" data-srcset="media/work/hero-finished-1024.webp 1024w, media/work/hero-finished-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
+    <!-- hero build: four art-directed stages of the same six-unit building. All plates derive from one finished still, so the
+         composition never moves; stacked plates are revealed with directional masks as the pinned hero scrolls:
+         framing → dried in (roof, then wrap + windows) → exterior build-out (shingles, then siding + trim) → built (porches +
+         railings, entry, then the whole property lands). .hero-start = framing (the LCP). .hero-end = built (also the static
+         image under reduced motion). The other plates are requested after the page is in. AI visualization. -->
+    <img class="hs hero-start" src="media/work/hero-stage-1-framing-960.webp" srcset="media/work/hero-stage-1-framing-960.webp 960w, media/work/hero-stage-1-framing-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
+    <img class="hs hs-stage" data-stage="roof" data-src="media/work/hero-stage-2-driedin-960.webp" data-srcset="media/work/hero-stage-2-driedin-960.webp 960w, media/work/hero-stage-2-driedin-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
+    <img class="hs hs-stage" data-stage="wrap" data-src="media/work/hero-stage-2-driedin-960.webp" data-srcset="media/work/hero-stage-2-driedin-960.webp 960w, media/work/hero-stage-2-driedin-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
+    <img class="hs hs-stage" data-stage="shingles" data-src="media/work/hero-finished-960.webp" data-srcset="media/work/hero-finished-960.webp 960w, media/work/hero-finished-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
+    <img class="hs hs-stage" data-stage="siding" data-src="media/work/hero-finished-960.webp" data-srcset="media/work/hero-finished-960.webp 960w, media/work/hero-finished-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
+    <img class="hs hs-stage" data-stage="entrymask" data-src="media/work/hero-stage-2-driedin-960.webp" data-srcset="media/work/hero-stage-2-driedin-960.webp 960w, media/work/hero-stage-2-driedin-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
+    <img class="hs hs-stage" data-stage="porch" data-src="media/work/hero-finished-960.webp" data-srcset="media/work/hero-finished-960.webp 960w, media/work/hero-finished-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
+    <img class="hs hs-stage hero-end" data-stage="built" data-src="media/work/hero-finished-960.webp" data-srcset="media/work/hero-finished-960.webp 960w, media/work/hero-finished-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
   </div>
   <div class="hero">
     <div class="kick">General Contractor · Plaistow, NH</div>
@@ -795,7 +801,7 @@ document.documentElement.classList.add('js');</script>
   </div>
   <div class="hero-foot">
     <div class="hero-phase" aria-hidden="true">
-      <span class="hp on">01 Framing</span><span class="hp">02 Dried In</span><span class="hp">03 Exterior Build-Out</span><span class="hp">04 Finished</span>
+      <span class="hp on">01 Framing</span><span class="hp">02 Dried In</span><span class="hp">03 Exterior Build-Out</span><span class="hp">04 Built</span>
       <span class="hp-hint">Scroll to build ↓</span>
       <i class="hp-bar"><b></b></i>
       <span class="hp-tag">Six-unit multifamily · Southern New Hampshire</span>
@@ -1993,66 +1999,66 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
     .to('#heroline .ln:nth-child(1)>span',{y:0, duration:1},.45)
     .to('#heroline .ln:nth-child(2)>span',{y:0, duration:1},.68)
     .to(['.hero .lead','.hero .btnrow','.hero-phase','.hero-creds'],{opacity:1, y:0, duration:.8, stagger:.1},1.05);
-  /* hero film, scroll-driven: the hero pins for ~2.6 screens and the construction film advances with the scrollbar.
-     The scroll sets a target time in the film; the film plays forward toward it (real playback, up to 3x, so roof, windows,
-     wrap, siding and railings assemble instead of scrub-flickering) and seeks back when the visitor scrolls up. The readout
-     and the bar follow the film's own clock, so they say what the building is actually doing. At the end of the build the
-     finished still (Anchor A) fades over the last frame, and fades back out if they scroll up. The last part of the pin
-     settles the frame and hands off to the capline. The film is only requested after load and not on data-saver; it pauses
-     while the hero is off screen or the tab is hidden, and the page-wide "one video at a time" rule above still applies.
-     If it can't play (error, no mp4, blocked), the readout, bar and finished still follow the scroll over the poster instead. */
+  /* hero build, scroll-driven and art-directed: the hero pins for three screens and the scrollbar builds the property in
+     four stages. Every plate is the same composition (all derived from one finished still), so masks drawn in plate space
+     reveal only what changed on the building: the roof settles top → down and the wrap and windows rise bottom → up (dried in),
+     shingles and then siding + trim sweep across with a slanted leading edge (exterior build-out), the porches and railings
+     resolve right → left, the entry finishes bottom → up, and the whole property lands (built). Each reveal also slides a
+     touch in its own direction so parts feel placed rather than faded. On top, a scroll-tied camera: a confident push-in with a
+     slight crane rise and lateral drift; the last part of the pin eases back, lifts the copy and dims for the capline. All of
+     it is a pure function of scroll progress, so scrolling up un-builds it exactly. Plates load after the page is in. */
   (function(){
-    const film = media.querySelector('.hero-film'), endImg = media.querySelector('.hero-end'), phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b'), hint = document.querySelector('.hp-hint');
+    const plates = [...media.querySelectorAll('.hs-stage')], S = {}; plates.forEach(p=>S[p.dataset.stage] = p);
+    const endImg = S.built, phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b'), hint = document.querySelector('.hp-hint');
     if(!endImg || !phases.length) return;
-    const CUES = [0, 5.6, 8.9, 13.1], LAST = CUES.length - 1, FILM_LEN = 14.08;   // film seconds at which 01 Framing → 02 Dried In → 03 Exterior Build-Out → 04 Finished light
-    const PIN = '+=260%';   // scroll distance the hero stays pinned
-    const BUILD = .86;      // share of that distance spent building; the rest settles the frame for the capline
-    const HOLD = 2.4;       // seconds after load before the film is requested (the headline is landing)
+    const PIN = '+=300%';   // scroll distance the hero stays pinned
+    const BUILD = .86;      // share of it spent building; the rest settles the frame for the capline
+    const clamp = gsap.utils.clamp(0, 1), ez = gsap.parseEase('power2.inOut'), camEase = ez;
+    const ramp = (b, a, c)=>clamp((b - a) / (c - a));
     const setPhase = n=>phases.forEach((p,i)=>p.classList.toggle('on', i === n));
     const onLoad = fn=>{ if(document.readyState === 'complete') fn(); else window.addEventListener('load', fn, {once:true}); };
-    const fetchEnd = ()=>{ if(!endImg.getAttribute('src')){ endImg.srcset = endImg.dataset.srcset; endImg.src = endImg.dataset.src; } };
-    const conn = navigator.connection || {};
-    const canFilm = !!(film && !conn.saveData && !/^(slow-)?2g$/.test(conn.effectiveType || '') && film.canPlayType && film.canPlayType('video/mp4'));
-    let mode = canFilm ? 'film' : 'stills', shown = false, started = false, seeking = false, lastSeek = 0, idle = false, pending = null;
-    const toStills = ()=>{ if(mode === 'stills') return; mode = 'stills'; if(film){ film.pause(); gsap.set(film,{opacity:0}); } };
-    /* play/pause that never overlap: a pause() during a pending play() rejects it with AbortError, which is not a failure */
-    const play = ()=>{ if(pending || !film.paused) return; pending = film.play().then(()=>{ pending = null; }).catch(err=>{ pending = null; if(!err || err.name !== 'AbortError') toStills(); }); };
-    const pause = ()=>{ if(pending || film.paused) return; film.pause(); };
-    const showEnd = on=>{ if(on === shown) return; shown = on; if(on) fetchEnd(); gsap.to(endImg,{opacity:on ? 1 : 0, duration:on ? .9 : .5, ease:'power2.inOut', overwrite:true}); };
-    const readout = t=>{ let n = 0; CUES.forEach((c,i)=>{ if(t >= c - .05) n = i; }); setPhase(n); gsap.set(bar,{scaleX:Math.min(1, t / CUES[LAST])}); };
-    const prog = {p:0};
-    const st = ScrollTrigger.create({trigger:'.hero-sec', start:'top top', end:PIN, pin:true, anticipatePin:1,
-      onUpdate:self=>{ prog.p = self.progress; },
-      onToggle:self=>{ if(self.isActive || !film || mode !== 'film' || !started) return;   // left the pin: rest at the matching end
-        pause(); if(film.duration && !pending){ if(self.progress >= 1) film.currentTime = FILM_LEN - .1; else if(self.progress <= 0) film.currentTime = 0; } }});
-    /* camera on top of the film, tied to the scroll: a confident push-in with a slight crane rise and lateral drift across the
-       build, so the building grows as it comes together; in the last part the copy lifts away and the frame eases back and dims */
-    const camEase = gsap.parseEase('power2.inOut');
-    const settle = p=>{ const b = gsap.utils.clamp(0, 1, p / BUILD), s = gsap.utils.clamp(0, 1, (p - BUILD) / (1 - BUILD)), k = camEase(b);
-      gsap.set(layers,{yPercent:-3 * k, xPercent:-1.6 * k}); gsap.set('.hero',{y:-40 * s});
-      gsap.set(media,{scale:(1 + .10 * k) * (1 - .035 * s), opacity:1 - .5 * s, transformOrigin:'50% 58%'});
+    let loaded = false;
+    const loadPlates = ()=>{ if(loaded) return; loaded = true; plates.forEach(p=>{ if(!p.getAttribute('src')){ p.srcset = p.dataset.srcset; p.src = p.dataset.src; } }); };
+    /* plate space → frame pixels: the 16:9 plates cover the frame, so a mask drawn in plate percentages stays on the building at any viewport */
+    let W = 0, H = 0, iw = 0, ih = 0, ox = 0, oy = 0;
+    const measure = ()=>{ W = media.clientWidth; H = media.clientHeight; const s = Math.max(W / 1920, H / 1080); iw = 1920 * s; ih = 1080 * s; ox = (W - iw) / 2; oy = (H - ih) / 2; };
+    const X = x=>(ox + iw * x / 100).toFixed(1) + 'px', Y = y=>(oy + ih * y / 100).toFixed(1) + 'px';
+    const rect = (x1, y1, x2, y2)=>`polygon(${X(x1)} ${Y(y1)}, ${X(x2)} ${Y(y1)}, ${X(x2)} ${Y(y2)}, ${X(x1)} ${Y(y2)})`;
+    const slant = (x1, y1, xr, y2, cap)=>`polygon(${X(x1)} ${Y(y1)}, ${X(Math.min(cap, xr + 6))} ${Y(y1)}, ${X(Math.min(cap, xr - 6))} ${Y(y2)}, ${X(x1)} ${Y(y2)})`;
+    let camX = 0, camY = 0;
+    const put = (el, on, clip, dx, dy)=>gsap.set(el,{opacity:on ? 1 : 0, clipPath:on ? clip : 'polygon(0 0, 0 0, 0 0, 0 0)', xPercent:camX + dx, yPercent:camY + dy});
+    /* the choreography as a function of build progress 0..1 */
+    const stage = b=>{
+      const roof = ez(ramp(b, .04, .16)),   // dried-in roof: sheathing and underlayment settle top → down
+            wrap = ez(ramp(b, .16, .31)),   // dried-in walls: housewrap and windows rise bottom → up
+            shin = ez(ramp(b, .35, .47)),   // shingles sweep across the roof
+            side = ez(ramp(b, .47, .64)),   // siding and trim sweep across the facade
+            porch = ez(ramp(b, .67, .81)),  // porches and railings resolve right → left
+            entry = ez(ramp(b, .79, .89)),  // entry canopy finishes bottom → up
+            land = ramp(b, .89, .95);       // the whole property lands
+      put(S.roof, roof > 0, rect(0, 6, 100, 6 + 35 * roof), 0, -1.4 * (1 - roof));
+      put(S.wrap, wrap > 0, rect(0, 100 - 59 * wrap, 100, 100), 0, 1.4 * (1 - wrap));
+      put(S.shingles, shin > 0, slant(0, 6, 112 * shin - 6, 41, 100), -1.2 * (1 - shin), 0);
+      put(S.siding, side > 0, slant(0, 41, 76 * side - 7, 100, 63), -1.2 * (1 - side), 0);
+      put(S.entrymask, side > 0 && entry < 1, rect(27, 58, 41, 82 - 24 * entry), 0, 0);   // keeps the entry dried-in until its turn
+      put(S.porch, porch > 0, rect(100 - 37 * porch, 20, 100, 100), 1.2 * (1 - porch), 0);
+      put(S.built, land > 0, land >= 1 ? 'none' : rect(0, 100 - 100 * land, 100, 100), 0, 0);
+      setPhase(b >= .90 ? 3 : b >= .42 ? 2 : b >= .22 ? 1 : 0);
+      gsap.set(bar,{scaleX:b}); };
+    /* camera + hand-off, as a function of pin progress */
+    const settle = p=>{ const b = clamp(p / BUILD), s = clamp((p - BUILD) / (1 - BUILD)), k = camEase(b);
+      camX = -1.8 * k; camY = -3.2 * k;
+      gsap.set(layers,{yPercent:camY, xPercent:camX}); gsap.set('.hero',{y:-40 * s});
+      gsap.set(media,{scale:(1 + .12 * k) * (1 - .035 * s), opacity:1 - .5 * s, transformOrigin:'50% 58%'});
       gsap.set(['.hero .lead','.hero .btnrow','.hero-foot'],{opacity:1 - s});
       if(hint) gsap.set(hint,{opacity:p < .03 ? 1 : 0}); };
-    const tick = ()=>{
-      if(!st.isActive){ if(idle) return; idle = true; } else idle = false;   // one last pass after leaving, then rest
-      settle(prog.p);
-      const b = gsap.utils.clamp(0, 1, prog.p / BUILD), target = b * FILM_LEN;
-      if(mode !== 'film' || !started || !film.duration){ readout(mode === 'film' ? 0 : target); showEnd(mode !== 'film' && b > .97); return; }
-      const t = film.currentTime, gap = target - t;
-      if(gap > .06){ if(!document.hidden && st.isActive){ film.playbackRate = gsap.utils.clamp(1, 3, 1 + gap * .9); play(); } else pause(); }
-      else { pause();
-        if(gap < -.08 && !seeking && !pending && performance.now() - lastSeek > 60){ seeking = true; lastSeek = performance.now(); film.currentTime = target; } }
-      readout(st.isActive ? t : target); showEnd(b > .985 && (t >= FILM_LEN - .25 || !st.isActive)); };
-    if(film){
-      film.addEventListener('seeking', ()=>{ seeking = true; }); film.addEventListener('seeked', ()=>{ seeking = false; });
-      film.addEventListener('error', toStills);
-      film.addEventListener('playing', ()=>gsap.to(film,{opacity:1, duration:.4, ease:'none'}), {once:true}); }
-    const start = ()=>{ if(started || mode !== 'film') return; started = true;
-      film.src = (matchMedia('(max-width: 900px)').matches && film.dataset.srcSm) ? film.dataset.srcSm : film.dataset.src;
-      film.preload = 'auto'; film.load(); fetchEnd(); };   // the poster is the film's first frame, so nothing moves until they scroll
-    document.addEventListener('visibilitychange', ()=>{ if(document.hidden && film && mode === 'film') pause(); });
+    const prog = {p:0}; let idle = false;
+    const st = ScrollTrigger.create({trigger:'.hero-sec', start:'top top', end:PIN, pin:true, anticipatePin:1, onUpdate:self=>{ prog.p = self.progress; }, onRefresh:measure});
+    const tick = ()=>{ if(!st.isActive){ if(idle) return; idle = true; } else idle = false;   // one last pass after leaving, then rest
+      if(!W) measure(); settle(prog.p); stage(clamp(prog.p / BUILD)); };
+    window.addEventListener('resize', measure);
     gsap.ticker.add(tick);
-    onLoad(()=>gsap.delayedCall(HOLD, start));
+    onLoad(()=>gsap.delayedCall(1.2, loadPlates));
   })();
   gsap.to('.capline li',{opacity:1, y:0, duration:.7, ease:M.ease, stagger:.09, scrollTrigger:{trigger:'.capline', start:'top 96%'}});
 })();
