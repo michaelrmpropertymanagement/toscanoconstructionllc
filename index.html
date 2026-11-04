@@ -2025,10 +2025,12 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
       onUpdate:self=>{ prog.p = self.progress; },
       onToggle:self=>{ if(self.isActive || !film || mode !== 'film' || !started) return;   // left the pin: rest at the matching end
         pause(); if(film.duration && !pending){ if(self.progress >= 1) film.currentTime = FILM_LEN - .1; else if(self.progress <= 0) film.currentTime = 0; } }});
-    /* across the build the layers drift (parallax); in the last part the copy lifts away and the frame settles and dims */
-    const settle = p=>{ const s = gsap.utils.clamp(0, 1, (p - BUILD) / (1 - BUILD));
-      gsap.set(layers,{yPercent:6 * p}); gsap.set('.hero',{y:-40 * s});
-      gsap.set(media,{scale:1 - .035 * s, opacity:1 - .5 * s});
+    /* camera on top of the film, tied to the scroll: a confident push-in with a slight crane rise and lateral drift across the
+       build, so the building grows as it comes together; in the last part the copy lifts away and the frame eases back and dims */
+    const camEase = gsap.parseEase('power2.inOut');
+    const settle = p=>{ const b = gsap.utils.clamp(0, 1, p / BUILD), s = gsap.utils.clamp(0, 1, (p - BUILD) / (1 - BUILD)), k = camEase(b);
+      gsap.set(layers,{yPercent:-3 * k, xPercent:-1.6 * k}); gsap.set('.hero',{y:-40 * s});
+      gsap.set(media,{scale:(1 + .10 * k) * (1 - .035 * s), opacity:1 - .5 * s, transformOrigin:'50% 58%'});
       gsap.set(['.hero .lead','.hero .btnrow','.hero-foot'],{opacity:1 - s});
       if(hint) gsap.set(hint,{opacity:p < .03 ? 1 : 0}); };
     const tick = ()=>{
