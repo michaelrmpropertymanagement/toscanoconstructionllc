@@ -317,16 +317,41 @@ document.documentElement.classList.add('js');</script>
 
   /* ================= FOR PROPERTY OWNERS ================= */
   .owners{padding:var(--section) 0;background:var(--bg2);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  .owners h2{font-size:var(--fs-xl);line-height:.98;letter-spacing:var(--track-display);max-width:12ch}
   .own-grid{display:grid;gap:var(--s7);margin-top:var(--s8)}
-  @media(min-width:980px){.own-grid{grid-template-columns:5fr 6fr;gap:var(--s9);align-items:start}}
+  @media(min-width:980px){.own-grid{grid-template-columns:6fr 5fr;gap:var(--s9);align-items:start}}
   .own-media{aspect-ratio:4/5}
-  @media(max-width:979px){.own-media{aspect-ratio:4/3}}
-  .own-media img{object-position:50% 30%}
+  .own-media img{object-position:50% 50%}
+  /* callouts drawn onto the photo: the photo and the SVG share the same 4:5 crop, so the coordinates line up */
+  .own-svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2;overflow:visible}
+  .co line{stroke:var(--paper);stroke-width:1.4;fill:none;opacity:.9}
+  .co .pt{fill:var(--paper);stroke:none}
+  .co .kn{fill:rgba(var(--ink-rgb),.78);stroke:var(--paper);stroke-width:1.6;transition:fill .3s var(--ease),stroke .3s var(--ease)}
+  .co text{font-family:var(--mono);fill:var(--paper);stroke:none}
+  .co .num{font-size:15px;letter-spacing:.06em;text-anchor:middle;font-weight:500}
+  .co .lbl{font-size:16px;letter-spacing:.12em;text-transform:uppercase;stroke:rgba(var(--ink-rgb),.8);stroke-width:7;paint-order:stroke;stroke-linejoin:round;
+    opacity:0;transition:opacity .25s var(--ease)}
+  @media(max-width:600px){.co .kn{r:24px}.co .num{font-size:20px}.co .lbl{font-size:22px;stroke-width:9}}
+  .co.hot .kn{fill:var(--paper)}
+  .co.hot .num{fill:var(--ink-900)}
+  .co.hot .lbl{opacity:1}
+  .js-motion .co{opacity:0;transition:opacity .3s var(--ease)}
+  .js-motion .co line{stroke-dasharray:1;stroke-dashoffset:1;transition:stroke-dashoffset .5s var(--ease) .15s}
+  .js-motion .co .pt{transform:scale(0);transform-box:fill-box;transform-origin:center;transition:transform .3s var(--ease) .55s}
+  .js-motion .co .kn,.js-motion .co .num{transform:scale(.6);transform-box:fill-box;transform-origin:center;transition:transform .4s var(--ease)}
+  .js-motion .co.on{opacity:1}
+  .js-motion .co.on line{stroke-dashoffset:0}
+  .js-motion .co.on .pt,.js-motion .co.on .kn,.js-motion .co.on .num{transform:none}
+  .own-read{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;justify-content:space-between;gap:var(--s3);padding:var(--s4) var(--s5);
+    background:linear-gradient(to top,rgba(var(--ink-rgb),.72),transparent);color:var(--paper)}
   .own-copy .sub{margin-bottom:var(--s6)}
   .scope{list-style:none;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
-  .scope li{display:flex;gap:var(--s3);align-items:baseline;padding:13px 0;border-bottom:1px solid var(--line);font-size:var(--fs-sm);color:var(--txt)}
+  .scope li{display:flex;gap:var(--s3);align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line);font-size:16px;color:var(--txt);cursor:default;transition:opacity .4s var(--ease)}
   .scope li:nth-child(odd){padding-right:var(--s4)}
-  .scope li span{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;color:var(--dim);min-width:22px}
+  .scope li span{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.1em;color:var(--dim);min-width:24px;transition:color .4s var(--ease)}
+  .js-motion .scope li{opacity:.3}
+  .js-motion .scope li.on{opacity:1}
+  .js-motion .scope li.on span{color:var(--txt)}
   .own-copy .tlink{margin-top:var(--s6)}
   .projmeta{margin-top:var(--s8);border-top:1px solid var(--line2)}
   .projmeta-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s3);padding:var(--s4) 0}
@@ -908,12 +933,27 @@ document.documentElement.classList.add('js');</script>
     <h2 class="reveal">One contractor for <em>the entire property.</em></h2>
     <div class="own-grid">
       <div class="frame own-media" id="ownmedia">
-        <img src="media/work/triple-porches-800.webp" srcset="media/work/triple-porches-800.webp 800w, media/work/triple-porches.webp 1078w" sizes="(min-width:980px) 42vw, 100vw" alt="Renovated New England three-family home with stacked white porches, gray siding and new windows" loading="lazy" decoding="async" width="800" height="998">
+        <img src="media/work/triple-porches-800.webp" srcset="media/work/triple-porches-800.webp 800w, media/work/triple-porches.webp 1078w" sizes="(min-width:980px) 48vw, 100vw" alt="Renovated New England three-family home with stacked white porches, gray siding and new windows" loading="lazy" decoding="async" width="800" height="998">
+        <!-- callouts: one per scope item, in list order; coordinates are in the photo's own pixels (800 × 998) -->
+        <svg class="own-svg" viewBox="0 0 800 998" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+          <!-- keynote bubbles (numbered like the list): a short leader to the feature, the word shows on hover -->
+          <g class="co"><line pathLength="1" x1="640" y1="205" x2="688" y2="250"/><circle class="pt" cx="688" cy="250" r="4"/><circle class="kn" cx="640" cy="205" r="18"/><text class="num" x="640" y="211">01</text><text class="lbl" x="614" y="211" text-anchor="end">Unit turns</text></g>
+          <g class="co"><line pathLength="1" x1="640" y1="440" x2="688" y2="485"/><circle class="pt" cx="688" cy="485" r="4"/><circle class="kn" cx="640" cy="440" r="18"/><text class="num" x="640" y="446">02</text><text class="lbl" x="614" y="446" text-anchor="end">Apartment renovations</text></g>
+          <g class="co"><line pathLength="1" x1="140" y1="430" x2="188" y2="470"/><circle class="pt" cx="188" cy="470" r="4"/><circle class="kn" cx="140" cy="430" r="18"/><text class="num" x="140" y="436">03</text><text class="lbl" x="166" y="436">Painting</text></g>
+          <g class="co"><line pathLength="1" x1="640" y1="655" x2="688" y2="700"/><circle class="pt" cx="688" cy="700" r="4"/><circle class="kn" cx="640" cy="655" r="18"/><text class="num" x="640" y="661">04</text><text class="lbl" x="614" y="661" text-anchor="end">Flooring</text></g>
+          <g class="co"><line pathLength="1" x1="330" y1="252" x2="330" y2="302"/><circle class="pt" cx="330" cy="302" r="4"/><circle class="kn" cx="330" cy="252" r="18"/><text class="num" x="330" y="258">05</text><text class="lbl" x="356" y="258">Carpentry</text></g>
+          <g class="co"><line pathLength="1" x1="80" y1="528" x2="80" y2="580"/><circle class="pt" cx="80" cy="580" r="4"/><circle class="kn" cx="80" cy="528" r="18"/><text class="num" x="80" y="534">06</text><text class="lbl" x="106" y="534">Siding</text></g>
+          <g class="co"><line pathLength="1" x1="420" y1="112" x2="420" y2="64"/><circle class="pt" cx="420" cy="64" r="4"/><circle class="kn" cx="420" cy="112" r="18"/><text class="num" x="420" y="118">07</text><text class="lbl" x="446" y="118">Roofing</text></g>
+          <g class="co"><line pathLength="1" x1="180" y1="775" x2="225" y2="820"/><circle class="pt" cx="225" cy="820" r="4"/><circle class="kn" cx="180" cy="775" r="18"/><text class="num" x="180" y="781">08</text><text class="lbl" x="206" y="781">Maintenance</text></g>
+          <g class="co"><line pathLength="1" x1="385" y1="648" x2="337" y2="690"/><circle class="pt" cx="337" cy="690" r="4"/><circle class="kn" cx="385" cy="648" r="18"/><text class="num" x="385" y="654">09</text><text class="lbl" x="411" y="654">Punch lists</text></g>
+          <g class="co"><line pathLength="1" x1="612" y1="836" x2="560" y2="872"/><circle class="pt" cx="560" cy="872" r="4"/><circle class="kn" cx="612" cy="836" r="18"/><text class="num" x="612" y="842">10</text><text class="lbl" x="586" y="842" text-anchor="end">Specialty trades</text></g>
+        </svg>
         <span class="regmark tl"></span><span class="regmark br"></span>
+        <div class="own-read label" aria-hidden="true"><span>Three-family · Exterior &amp; units</span><span id="ownstep">Scope 00 / 10</span></div>
       </div>
       <div class="own-copy">
         <p class="sub reveal">Multifamily owners, landlords, and property managers don't need ten phone numbers. We run the whole scope — from unit turns and maintenance to full renovations and capital improvements, inside the units and outside the building — on one schedule, with one point of contact.</p>
-        <ul class="scope reveal" aria-label="Property scope">
+        <ul class="scope reveal" id="scope" aria-label="Property scope">
           <li><span>01</span>Unit turns</li><li><span>02</span>Apartment renovations</li>
           <li><span>03</span>Painting</li><li><span>04</span>Flooring</li>
           <li><span>05</span>Carpentry</li><li><span>06</span>Siding</li>
@@ -1951,6 +1991,24 @@ mm.add('(min-width: 980px)', ()=>{
   });
   return ()=>items.forEach(it=>it.classList.remove('is-active'));
 });
+
+/* PRIMARY 2b — property owners: the scope list lights in order and each item's callout draws onto the building.
+   Desktop: both follow the list. Mobile: the callouts follow the photo (which sits above the list) so they're seen. */
+(function(){
+  const list = document.getElementById('scope'); if(!list) return;
+  const items = [...list.querySelectorAll('li')], cos = [...document.querySelectorAll('.own-svg .co')], read = document.getElementById('ownstep');
+  const desktop = matchMedia('(min-width: 980px)').matches;
+  let shown = 0;
+  const setCos = n=>{ cos.forEach((c,i)=>c.classList.toggle('on', i < n)); if(read && n !== shown){ read.textContent = 'Scope '+pad(n)+' / '+pad(cos.length); } shown = n; };
+  const setItems = n=>items.forEach((it,i)=>it.classList.toggle('on', i < n));
+  const steps = p=>Math.min(items.length, Math.ceil(p * items.length));
+  ScrollTrigger.create({trigger:list, start:'top 82%', end:'bottom 45%',
+    onUpdate:s=>{ setItems(steps(s.progress)); if(desktop) setCos(steps(s.progress)); },
+    onLeave:()=>{ setItems(items.length); if(desktop) setCos(cos.length); }});
+  if(!desktop) ScrollTrigger.create({trigger:'#ownmedia', start:'top 78%', end:'bottom 55%',
+    onUpdate:s=>setCos(steps(s.progress)), onLeave:()=>setCos(cos.length)});
+  items.forEach((it,i)=>{ it.addEventListener('mouseenter', ()=>cos[i]?.classList.add('hot')); it.addEventListener('mouseleave', ()=>cos[i]?.classList.remove('hot')); });
+})();
 
 /* image scale transitions (owners + light section): frame opens and the crop settles as it scrolls in */
 [['#ownmedia','inset(8% 10% 8% 0%)'],['#halfmedia','inset(12% 0% 0% 12%)']].forEach(([sel, from])=>{
