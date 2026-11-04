@@ -239,7 +239,7 @@ document.documentElement.classList.add('js');</script>
   .hero-creds .coords::before{display:none}
   @media(max-width:700px){.hero-creds .coords{margin-left:0;width:100%}}
   .js-motion .hero .kick,.js-motion .hero .lead,.js-motion .hero .btnrow,.js-motion .hero-creds,.js-motion .hero-phase{opacity:0;transform:translateY(16px)}
-  /* hero sequence readout: envelope → roofing → siding → porches/trim → finished. Static state shows all five; motion lights
+  /* hero sequence readout: framing → dried in → exterior build-out → finished. Static state shows all four; motion lights
      them in step with the hero film. The film sits between the poster (its own first frame) and the finished still (Anchor A),
      fades in once it is actually playing, and is never loaded without .js-motion. */
   .hero-end,.hero-film{opacity:0}
@@ -774,7 +774,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= HERO ================= -->
 <section class="hero-sec" id="top">
   <div class="hero-media" aria-hidden="true">
-    <!-- hero film: a six-unit multifamily going from envelope to finished (AI visualization built from the finished still).
+    <!-- hero film: a six-unit multifamily going from raw framed shell → dried in → finished (AI visualization built from the finished still).
          .hero-start = the film's own first frame (the LCP poster). .hero-film = the film, requested only after load, when the hero
          is on screen and not on data-saver (960w source under 900px). .hero-end = the finished still (Anchor A), crossfaded over
          the film's last frame; also the static image under reduced motion. -->
@@ -793,7 +793,7 @@ document.documentElement.classList.add('js');</script>
   </div>
   <div class="hero-foot">
     <div class="hero-phase" aria-hidden="true">
-      <span class="hp on">01 Envelope</span><span class="hp">02 Roofing</span><span class="hp">03 Siding</span><span class="hp">04 Porches / Trim</span><span class="hp">05 Finished</span>
+      <span class="hp on">01 Framing</span><span class="hp">02 Dried In</span><span class="hp">03 Exterior Build-Out</span><span class="hp">04 Finished</span>
       <i class="hp-bar"><b></b></i>
       <span class="hp-tag">Six-unit multifamily · Southern New Hampshire</span>
     </div>
@@ -2000,20 +2000,20 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
   (function(){
     const film = media.querySelector('.hero-film'), endImg = media.querySelector('.hero-end'), phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b');
     if(!endImg || !phases.length) return;
-    const CUES = [0, .9, 2.6, 5.4, 8.6];           // film seconds at which 01 Envelope → 02 Roofing → 03 Siding → 04 Porches/Trim → 05 Finished light
+    const CUES = [0, 5.6, 8.9, 13.1], LAST = CUES.length - 1;   // film seconds at which 01 Framing → 02 Dried In → 03 Exterior Build-Out → 04 Finished light
     const HOLD = 2.4;                               // seconds after load before anything moves (the headline is landing)
     const setPhase = n=>phases.forEach((p,i)=>p.classList.toggle('on', i === n));
     const onLoad = fn=>{ if(document.readyState === 'complete') fn(); else window.addEventListener('load', fn, {once:true}); };
     const fetchEnd = cb=>{ if(!endImg.getAttribute('src')){ endImg.srcset = endImg.dataset.srcset; endImg.src = endImg.dataset.src; }
       if(!cb) return; if(endImg.complete) cb(); else endImg.addEventListener('load', cb, {once:true}); };
     let finished = false, mode = '';
-    const finish = ()=>{ if(finished) return; finished = true; setPhase(4); gsap.to(bar,{scaleX:1, duration:.4, ease:'none'});
+    const finish = ()=>{ if(finished) return; finished = true; setPhase(LAST); gsap.to(bar,{scaleX:1, duration:.4, ease:'none'});
       fetchEnd(()=>gsap.to(endImg,{opacity:1, duration:1.4, ease:'power2.inOut', onComplete:()=>{ if(film && mode === 'film') film.pause(); }})); };
     /* fallback: the readout on a timer, then the finished still */
     const stillsSeq = ()=>{ if(mode === 'stills') return; mode = 'stills'; if(film) gsap.set(film,{opacity:0});
-      fetchEnd(()=>{ const seq = gsap.timeline().to(bar,{scaleX:1, duration:CUES[4], ease:'none'},0);
-        CUES.forEach((t,i)=>{ if(i > 0 && i < 4) seq.call(()=>setPhase(i), [], t); });
-        seq.call(finish, [], CUES[4]); }); };
+      fetchEnd(()=>{ const seq = gsap.timeline().to(bar,{scaleX:1, duration:CUES[LAST], ease:'none'},0);
+        CUES.forEach((t,i)=>{ if(i > 0 && i < LAST) seq.call(()=>setPhase(i), [], t); });
+        seq.call(finish, [], CUES[LAST]); }); };
     const conn = navigator.connection || {};
     const canFilm = film && !conn.saveData && !/^(slow-)?2g$/.test(conn.effectiveType || '') && film.canPlayType && film.canPlayType('video/mp4');
     if(!canFilm){ onLoad(()=>gsap.delayedCall(HOLD, stillsSeq)); return; }
