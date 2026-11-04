@@ -252,6 +252,8 @@ document.documentElement.classList.add('js');</script>
   .hp-bar{display:none;flex:1 1 80px;height:1px;background:rgba(238,234,226,.22);position:relative;min-width:60px}
   .js-motion .hp-bar{display:block}
   .hp-bar b{position:absolute;inset:0;background:var(--paper);transform:scaleX(0);transform-origin:left}
+  .hp-hint{display:none;color:var(--paper-3)}
+  .js-motion .hp-hint{display:inline}
   .hp-tag{color:var(--paper-3);margin-left:auto}
   @media(max-width:700px){.hp-tag{display:none}}
 
@@ -794,6 +796,7 @@ document.documentElement.classList.add('js');</script>
   <div class="hero-foot">
     <div class="hero-phase" aria-hidden="true">
       <span class="hp on">01 Framing</span><span class="hp">02 Dried In</span><span class="hp">03 Exterior Build-Out</span><span class="hp">04 Finished</span>
+      <span class="hp-hint">Scroll to build ↓</span>
       <i class="hp-bar"><b></b></i>
       <span class="hp-tag">Six-unit multifamily · Southern New Hampshire</span>
     </div>
@@ -1990,58 +1993,65 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
     .to('#heroline .ln:nth-child(1)>span',{y:0, duration:1},.45)
     .to('#heroline .ln:nth-child(2)>span',{y:0, duration:1},.68)
     .to(['.hero .lead','.hero .btnrow','.hero-phase','.hero-creds'],{opacity:1, y:0, duration:.8, stagger:.1},1.05);
-  gsap.to(layers,{yPercent:6, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
-  /* hero film sequence: once the page has loaded and the headline has landed, the construction film plays once (envelope →
-     finished). The readout and the bar follow the film's own clock, and the finished still (Anchor A) crossfades over the
-     film's last frame. The film is only requested when the hero is on screen and not on data-saver, pauses while off screen or
-     in a hidden tab, plays once (no replay), and never starts a second copy. The page-wide "one video at a time" rule above
-     still applies to it. If it can't play (blocked autoplay, error, no mp4), the readout runs on a timer over the poster and the
-     finished still fades in — the stills version the hero shipped with. */
+  /* hero film, scroll-driven: the hero pins for ~2.6 screens and the construction film advances with the scrollbar.
+     The scroll sets a target time in the film; the film plays forward toward it (real playback, up to 3x, so roof, windows,
+     wrap, siding and railings assemble instead of scrub-flickering) and seeks back when the visitor scrolls up. The readout
+     and the bar follow the film's own clock, so they say what the building is actually doing. At the end of the build the
+     finished still (Anchor A) fades over the last frame, and fades back out if they scroll up. The last part of the pin
+     settles the frame and hands off to the capline. The film is only requested after load and not on data-saver; it pauses
+     while the hero is off screen or the tab is hidden, and the page-wide "one video at a time" rule above still applies.
+     If it can't play (error, no mp4, blocked), the readout, bar and finished still follow the scroll over the poster instead. */
   (function(){
-    const film = media.querySelector('.hero-film'), endImg = media.querySelector('.hero-end'), phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b');
+    const film = media.querySelector('.hero-film'), endImg = media.querySelector('.hero-end'), phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b'), hint = document.querySelector('.hp-hint');
     if(!endImg || !phases.length) return;
-    const CUES = [0, 5.6, 8.9, 13.1], LAST = CUES.length - 1;   // film seconds at which 01 Framing → 02 Dried In → 03 Exterior Build-Out → 04 Finished light
-    const HOLD = 2.4;                               // seconds after load before anything moves (the headline is landing)
+    const CUES = [0, 5.6, 8.9, 13.1], LAST = CUES.length - 1, FILM_LEN = 14.08;   // film seconds at which 01 Framing → 02 Dried In → 03 Exterior Build-Out → 04 Finished light
+    const PIN = '+=260%';   // scroll distance the hero stays pinned
+    const BUILD = .86;      // share of that distance spent building; the rest settles the frame for the capline
+    const HOLD = 2.4;       // seconds after load before the film is requested (the headline is landing)
     const setPhase = n=>phases.forEach((p,i)=>p.classList.toggle('on', i === n));
     const onLoad = fn=>{ if(document.readyState === 'complete') fn(); else window.addEventListener('load', fn, {once:true}); };
-    const fetchEnd = cb=>{ if(!endImg.getAttribute('src')){ endImg.srcset = endImg.dataset.srcset; endImg.src = endImg.dataset.src; }
-      if(!cb) return; if(endImg.complete) cb(); else endImg.addEventListener('load', cb, {once:true}); };
-    let finished = false, mode = '';
-    const finish = ()=>{ if(finished) return; finished = true; setPhase(LAST); gsap.to(bar,{scaleX:1, duration:.4, ease:'none'});
-      fetchEnd(()=>gsap.to(endImg,{opacity:1, duration:1.4, ease:'power2.inOut', onComplete:()=>{ if(film && mode === 'film') film.pause(); }})); };
-    /* fallback: the readout on a timer, then the finished still */
-    const stillsSeq = ()=>{ if(mode === 'stills') return; mode = 'stills'; if(film) gsap.set(film,{opacity:0});
-      fetchEnd(()=>{ const seq = gsap.timeline().to(bar,{scaleX:1, duration:CUES[LAST], ease:'none'},0);
-        CUES.forEach((t,i)=>{ if(i > 0 && i < LAST) seq.call(()=>setPhase(i), [], t); });
-        seq.call(finish, [], CUES[LAST]); }); };
+    const fetchEnd = ()=>{ if(!endImg.getAttribute('src')){ endImg.srcset = endImg.dataset.srcset; endImg.src = endImg.dataset.src; } };
     const conn = navigator.connection || {};
-    const canFilm = film && !conn.saveData && !/^(slow-)?2g$/.test(conn.effectiveType || '') && film.canPlayType && film.canPlayType('video/mp4');
-    if(!canFilm){ onLoad(()=>gsap.delayedCall(HOLD, stillsSeq)); return; }
-    /* film path */
-    let started = false, inView = false, watchdog;
-    const sync = ()=>{ const t = film.currentTime; let n = 0; CUES.forEach((c,i)=>{ if(t >= c) n = i; }); if(!finished) setPhase(n);
-      if(film.duration && !finished) gsap.set(bar,{scaleX:Math.min(1, t / film.duration)}); };
-    film.addEventListener('timeupdate', sync);
-    film.addEventListener('playing', ()=>{ if(mode) return; mode = 'film'; clearTimeout(watchdog); gsap.to(film,{opacity:1, duration:.5, ease:'none'}); fetchEnd(); }, {once:false});
-    film.addEventListener('ended', ()=>{ sync(); finish(); });
-    film.addEventListener('error', ()=>{ if(mode === 'film') finish(); else stillsSeq(); });
-    const start = ()=>{ if(started) return; started = true;
+    const canFilm = !!(film && !conn.saveData && !/^(slow-)?2g$/.test(conn.effectiveType || '') && film.canPlayType && film.canPlayType('video/mp4'));
+    let mode = canFilm ? 'film' : 'stills', shown = false, started = false, seeking = false, lastSeek = 0, idle = false, pending = null;
+    const toStills = ()=>{ if(mode === 'stills') return; mode = 'stills'; if(film){ film.pause(); gsap.set(film,{opacity:0}); } };
+    /* play/pause that never overlap: a pause() during a pending play() rejects it with AbortError, which is not a failure */
+    const play = ()=>{ if(pending || !film.paused) return; pending = film.play().then(()=>{ pending = null; }).catch(err=>{ pending = null; if(!err || err.name !== 'AbortError') toStills(); }); };
+    const pause = ()=>{ if(pending || film.paused) return; film.pause(); };
+    const showEnd = on=>{ if(on === shown) return; shown = on; if(on) fetchEnd(); gsap.to(endImg,{opacity:on ? 1 : 0, duration:on ? .9 : .5, ease:'power2.inOut', overwrite:true}); };
+    const readout = t=>{ let n = 0; CUES.forEach((c,i)=>{ if(t >= c - .05) n = i; }); setPhase(n); gsap.set(bar,{scaleX:Math.min(1, t / CUES[LAST])}); };
+    const prog = {p:0};
+    const st = ScrollTrigger.create({trigger:'.hero-sec', start:'top top', end:PIN, pin:true, anticipatePin:1,
+      onUpdate:self=>{ prog.p = self.progress; },
+      onToggle:self=>{ if(self.isActive || !film || mode !== 'film' || !started) return;   // left the pin: rest at the matching end
+        pause(); if(film.duration && !pending){ if(self.progress >= 1) film.currentTime = FILM_LEN - .1; else if(self.progress <= 0) film.currentTime = 0; } }});
+    /* across the build the layers drift (parallax); in the last part the copy lifts away and the frame settles and dims */
+    const settle = p=>{ const s = gsap.utils.clamp(0, 1, (p - BUILD) / (1 - BUILD));
+      gsap.set(layers,{yPercent:6 * p}); gsap.set('.hero',{y:-40 * s});
+      gsap.set(media,{scale:1 - .035 * s, opacity:1 - .5 * s});
+      gsap.set(['.hero .lead','.hero .btnrow','.hero-foot'],{opacity:1 - s});
+      if(hint) gsap.set(hint,{opacity:p < .03 ? 1 : 0}); };
+    const tick = ()=>{
+      if(!st.isActive){ if(idle) return; idle = true; } else idle = false;   // one last pass after leaving, then rest
+      settle(prog.p);
+      const b = gsap.utils.clamp(0, 1, prog.p / BUILD), target = b * FILM_LEN;
+      if(mode !== 'film' || !started || !film.duration){ readout(mode === 'film' ? 0 : target); showEnd(mode !== 'film' && b > .97); return; }
+      const t = film.currentTime, gap = target - t;
+      if(gap > .06){ if(!document.hidden && st.isActive){ film.playbackRate = gsap.utils.clamp(1, 3, 1 + gap * .9); play(); } else pause(); }
+      else { pause();
+        if(gap < -.08 && !seeking && !pending && performance.now() - lastSeek > 60){ seeking = true; lastSeek = performance.now(); film.currentTime = target; } }
+      readout(st.isActive ? t : target); showEnd(b > .985 && (t >= FILM_LEN - .25 || !st.isActive)); };
+    if(film){
+      film.addEventListener('seeking', ()=>{ seeking = true; }); film.addEventListener('seeked', ()=>{ seeking = false; });
+      film.addEventListener('error', toStills);
+      film.addEventListener('playing', ()=>gsap.to(film,{opacity:1, duration:.4, ease:'none'}), {once:true}); }
+    const start = ()=>{ if(started || mode !== 'film') return; started = true;
       film.src = (matchMedia('(max-width: 900px)').matches && film.dataset.srcSm) ? film.dataset.srcSm : film.dataset.src;
-      film.preload = 'auto'; film.load();
-      watchdog = setTimeout(()=>{ if(!mode) stillsSeq(); }, 8000);           // nothing on screen for 8 s → stills version
-      film.play().catch(()=>{ if(!mode) stillsSeq(); }); };
-    const resume = ()=>{ if(mode === 'film' && !finished && inView && !document.hidden && film.paused) film.play().catch(()=>{}); };
-    const io = ('IntersectionObserver' in window) && new IntersectionObserver(es=>es.forEach(en=>{
-      inView = en.isIntersecting;
-      if(inView){ if(!started) start(); else resume(); } else if(mode === 'film' && !film.paused) film.pause();
-    }),{threshold:.3});
-    document.addEventListener('visibilitychange', ()=>{ if(document.hidden){ if(mode === 'film' && !film.paused) film.pause(); } else resume(); });
-    onLoad(()=>gsap.delayedCall(HOLD, ()=>{ if(io) io.observe(media); else { inView = true; start(); } }));
+      film.preload = 'auto'; film.load(); fetchEnd(); };   // the poster is the film's first frame, so nothing moves until they scroll
+    document.addEventListener('visibilitychange', ()=>{ if(document.hidden && film && mode === 'film') pause(); });
+    gsap.ticker.add(tick);
+    onLoad(()=>gsap.delayedCall(HOLD, start));
   })();
-  gsap.to('.hero',{y:-40, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
-  /* stitch into the next section: the frame settles back and dims as the capline arrives, then the capline items step in */
-  gsap.to(media,{scale:.965, opacity:.5, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'35% top', end:'bottom top', scrub:M.scrub}});
-  gsap.to(['.hero .lead','.hero .btnrow','.hero-foot'],{opacity:0, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'45% top', end:'90% top', scrub:M.scrub}});
   gsap.to('.capline li',{opacity:1, y:0, duration:.7, ease:M.ease, stagger:.09, scrollTrigger:{trigger:'.capline', start:'top 96%'}});
 })();
 
