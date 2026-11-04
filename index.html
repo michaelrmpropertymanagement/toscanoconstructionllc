@@ -313,6 +313,9 @@ document.documentElement.classList.add('js');</script>
     .sm-bar{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;justify-content:space-between;align-items:center;
       padding:var(--s4) var(--s5);background:linear-gradient(to top,rgba(var(--ink-rgb),.72),transparent);color:var(--paper)}
     .sm-bar .label{color:var(--paper)}
+    .sm-txt{display:grid;gap:4px}
+    .sm-scope{color:var(--paper-2) !important}
+    .js-motion .svc-item.is-active{border-top-color:var(--line2)}
   }
 
   /* ================= FOR PROPERTY OWNERS ================= */
@@ -343,7 +346,8 @@ document.documentElement.classList.add('js');</script>
   .js-motion .co.on line{stroke-dashoffset:0}
   .js-motion .co.on .pt,.js-motion .co.on .kn,.js-motion .co.on .num{transform:none}
   .own-read{position:absolute;left:0;right:0;bottom:0;z-index:3;display:flex;justify-content:space-between;gap:var(--s3);padding:var(--s4) var(--s5);
-    background:linear-gradient(to top,rgba(var(--ink-rgb),.72),transparent);color:var(--paper)}
+    background:linear-gradient(to top,rgba(var(--ink-rgb),.72),transparent);color:var(--paper);white-space:nowrap}
+  @media(max-width:600px){.own-read span:first-child{display:none}}
   .own-copy .sub{margin-bottom:var(--s6)}
   .scope{list-style:none;display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--line)}
   .scope li{display:flex;gap:var(--s3);align-items:baseline;padding:15px 0;border-bottom:1px solid var(--line);font-size:16px;color:var(--txt);cursor:default;transition:opacity .4s var(--ease)}
@@ -917,7 +921,7 @@ document.documentElement.classList.add('js');</script>
           <div class="sm-img"><img src="media/photos/framing-roofline.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/install-crew.webp" alt="" loading="lazy" decoding="async"></div>
           <span class="regmark tl"></span><span class="regmark tr"></span>
-          <div class="sm-bar"><span class="label" id="smname">Remodeling</span><span class="label" id="smcount">01 / 07</span></div>
+          <div class="sm-bar"><div class="sm-txt"><span class="label" id="smname">Remodeling</span><span class="label sm-scope" id="smscope">Kitchens · Baths · Full units</span></div><span class="label" id="smcount">01 / 07</span></div>
         </div>
       </div>
     </div>
@@ -1971,21 +1975,28 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
 const mm = gsap.matchMedia();
 mm.add('(min-width: 980px)', ()=>{
   const items = gsap.utils.toArray('.svc-item'), imgs = gsap.utils.toArray('.svc-media .sm-img');
-  const name = document.getElementById('smname'), count = document.getElementById('smcount');
-  const setActive = i=>{
+  const name = document.getElementById('smname'), scope = document.getElementById('smscope'), count = document.getElementById('smcount');
+  const setActive = (i, animate)=>{
     items.forEach((it,k)=>it.classList.toggle('is-active', k === i));
-    name.textContent = items[i].dataset.name; count.textContent = pad(i+1)+' / '+pad(items.length);
+    name.textContent = items[i].dataset.name; scope.textContent = items[i].querySelector('.svc-scope')?.textContent || '';
+    count.textContent = pad(i+1)+' / '+pad(items.length);
+    if(animate){ gsap.fromTo([name, scope],{y:8, opacity:0},{y:0, opacity:1, duration:.45, ease:M.ease, stagger:.06, overwrite:true});
+      gsap.fromTo(count,{y:-6, opacity:0},{y:0, opacity:1, duration:.35, ease:M.ease, overwrite:true}); }
   };
   let cur = -1;
-  const sync = ()=>{ const i = activeIndex(items, .55); if(i !== cur){ cur = i; setActive(i); } };
+  const sync = ()=>{ const i = activeIndex(items, .55); if(i !== cur){ const first = cur < 0; cur = i; setActive(i, !first); } };
   ScrollTrigger.create({trigger:'.svc-list', start:'top bottom', end:'bottom top', onUpdate:sync, onRefresh:sync});
   sync();
+  /* each service enters from its own side and settles its crop in its own direction, so the sequence doesn't repeat one beat */
+  const wipes = ['inset(100% 0% 0% 0%)','inset(0% 0% 0% 100%)','inset(0% 100% 0% 0%)'];
+  const drift = [[3,3],[-3,2],[3,-2],[-3,-3],[2,3],[-2,-3]];
   items.forEach((it,i)=>{
     if(i === 0) return;
-    gsap.fromTo(imgs[i],{clipPath:'inset(100% 0% 0% 0%)'},{clipPath:'inset(0% 0% 0% 0%)', ease:'none',
+    const [dx, dy] = drift[(i-1) % drift.length], m = imgs[i].querySelector('img, video');
+    gsap.fromTo(imgs[i],{clipPath:wipes[(i-1) % wipes.length]},{clipPath:'inset(0% 0% 0% 0%)', ease:'none',
       scrollTrigger:{trigger:it, start:'top 88%', end:'top 52%', scrub:M.scrub}});
-    gsap.fromTo(imgs[i].querySelector('img, video'),{scale:1.12},{scale:1, ease:'none',
-      scrollTrigger:{trigger:it, start:'top 88%', end:'top 30%', scrub:M.scrub}});
+    gsap.fromTo(m,{scale:1.16, xPercent:dx, yPercent:dy},{scale:1.06, xPercent:0, yPercent:0, ease:'none',
+      scrollTrigger:{trigger:it, start:'top 88%', end:'top 25%', scrub:M.scrub}});
     gsap.to(imgs[i-1].querySelector('img, video'),{scale:.96, opacity:.6, ease:'none',
       scrollTrigger:{trigger:it, start:'top 88%', end:'top 52%', scrub:M.scrub}});
   });
