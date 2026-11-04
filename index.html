@@ -39,7 +39,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@300..700&family=Cormorant+Garamond:ital,wght@1,400;1,500&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
-<link rel="preload" as="image" href="media/work/hero-build-1024.webp" imagesrcset="media/work/hero-build-1024.webp 1024w, media/work/hero-build.webp 1920w" imagesizes="100vw" fetchpriority="high">
+<link rel="preload" as="image" href="media/work/hero-film-start-960.webp" imagesrcset="media/work/hero-film-start-960.webp 960w, media/work/hero-film-start-1920.webp 1920w" imagesizes="100vw" fetchpriority="high">
 <script>/* motion flag: pre-animation states only apply when motion is allowed (removed again if GSAP fails to load) */
 if(!matchMedia('(prefers-reduced-motion: reduce)').matches) document.documentElement.classList.add('js-motion');
 document.documentElement.classList.add('js');</script>
@@ -239,8 +239,11 @@ document.documentElement.classList.add('js');</script>
   .hero-creds .coords::before{display:none}
   @media(max-width:700px){.hero-creds .coords{margin-left:0;width:100%}}
   .js-motion .hero .kick,.js-motion .hero .lead,.js-motion .hero .btnrow,.js-motion .hero-creds,.js-motion .hero-phase{opacity:0;transform:translateY(16px)}
-  /* hero sequence readout: envelope → cladding → finished. Static state shows all three; motion lights them in turn. */
-  .hero-end{opacity:0}
+  /* hero sequence readout: envelope → roofing → siding → porches/trim → finished. Static state shows all five; motion lights
+     them in step with the hero film. The film sits between the poster (its own first frame) and the finished still (Anchor A),
+     fades in once it is actually playing, and is never loaded without .js-motion. */
+  .hero-end,.hero-film{opacity:0}
+  html:not(.js-motion) .hero-film{display:none}
   .hero-phase{display:flex;flex-wrap:wrap;align-items:center;gap:var(--s3) var(--s5);padding-bottom:var(--s4);
     font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.14em;text-transform:uppercase;color:var(--paper-2)}
   .hp{transition:color .5s var(--ease)}
@@ -771,10 +774,13 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= HERO ================= -->
 <section class="hero-sec" id="top">
   <div class="hero-media" aria-hidden="true">
-    <!-- start state (poster): the building mid-construction. end state: the same building finished — loaded after the page is in, then crossfaded in by the hero sequence.
-         Phase 4 adds <video class="hero-film"> between them; the sequence below then follows the film's time instead of a timer. -->
-    <img class="hero-start" src="media/work/hero-build-1024.webp" srcset="media/work/hero-build-1024.webp 1024w, media/work/hero-build.webp 1920w" sizes="100vw" alt="" width="1920" height="1438" fetchpriority="high" decoding="async">
-    <img class="hero-end" data-src="media/work/multifamily-finished-1024.webp" data-srcset="media/work/multifamily-finished-1024.webp 1024w, media/work/multifamily-finished.webp 1920w" sizes="100vw" alt="" width="1920" height="1012" decoding="async">
+    <!-- hero film: a six-unit multifamily going from envelope to finished (AI visualization built from the finished still).
+         .hero-start = the film's own first frame (the LCP poster). .hero-film = the film, requested only after load, when the hero
+         is on screen and not on data-saver (960w source under 900px). .hero-end = the finished still (Anchor A), crossfaded over
+         the film's last frame; also the static image under reduced motion. -->
+    <img class="hero-start" src="media/work/hero-film-start-960.webp" srcset="media/work/hero-film-start-960.webp 960w, media/work/hero-film-start-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" fetchpriority="high" decoding="async">
+    <video class="hero-film" muted playsinline preload="none" disablepictureinpicture disableremoteplayback tabindex="-1" width="1920" height="1080" data-src="media/work/hero-film-1920.mp4" data-src-sm="media/work/hero-film-960.mp4"></video>
+    <img class="hero-end" data-src="media/work/hero-finished-1024.webp" data-srcset="media/work/hero-finished-1024.webp 1024w, media/work/hero-finished-1920.webp 1920w" sizes="100vw" alt="" width="1920" height="1080" decoding="async">
   </div>
   <div class="hero">
     <div class="kick">General Contractor · Plaistow, NH</div>
@@ -787,9 +793,9 @@ document.documentElement.classList.add('js');</script>
   </div>
   <div class="hero-foot">
     <div class="hero-phase" aria-hidden="true">
-      <span class="hp on">01 Envelope</span><span class="hp">02 Cladding</span><span class="hp">03 Finished</span>
+      <span class="hp on">01 Envelope</span><span class="hp">02 Roofing</span><span class="hp">03 Siding</span><span class="hp">04 Porches / Trim</span><span class="hp">05 Finished</span>
       <i class="hp-bar"><b></b></i>
-      <span class="hp-tag">Four-story multifamily · Greater Boston</span>
+      <span class="hp-tag">Six-unit multifamily · Southern New Hampshire</span>
     </div>
     <ul class="hero-creds" aria-label="Credentials">
       <li>Licensed &amp; Insured</li><li>In-House Crew</li><li>One Point of Contact</li>
@@ -1927,7 +1933,9 @@ function renderUpdates(list){
 (function(){ try{ renderUpdates(JSON.parse(document.getElementById('updates-data').textContent || '[]')); }catch(_){} })();
 
 /* ============ MOTION SUITE (GSAP + ScrollTrigger) ============ */
-function staticMode(){ root.classList.remove('js-motion'); }
+function staticMode(){ root.classList.remove('js-motion');
+  /* static hero (reduced motion / no GSAP): show the finished property, never the film */
+  const e = document.querySelector('.hero-end'); if(e && !e.getAttribute('src')){ e.srcset = e.dataset.srcset || ''; e.src = e.dataset.src; e.style.opacity = 1; } }
 window.addEventListener('DOMContentLoaded', ()=>{
 if(!window.gsap || !window.ScrollTrigger || reduced){ staticMode(); return; }
 gsap.registerPlugin(ScrollTrigger);
@@ -1983,22 +1991,52 @@ gsap.to('#tapefill',{width:'100%', ease:'none', scrollTrigger:{trigger:document.
     .to('#heroline .ln:nth-child(2)>span',{y:0, duration:1},.68)
     .to(['.hero .lead','.hero .btnrow','.hero-phase','.hero-creds'],{opacity:1, y:0, duration:.8, stagger:.1},1.05);
   gsap.to(layers,{yPercent:6, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
-  /* hero sequence (stills version): once the headline has landed, the readout ticks envelope → cladding → finished and the
-     finished photo crossfades over the construction photo. The finished photo is only requested after the page has loaded,
-     so it never competes with the poster (the LCP). Phase 4 swaps the timer for the hero film's timeline. */
+  /* hero film sequence: once the page has loaded and the headline has landed, the construction film plays once (envelope →
+     finished). The readout and the bar follow the film's own clock, and the finished still (Anchor A) crossfades over the
+     film's last frame. The film is only requested when the hero is on screen and not on data-saver, pauses while off screen or
+     in a hidden tab, plays once (no replay), and never starts a second copy. The page-wide "one video at a time" rule above
+     still applies to it. If it can't play (blocked autoplay, error, no mp4), the readout runs on a timer over the poster and the
+     finished still fades in — the stills version the hero shipped with. */
   (function(){
-    const endImg = media.querySelector('.hero-end'), phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b');
+    const film = media.querySelector('.hero-film'), endImg = media.querySelector('.hero-end'), phases = [...document.querySelectorAll('.hero-phase .hp')], bar = document.querySelector('.hp-bar b');
     if(!endImg || !phases.length) return;
+    const CUES = [0, .9, 2.6, 5.4, 8.6];           // film seconds at which 01 Envelope → 02 Roofing → 03 Siding → 04 Porches/Trim → 05 Finished light
+    const HOLD = 2.4;                               // seconds after load before anything moves (the headline is landing)
     const setPhase = n=>phases.forEach((p,i)=>p.classList.toggle('on', i === n));
-    const seq = gsap.timeline({paused:true})
-      .to(bar,{scaleX:1, duration:9, ease:'none'},0)
-      .call(()=>setPhase(1), [], 3)
-      .call(()=>setPhase(2), [], 6)
-      .fromTo(endImg,{opacity:0, scale:1.08},{opacity:1, scale:1, duration:2.2, ease:'power2.inOut'},6);
-    const begin = ()=>gsap.delayedCall(2.4, ()=>seq.play());
-    const fetchEnd = ()=>{ endImg.srcset = endImg.dataset.srcset; endImg.src = endImg.dataset.src;
-      if(endImg.complete) begin(); else endImg.addEventListener('load', begin, {once:true}); };
-    if(document.readyState === 'complete') fetchEnd(); else window.addEventListener('load', fetchEnd, {once:true});
+    const onLoad = fn=>{ if(document.readyState === 'complete') fn(); else window.addEventListener('load', fn, {once:true}); };
+    const fetchEnd = cb=>{ if(!endImg.getAttribute('src')){ endImg.srcset = endImg.dataset.srcset; endImg.src = endImg.dataset.src; }
+      if(!cb) return; if(endImg.complete) cb(); else endImg.addEventListener('load', cb, {once:true}); };
+    let finished = false, mode = '';
+    const finish = ()=>{ if(finished) return; finished = true; setPhase(4); gsap.to(bar,{scaleX:1, duration:.4, ease:'none'});
+      fetchEnd(()=>gsap.to(endImg,{opacity:1, duration:1.4, ease:'power2.inOut', onComplete:()=>{ if(film && mode === 'film') film.pause(); }})); };
+    /* fallback: the readout on a timer, then the finished still */
+    const stillsSeq = ()=>{ if(mode === 'stills') return; mode = 'stills'; if(film) gsap.set(film,{opacity:0});
+      fetchEnd(()=>{ const seq = gsap.timeline().to(bar,{scaleX:1, duration:CUES[4], ease:'none'},0);
+        CUES.forEach((t,i)=>{ if(i > 0 && i < 4) seq.call(()=>setPhase(i), [], t); });
+        seq.call(finish, [], CUES[4]); }); };
+    const conn = navigator.connection || {};
+    const canFilm = film && !conn.saveData && !/^(slow-)?2g$/.test(conn.effectiveType || '') && film.canPlayType && film.canPlayType('video/mp4');
+    if(!canFilm){ onLoad(()=>gsap.delayedCall(HOLD, stillsSeq)); return; }
+    /* film path */
+    let started = false, inView = false, watchdog;
+    const sync = ()=>{ const t = film.currentTime; let n = 0; CUES.forEach((c,i)=>{ if(t >= c) n = i; }); if(!finished) setPhase(n);
+      if(film.duration && !finished) gsap.set(bar,{scaleX:Math.min(1, t / film.duration)}); };
+    film.addEventListener('timeupdate', sync);
+    film.addEventListener('playing', ()=>{ if(mode) return; mode = 'film'; clearTimeout(watchdog); gsap.to(film,{opacity:1, duration:.5, ease:'none'}); fetchEnd(); }, {once:false});
+    film.addEventListener('ended', ()=>{ sync(); finish(); });
+    film.addEventListener('error', ()=>{ if(mode === 'film') finish(); else stillsSeq(); });
+    const start = ()=>{ if(started) return; started = true;
+      film.src = (matchMedia('(max-width: 900px)').matches && film.dataset.srcSm) ? film.dataset.srcSm : film.dataset.src;
+      film.preload = 'auto'; film.load();
+      watchdog = setTimeout(()=>{ if(!mode) stillsSeq(); }, 8000);           // nothing on screen for 8 s → stills version
+      film.play().catch(()=>{ if(!mode) stillsSeq(); }); };
+    const resume = ()=>{ if(mode === 'film' && !finished && inView && !document.hidden && film.paused) film.play().catch(()=>{}); };
+    const io = ('IntersectionObserver' in window) && new IntersectionObserver(es=>es.forEach(en=>{
+      inView = en.isIntersecting;
+      if(inView){ if(!started) start(); else resume(); } else if(mode === 'film' && !film.paused) film.pause();
+    }),{threshold:.3});
+    document.addEventListener('visibilitychange', ()=>{ if(document.hidden){ if(mode === 'film' && !film.paused) film.pause(); } else resume(); });
+    onLoad(()=>gsap.delayedCall(HOLD, ()=>{ if(io) io.observe(media); else { inView = true; start(); } }));
   })();
   gsap.to('.hero',{y:-40, ease:'none', scrollTrigger:{trigger:'.hero-sec', start:'top top', end:'bottom top', scrub:M.scrub}});
   /* stitch into the next section: the frame settles back and dims as the capline arrives, then the capline items step in */
