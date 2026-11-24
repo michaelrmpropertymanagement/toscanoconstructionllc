@@ -581,8 +581,9 @@ document.documentElement.classList.add('js');</script>
   .forwho{padding:var(--section) 0;border-top:1px solid var(--line)}
   .who-grid{display:grid;grid-template-columns:1fr;gap:var(--grid-gap);margin-top:var(--s8)}
   @media(min-width:860px){.who-grid{grid-template-columns:1fr 1fr}}
-  .who{background:var(--panel);border:1px solid var(--line);position:relative;padding:var(--s7) var(--s6) var(--s6);overflow:hidden}
-  @media(min-width:860px){.who{padding:var(--s8) var(--s7) var(--s7)}}
+  .who{background:var(--panel);border:1px solid var(--line);position:relative;padding:var(--s7) var(--s6) var(--s6);overflow:hidden;display:flex;flex-direction:column}
+  @media(min-width:860px){.who{padding:var(--s8) var(--s6) var(--s7)}}
+  .who ul{flex:1}
   .who::before{content:"";position:absolute;top:-1px;left:-1px;width:32px;height:1px;background:var(--accent)}
   .who .wkick{font-family:var(--mono);font-size:var(--fs-label);letter-spacing:var(--track-label);text-transform:uppercase;color:var(--dim)}
   .who h3{font-size:clamp(28px,2.6vw,36px);letter-spacing:var(--track-head);line-height:1.1;margin:var(--s3) 0}
@@ -759,6 +760,12 @@ document.documentElement.classList.add('js');</script>
 
   /* ---------- property concierge (Nov 2026 brief): longer hero line, request flow ---------- */
   h1.h1-long{font-size:clamp(36px,5.3vw,80px);max-width:20ch}
+  .half h2{max-width:16ch}
+  .half-copy .about-list{margin-top:var(--s4);grid-template-columns:1fr}
+  .about-list li{font-size:var(--fs-sm);padding:11px 0}
+  @media(min-width:980px){.who-grid{grid-template-columns:repeat(3,1fr)}}
+  .who-note{margin-top:var(--s6);font-weight:300;font-size:var(--fs-sm);color:var(--mut);text-align:center}
+  .who-note b{color:var(--txt);font-weight:500}
   .trust{padding:var(--section) 0;border-top:1px solid var(--line)}
   .trust-grid{list-style:none;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:var(--s8)}
   @media(min-width:640px){.trust-grid{grid-template-columns:1fr 1fr}}
@@ -1096,63 +1103,84 @@ document.documentElement.classList.add('js');</script>
     <div class="dimhead" data-dim="04 · Who We Work For">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
-    <div class="kick reveal">Homes &amp; Businesses</div>
-    <h2 class="reveal">Two kinds of clients. <em>One standard.</em></h2>
+    <div class="kick reveal">Homes · Rentals · Businesses</div>
+    <h2 class="reveal">Every kind of property owner. <em>One standard.</em></h2>
     <div class="who-grid">
       <div class="who reveal">
         <div class="wkick">For Homeowners</div>
         <h3>Residential</h3>
         <p class="wsub">From a weekend punch list to a full remodel — one call covers it.</p>
         <ul>
-          <li>Home remodeling</li>
-          <li>Siding</li>
-          <li>Interior painting</li>
-          <li>Exterior painting</li>
-          <li>Property upgrades</li>
-          <li>Roof repairs &amp; improvements</li>
+          <li>Kitchen &amp; bathroom remodels</li>
+          <li>Basement &amp; whole-home renovations</li>
+          <li>Siding, roofing &amp; windows</li>
+          <li>Decks &amp; porches</li>
+          <li>Interior &amp; exterior painting</li>
+          <li>Flooring &amp; finish carpentry</li>
           <li>General handyman services</li>
         </ul>
-        <a class="more" href="#contact">Start a residential project</a>
+        <a class="more" href="#cform" data-focus="f-name">Start a residential project</a>
+      </div>
+      <div class="who reveal">
+        <div class="wkick">For Landlords, Investors &amp; Associations</div>
+        <h3>Rental &amp; Multifamily</h3>
+        <p class="wsub">Landlords, investors, multifamily owners, condominium and HOA associations, developers, and other property management companies.</p>
+        <ul>
+          <li>Unit turnovers &amp; apartment renovations</li>
+          <li>Capital improvement projects</li>
+          <li>Roofing, siding, decks &amp; porches</li>
+          <li>Electrical, plumbing, HVAC &amp; fire alarm coordination</li>
+          <li>Common-area &amp; grounds improvements</li>
+          <li>Multi-property maintenance programs</li>
+          <li>Vendor bidding &amp; project oversight</li>
+        </ul>
+        <a class="more" href="#cform" data-focus="f-name" data-type="Multifamily / Unit Turns">Talk through a property</a>
       </div>
       <div class="who reveal">
         <div class="wkick">For Businesses</div>
         <h3>Commercial</h3>
-        <p class="wsub">Spaces that open on schedule and hold up under real use.</p>
+        <p class="wsub">Office, retail, and industrial properties that open on schedule and hold up under real use.</p>
         <ul>
-          <li>Office improvements</li>
-          <li>Retail spaces</li>
+          <li>Commercial tenant buildouts</li>
+          <li>Office &amp; retail renovations</li>
           <li>Commercial painting</li>
-          <li>Carpentry</li>
-          <li>Exterior upgrades</li>
-          <li>Maintenance work</li>
-          <li>Build-out support</li>
+          <li>Exterior &amp; parking-lot improvements</li>
+          <li>Building system upgrades</li>
+          <li>Compliance &amp; life safety improvements</li>
+          <li>Ongoing maintenance</li>
         </ul>
-        <a class="more" href="#contact">Start a commercial project</a>
+        <a class="more" href="#cform" data-focus="f-name" data-type="Commercial / Office">Start a commercial project</a>
       </div>
     </div>
+    <p class="who-note reveal">Individual repairs, renovations, or ongoing property maintenance — <b>no property management agreement required.</b></p>
   </div>
 </section>
 <!-- ================= LIGHT CONTRAST — how we work ================= -->
 <section class="half tone-bone" id="about">
   <div class="wrap">
-    <div class="dimhead" data-dim="05 · How We Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
-    <div class="kick reveal">About Toscano</div>
-    <h2 class="reveal">The work is only <em>half the job.</em></h2>
+    <div class="dimhead" data-dim="05 · About Toscano"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="kick reveal">Our background</div>
+    <h2 class="reveal">Built on property ownership. <em>Driven by quality construction.</em></h2>
     <div class="half-grid">
       <div class="frame half-media" id="halfmedia">
         <img src="media/work/site-overhead-960.webp" srcset="media/work/site-overhead-960.webp 960w, media/work/site-overhead.webp 1600w" sizes="(min-width:980px) 55vw, 100vw" alt="Overhead view of an organized multifamily jobsite with excavation, staged materials and a neighboring triple-decker" loading="lazy" decoding="async" width="960" height="720">
       </div>
       <div class="half-copy">
-        <p class="sub reveal">Most projects fail in the gaps between trades. Our in-house team handles carpentry, painting, and maintenance directly, and for specialty trades we manage a vetted network — so you hold one contract, one schedule, and one standard for the finished work.</p>
-        <ol class="half-list">
-          <li class="reveal"><span>01</span><div><b>Scope</b><p>We walk the property and define exactly what's included — before anything starts.</p></div></li>
-          <li class="reveal"><span>02</span><div><b>Estimating</b><p>A detailed, fixed, line-item proposal — no allowance games.</p></div></li>
-          <li class="reveal"><span>03</span><div><b>Scheduling</b><p>Fixed milestones, with trades booked in the right order.</p></div></li>
-          <li class="reveal"><span>04</span><div><b>Trade coordination</b><p>Our crew and vetted specialty subs, run as one team.</p></div></li>
-          <li class="reveal"><span>05</span><div><b>Site supervision</b><p>A project manager who always knows what's next on your job.</p></div></li>
-          <li class="reveal"><span>06</span><div><b>Communication</b><p>One point of contact and daily updates.</p></div></li>
-          <li class="reveal"><span>07</span><div><b>Cleanup</b><p>Finishes protected, and the site left broom-ready every workday.</p></div></li>
-          <li class="reveal"><span>08</span><div><b>Final walkthrough</b><p>The punch list closed before we call it done.</p></div></li>
+        <p class="sub reveal">Toscano Construction is a natural extension of what we do every day at R&amp;M Capital Property Management — owning, operating, maintaining, renovating, and protecting our own real estate and the properties we manage for clients across Massachusetts and Southern New Hampshire. The infrastructure, maintenance personnel, contractor relationships, vendor network, and operational systems were already in place. Toscano brings those same capabilities to clients outside our management portfolio.</p>
+        <p class="sub reveal">We understand properties from both a construction and an ownership perspective — every repair, renovation, and improvement has a financial and operational impact on the owner, and we plan the work that way.</p>
+        <span class="label cc-label reveal">What we manage for, on every project</span>
+        <ol class="cc-list about-list">
+          <li><span>01</span>Controlling project costs</li>
+          <li><span>02</span>Minimizing property downtime</li>
+          <li><span>03</span>Reducing vacancy periods</li>
+          <li><span>04</span>Maximizing rental income</li>
+          <li><span>05</span>Protecting long-term property value</li>
+          <li><span>06</span>Safe, functional buildings</li>
+          <li><span>07</span>Completing projects efficiently</li>
+          <li><span>08</span>Reliable materials &amp; finishes</li>
+          <li><span>09</span>Coordinating every contractor &amp; trade</li>
+          <li><span>10</span>Clear communication with the owner</li>
+          <li><span>11</span>Improvements that hold their value</li>
         </ol>
       </div>
     </div>
