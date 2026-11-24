@@ -760,6 +760,28 @@ document.documentElement.classList.add('js');</script>
 
   /* ---------- property concierge (Nov 2026 brief): longer hero line, request flow ---------- */
   h1.h1-long{font-size:clamp(36px,5.3vw,80px);max-width:20ch}
+  .caps{margin-top:var(--s9);border-top:1px solid var(--line2);padding-top:var(--s7)}
+  .caps-title{font-size:clamp(28px,3.2vw,46px);letter-spacing:var(--track-head);line-height:1.05;margin:var(--s4) 0 0;max-width:16ch}
+  .caps-grid{display:grid;grid-template-columns:1fr;gap:0 var(--s6);margin-top:var(--s7);border-bottom:1px solid var(--line)}
+  @media(min-width:720px){.caps-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:1180px){.caps-grid{grid-template-columns:repeat(5,1fr);align-items:start}}
+  .cap{border-top:1px solid var(--line)}
+  .cap summary{list-style:none;display:flex;align-items:baseline;gap:var(--s3);padding:var(--s4) 0;cursor:pointer}
+  .cap summary::-webkit-details-marker{display:none}
+  .cap summary b{font-weight:500;font-size:15px;letter-spacing:var(--track-title);color:var(--txt);flex:1;line-height:1.3}
+  .cap summary i{position:relative;width:12px;height:12px;flex:none;align-self:center}
+  .cap summary i::before,.cap summary i::after{content:"";position:absolute;background:var(--txt);transition:transform var(--t-base) var(--ease)}
+  .cap summary i::before{left:0;top:5.5px;width:12px;height:1px}
+  .cap summary i::after{left:5.5px;top:0;width:1px;height:12px}
+  .cap[open] summary i::after{transform:rotate(90deg)}
+  .cap ul{list-style:none;padding:0 0 var(--s5)}
+  .cap li{font-size:13.5px;font-weight:300;color:var(--mut);padding:5px 0 5px 16px;position:relative;line-height:1.45}
+  .cap li::before{content:"";position:absolute;left:0;top:.85em;width:8px;height:1px;background:var(--dim)}
+  @media(min-width:1180px){.cap summary{pointer-events:none}.cap summary i{display:none}}
+  .caps-note{margin-top:var(--s6);font-size:var(--fs-sm);font-weight:300;line-height:1.7;color:var(--dim);max-width:72ch}
+  .caps-cta{display:flex;flex-wrap:wrap;gap:var(--s5);justify-content:space-between;align-items:center;margin-top:var(--s7);padding:var(--s6);border:1px solid var(--line2);background:var(--panel)}
+  .caps-cta p{font-size:var(--fs-lead);font-weight:300;line-height:1.5;color:var(--mut);max-width:44ch}
+  .caps-cta p b{color:var(--txt);font-weight:500}
   .half h2{max-width:16ch}
   .half-copy .about-list{margin-top:var(--s4);grid-template-columns:1fr}
   .about-list li{font-size:var(--fs-sm);padding:11px 0}
@@ -945,7 +967,7 @@ document.documentElement.classList.add('js');</script>
         <div class="kick reveal">What We Take On</div>
         <h2 class="reveal">One contractor. <em>Every trade.</em></h2>
       </div>
-      <p class="sub reveal">Hire us once and the whole project is handled — planning, permits, scheduling, crews, and cleanup. These are the trades we run every week.</p>
+      <p class="sub reveal">Hire us once and the whole project is handled — planning, permits, scheduling, crews, and cleanup. These are the trades we run every week; the full scope we handle or coordinate is below them.</p>
     </div>
 
     <!-- umbrella service: general contracting & project management sits over every trade below -->
@@ -955,7 +977,7 @@ document.documentElement.classList.add('js');</script>
         <h3>General Contracting &amp; Project Management</h3>
       </div>
       <div class="umb-copy reveal">
-        <p>We hold the contract, set the schedule, and manage every trade below — one team from the first walkthrough to the final punch list.</p>
+        <p>We hold the contract, set the schedule, and manage every trade — our own crews and our vetted network of licensed, insured contractors — from the first walkthrough to the final punch list.</p>
         <span class="label">The trades we run under it ↓</span>
       </div>
     </div>
@@ -1042,7 +1064,43 @@ document.documentElement.classList.add('js');</script>
         </div>
       </div>
     </div>
-    <p class="svcnote reveal"><b>The work we manage:</b> Kitchens · Bathrooms · Full remodels · Flooring · Painting · Carpentry · Trim · Electrical · Plumbing · Roofing · Decks · Masonry · Paving · Retaining walls · Turnovers · Property improvements · Repairs &amp; more. If it improves a property, we can run it.</p>
+    <!-- full-service capability directory: what we handle directly or coordinate. Groups are open on wide screens, collapsible on phones. -->
+    <div class="caps" id="capabilities">
+      <div class="sec-head">
+        <div>
+          <div class="kick reveal">The full scope</div>
+          <h3 class="caps-title reveal">If it's on a property, <em>we can handle it or coordinate it.</em></h3>
+        </div>
+        <p class="sub reveal">Beyond the seven trades above, this is the work we take on directly or coordinate through our network — and if what you need isn't listed here, ask anyway.</p>
+      </div>
+      <div class="caps-grid">
+        <details class="cap" open>
+          <summary><span class="label">01</span><b>General Construction &amp; Renovations</b><i aria-hidden="true"></i></summary>
+          <ul><li>Residential &amp; commercial renovations</li><li>Full apartment renovations</li><li>Kitchen remodels</li><li>Bathroom remodels</li><li>Basement renovations</li><li>Commercial tenant buildouts</li><li>Office renovations</li><li>Retail space improvements</li><li>Interior demolition</li><li>Framing &amp; carpentry</li><li>Drywall installation &amp; finishing</li><li>Insulation</li><li>Cabinetry &amp; countertop installations</li><li>Interior &amp; exterior painting</li><li>Flooring installation &amp; replacement</li><li>Hardwood floor refinishing</li><li>Tile installation</li><li>Doors, windows &amp; finish carpentry</li><li>Property modernization</li><li>Complete interior &amp; exterior transformations</li></ul>
+        </details>
+        <details class="cap" open>
+          <summary><span class="label">02</span><b>Handyman &amp; Property Maintenance</b><i aria-hidden="true"></i></summary>
+          <ul><li>General handyman services</li><li>Routine property repairs</li><li>Drywall patching</li><li>Door, lock &amp; hardware repairs</li><li>Minor carpentry</li><li>Cabinetry repairs</li><li>Fixture replacements</li><li>Flooring repairs</li><li>Appliance installation &amp; replacement</li><li>Caulking &amp; weatherproofing</li><li>Window &amp; screen repairs</li><li>Preventative maintenance</li><li>Unit turnovers</li><li>Punch-list repairs</li><li>Common-area maintenance</li><li>Property upkeep</li><li>Emergency maintenance assistance</li></ul>
+        </details>
+        <details class="cap" open>
+          <summary><span class="label">03</span><b>Exterior &amp; Structural Improvements</b><i aria-hidden="true"></i></summary>
+          <ul><li>Roofing repairs</li><li>Complete roof replacements</li><li>Deck repairs</li><li>Full deck replacements</li><li>Porch repairs &amp; replacements</li><li>Stairway repairs</li><li>Structural repairs</li><li>Siding repairs &amp; replacements</li><li>Exterior painting</li><li>Window &amp; door replacements</li><li>Masonry</li><li>Brick &amp; concrete repairs</li><li>Foundation repair coordination</li><li>Waterproofing</li><li>Gutter repairs &amp; replacements</li><li>Fencing</li><li>Landscaping</li><li>Hardscaping</li><li>Retaining walls</li><li>Walkways &amp; patios</li><li>Parking lot improvements</li><li>Asphalt &amp; paving coordination</li><li>Drainage improvements</li><li>Excavation coordination</li></ul>
+        </details>
+        <details class="cap" open>
+          <summary><span class="label">04</span><b>Mechanical, Electrical, Plumbing &amp; Building Systems</b><i aria-hidden="true"></i></summary>
+          <ul><li>Electrical repairs &amp; upgrades</li><li>Electrical panel &amp; service upgrades</li><li>Lighting installations &amp; upgrades</li><li>Plumbing repairs &amp; upgrades</li><li>Water heater replacements</li><li>Plumbing fixture installations</li><li>HVAC repairs &amp; replacements</li><li>Heating system upgrades</li><li>Boiler replacements</li><li>Fire alarm system upgrades</li><li>Smoke &amp; carbon monoxide detection systems</li><li>Life safety improvements</li><li>Building system modernization</li></ul>
+        </details>
+        <details class="cap" open>
+          <summary><span class="label">05</span><b>Additional Services &amp; Project Coordination</b><i aria-hidden="true"></i></summary>
+          <ul><li>Water damage restoration coordination</li><li>Insurance-related repair coordination</li><li>Property cleanouts</li><li>Junk removal</li><li>Construction debris removal</li><li>Post-construction cleaning</li><li>Rental property preparation</li><li>Property inspection repairs</li><li>Building compliance improvements</li><li>Capital improvement projects</li><li>Multi-property maintenance programs</li><li>Vendor procurement &amp; coordination</li><li>Ongoing property maintenance assistance</li></ul>
+        </details>
+      </div>
+      <p class="caps-note reveal">Specialized work requiring specific trade licenses or certifications — electrical, plumbing, HVAC, fire alarm, and other regulated trades — is completed through appropriately licensed and insured professionals we coordinate.</p>
+      <div class="caps-cta reveal">
+        <p>Don't see the service you're looking for? <b>Tell us what your property needs, and we'll help find the right solution.</b></p>
+        <a class="btn-solid" href="#cform" data-focus="f-msg" data-type="Not sure — tell us what your property needs"><span>Tell Us What You Need</span></a>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -1807,7 +1865,7 @@ document.documentElement.classList.add('js');</script>
           <select id="f-type" name="type">
             <option>Multifamily / Unit Turns</option><option>Property Concierge — bids, vetting &amp; oversight</option><option>Home Remodeling</option><option>Painting — Interior / Exterior</option><option>Siding</option>
             <option>Roof Repairs &amp; Improvements</option><option>Carpentry &amp; Decks</option>
-            <option>Handyman / Maintenance</option><option>Commercial / Office</option><option>Other</option>
+            <option>Handyman / Maintenance</option><option>Commercial / Office</option><option>Not sure — tell us what your property needs</option><option>Other</option>
           </select>
         </div>
         <div class="cfield"><label for="f-msg">Tell Us About It</label><textarea id="f-msg" name="message" rows="4" placeholder="Property, scope, location, ideal timing…"></textarea></div>
@@ -1866,6 +1924,15 @@ document.getElementById('yr').textContent = new Date().getFullYear();
 const reduced = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const root = document.documentElement;
 document.querySelectorAll('.dimhead').forEach(dh=>{ const t = dh.querySelector('.dimtxt'); if(t) t.textContent = dh.dataset.dim; });
+
+/* capability directory: all five groups open on wide screens, collapsed (tap to open) on phones and tablets */
+(function(){
+  const caps = document.querySelectorAll('.cap'); if(!caps.length) return;
+  const wide = matchMedia('(min-width: 1180px)');
+  const sync = ()=>caps.forEach(d=>{ d.open = wide.matches; });
+  sync(); wide.addEventListener('change', sync);
+  caps.forEach(d=>d.addEventListener('toggle', ()=>{ if(window.ScrollTrigger) ScrollTrigger.refresh(); }));
+})();
 
 /* FAQ accordion */
 document.querySelectorAll('.qa').forEach(qa=>{
