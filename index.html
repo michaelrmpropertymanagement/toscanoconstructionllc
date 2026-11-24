@@ -760,6 +760,8 @@ document.documentElement.classList.add('js');</script>
 
   /* ---------- property concierge (Nov 2026 brief): longer hero line, request flow ---------- */
   h1.h1-long{font-size:clamp(36px,5.3vw,80px);max-width:20ch}
+  .reel{padding:0 0 var(--section);background:var(--bg)}
+  .reel .film{margin-top:0;padding-top:var(--s8);border-top:1px solid var(--line)}
   .contact h2{max-width:14ch}
   .cf2{display:grid;grid-template-columns:1fr}
   @media(min-width:640px){.cf2{grid-template-columns:1fr 1fr}.cf2 .cfield:first-child{border-right:1px solid var(--line)}}
@@ -1039,7 +1041,7 @@ document.documentElement.classList.add('js');</script>
           </div>
         </li>
         <li class="svc-item" data-name="Roofing">
-          <div class="svc-photo"><img src="media/photos/framing-roofline-960.webp" srcset="media/photos/framing-roofline-960.webp 960w, media/photos/framing-roofline.webp 1800w" sizes="(min-width:1080px) 33vw, (min-width:720px) 50vw, 100vw" alt="Framed two-story structure with a finished roofline and edge safety rails" loading="lazy" decoding="async" width="960" height="640"></div>
+          <div class="svc-photo"><video src="media/films/roof-loop-960.mp4" poster="media/films/roof-loop-poster.webp" muted loop playsinline preload="none" data-inview aria-label="Aerial view of a roofing crew framing and sheathing a roof (illustrative footage)"></video></div>
           <div class="svc-body">
             <div class="svc-idx">06</div><h3>Roofing</h3>
             <p>Roof repairs and improvements — leaks found, flashing fixed, and full replacements managed end to end.</p>
@@ -1065,7 +1067,7 @@ document.documentElement.classList.add('js');</script>
           <div class="sm-img"><img src="media/work/siding-facade.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/deck-composite.webp" alt="" loading="lazy" decoding="async"></div>
           <div class="sm-img"><img src="media/work/paint-crew.webp" alt="" loading="lazy" decoding="async"></div>
-          <div class="sm-img"><img src="media/photos/framing-roofline.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="sm-img"><video src="media/films/roof-loop-960.mp4" poster="media/films/roof-loop-poster.webp" muted loop playsinline preload="none" data-inview aria-hidden="true"></video></div>
           <div class="sm-img"><img src="media/work/install-crew.webp" alt="" loading="lazy" decoding="async"></div>
           <span class="regmark tl"></span><span class="regmark tr"></span>
           <div class="sm-bar"><div class="sm-txt"><span class="label" id="smname">Remodeling</span><span class="label sm-scope" id="smscope">Kitchens · Baths · Full units</span></div><span class="label" id="smcount">01 / 07</span></div>
@@ -1109,6 +1111,32 @@ document.documentElement.classList.add('js');</script>
         <a class="btn-solid" href="#cform" data-focus="f-msg" data-type="Not sure — tell us what your property needs"><span>Tell Us What You Need</span></a>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ================= REEL — licensed stock footage of the trades, in build order (illustrative, not Toscano projects) ================= -->
+<section class="reel" id="reel">
+  <div class="wrap">
+    <figure class="film" data-film
+      data-src="media/films/reel-1920.mp4" data-src-sm="media/films/reel-960.mp4"
+      data-phases="0:Excavation|2.25:Framing|4.5:Framing crew|6.75:Roof framing|9:Roofing|11.25:Drywall|13.5:Decks &amp; carpentry|15.75:Finished">
+      <div class="kick film-kick reveal">On the job · the trades, in build order</div>
+      <div class="film-frame">
+        <video class="film-video" muted playsinline preload="none" controls
+          poster="media/films/reel-start.webp" data-end-poster="media/films/reel-end.webp"
+          aria-label="Montage of construction trades in build order: excavation, framing, roof framing, roofing, drywall, deck carpentry, and a finished kitchen">
+          <source src="media/films/reel-1920.mp4" type="video/mp4">
+        </video>
+        <span class="wk-tag label film-tag">Illustrative footage · not Toscano projects</span>
+        <div class="film-hud" aria-hidden="true"><span class="label film-phase">Excavation</span><span class="film-bar"><i></i></span></div>
+        <button class="film-replay" type="button" hidden><span>Replay</span></button>
+      </div>
+      <figcaption class="film-cap">
+        <div class="wk-top"><span class="label">Reel</span><span class="label">Licensed stock footage</span></div>
+        <h3>From the first bucket of dirt to the finished kitchen.</h3>
+        <div class="wk-meta"><span>Excavation</span><span>Framing</span><span>Roofing</span><span>Drywall</span><span>Carpentry</span><span>Finish</span></div>
+      </figcaption>
+    </figure>
   </div>
 </section>
 
