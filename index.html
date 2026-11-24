@@ -760,6 +760,14 @@ document.documentElement.classList.add('js');</script>
 
   /* ---------- property concierge (Nov 2026 brief): longer hero line, request flow ---------- */
   h1.h1-long{font-size:clamp(36px,5.3vw,80px);max-width:20ch}
+  .contact h2{max-width:14ch}
+  .cf2{display:grid;grid-template-columns:1fr}
+  @media(min-width:640px){.cf2{grid-template-columns:1fr 1fr}.cf2 .cfield:first-child{border-right:1px solid var(--line)}}
+  .cf-hint{font-size:12.5px;font-weight:300;line-height:1.5;color:var(--dim);margin-top:2px}
+  .cf-opt{text-transform:none;letter-spacing:0;color:var(--dim);margin-left:6px}
+  .cfield input[type=file]{font-size:13px;color:var(--mut);padding:4px 0}
+  .cfield input[type=file]::file-selector-button{font-family:var(--mono);font-size:var(--fs-micro);letter-spacing:.12em;text-transform:uppercase;color:var(--txt);
+    background:transparent;border:1px solid var(--line2);padding:8px 12px;margin-right:12px;cursor:pointer}
   .caps{margin-top:var(--s9);border-top:1px solid var(--line2);padding-top:var(--s7)}
   .caps-title{font-size:clamp(28px,3.2vw,46px);letter-spacing:var(--track-head);line-height:1.05;margin:var(--s4) 0 0;max-width:16ch}
   .caps-grid{display:grid;grid-template-columns:1fr;gap:0 var(--s6);margin-top:var(--s7);border-bottom:1px solid var(--line)}
@@ -1846,29 +1854,60 @@ document.documentElement.classList.add('js');</script>
     <div class="grid">
       <div>
         <div class="kick reveal">Ready When You Are</div>
-        <h2 class="reveal">Let's build it <em>right.</em></h2>
-        <p class="sub reveal">Tell us what you're planning. We'll walk the property, define the scope, and give you a straightforward path forward.</p>
-        <a class="btn-solid reveal" href="#cform" data-focus="f-name"><span>Tell Us What You Need Done</span></a>
+        <h2 class="reveal">Whatever your property needs, <em>start with Toscano.</em></h2>
+        <p class="sub reveal">No need to coordinate multiple contractors. No need to chase down estimates. No need to manage every detail yourself. One dedicated team, one point of contact, comprehensive property solutions — tell us what you're planning and we'll walk the property, define the scope, and give you a straightforward path forward.</p>
+        <a class="btn-solid reveal" href="#cform" data-focus="f-name"><span>Request a Free Estimate</span></a>
         <div class="cinfo">
           <div class="row reveal"><span>Phone</span><b><a href="tel:+18444657566">(844) 465-7566</a></b></div>
           <div class="row reveal"><span>Email</span><b><a href="mailto:info@toscanoconstructionllc.net">info@toscanoconstructionllc.net</a></b></div>
           <div class="row reveal"><span>Service Area</span><b>Plaistow, NH &amp; Greater New England</b></div>
         </div>
       </div>
-      <form class="cform reveal" id="cform" action="https://formsubmit.co/info@toscanoconstructionllc.net" method="POST">
+      <form class="cform reveal" id="cform" action="https://formsubmit.co/info@toscanoconstructionllc.net" method="POST" enctype="multipart/form-data">
         <input type="hidden" name="_subject" value="New estimate request — toscanoconstructionllc.net">
         <input type="hidden" name="_captcha" value="false">
+        <input type="hidden" name="_template" value="table">
         <input type="text" name="_honey" style="display:none" tabindex="-1" autocomplete="off" aria-hidden="true">
         <div class="cfield"><label for="f-name">Name</label><input id="f-name" type="text" name="name" placeholder="Your full name" autocomplete="name" required></div>
-        <div class="cfield"><label for="f-contact">Phone or Email</label><input id="f-contact" type="text" name="contact" placeholder="How do we reach you?" autocomplete="email" required></div>
-        <div class="cfield"><label for="f-type">Project Type</label>
-          <select id="f-type" name="type">
-            <option>Multifamily / Unit Turns</option><option>Property Concierge — bids, vetting &amp; oversight</option><option>Home Remodeling</option><option>Painting — Interior / Exterior</option><option>Siding</option>
-            <option>Roof Repairs &amp; Improvements</option><option>Carpentry &amp; Decks</option>
+        <div class="cf2">
+          <div class="cfield"><label for="f-phone">Phone</label><input id="f-phone" type="tel" name="phone" placeholder="(000) 000-0000" autocomplete="tel"></div>
+          <div class="cfield"><label for="f-email">Email</label><input id="f-email" type="email" name="email" placeholder="you@example.com" autocomplete="email" required></div>
+        </div>
+        <div class="cf2">
+          <div class="cfield"><label for="f-ptype">Property Type</label>
+            <select id="f-ptype" name="property_type">
+              <option value="">Select one</option><option>Single-family home</option><option>Condo / townhouse</option><option>2–4 unit multifamily</option><option>5+ unit multifamily / apartment building</option><option>Condominium or HOA association</option><option>Commercial — office / retail</option><option>Industrial</option><option>Other</option>
+            </select>
+          </div>
+          <div class="cfield"><label for="f-addr">Property Address</label><input id="f-addr" type="text" name="property_address" placeholder="Street, town, state" autocomplete="street-address"></div>
+        </div>
+        <div class="cfield"><label for="f-type">What do you need?</label>
+          <select id="f-type" name="service">
+            <option>Multifamily / Unit Turns</option><option>Property Concierge — bids, vetting &amp; oversight</option><option>Home Remodeling</option><option>Kitchen or Bathroom Remodel</option><option>Painting — Interior / Exterior</option><option>Siding</option>
+            <option>Roof Repairs &amp; Improvements</option><option>Carpentry &amp; Decks</option><option>Electrical, Plumbing, HVAC or Fire Alarm</option>
             <option>Handyman / Maintenance</option><option>Commercial / Office</option><option>Not sure — tell us what your property needs</option><option>Other</option>
           </select>
+          <span class="cf-hint">Not sure what it needs? Choose “Not sure” and describe the issue — we'll determine the right solution.</span>
         </div>
-        <div class="cfield"><label for="f-msg">Tell Us About It</label><textarea id="f-msg" name="message" rows="4" placeholder="Property, scope, location, ideal timing…"></textarea></div>
+        <div class="cfield"><label for="f-msg">Describe the project or issue</label><textarea id="f-msg" name="message" rows="4" placeholder="What's going on at the property, what you'd like done, anything we should know…"></textarea></div>
+        <div class="cfield"><label for="f-files">Photos &amp; documents <span class="cf-opt">optional</span></label><input id="f-files" type="file" name="attachment" accept="image/*,.pdf" multiple><span class="cf-hint">Photos of the issue, plans, inspection reports, or scopes — a few at a time.</span></div>
+        <div class="cf2">
+          <div class="cfield"><label for="f-when">Timeline</label>
+            <select id="f-when" name="timeline">
+              <option value="">Select one</option><option>As soon as possible</option><option>Within 30 days</option><option>1–3 months</option><option>3–6 months</option><option>Planning / budgeting</option><option>Flexible</option>
+            </select>
+          </div>
+          <div class="cfield"><label for="f-occ">Occupancy</label>
+            <select id="f-occ" name="occupancy">
+              <option value="">Select one</option><option>Occupied</option><option>Vacant</option><option>Partially occupied</option>
+            </select>
+          </div>
+        </div>
+        <div class="cfield"><label for="f-kind">Type of request</label>
+          <select id="f-kind" name="request_type">
+            <option>A one-time project or repair</option><option>Ongoing property maintenance assistance</option><option>Both — a project now and ongoing help after</option><option>Not sure yet</option>
+          </select>
+        </div>
         <button type="submit">Request a Free Estimate</button>
       </form>
     </div>
@@ -1887,8 +1926,8 @@ document.documentElement.classList.add('js');</script>
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="#top"><img class="logo-foot" src="logo-white.png" alt="Toscano Construction LLC" width="173" height="80" loading="lazy"></a>
-        <p class="label">General Contracting · Project Management</p>
-        <p class="foot-note">Plaistow, NH — serving Greater New England. Licensed &amp; insured.</p>
+        <p class="label">General Contracting · Property Concierge</p>
+        <p class="foot-note">Plaistow, NH — serving Massachusetts &amp; Southern New Hampshire. Insured company · Licensed &amp; insured contractor network.</p>
       </div>
       <nav class="foot-col" aria-label="Footer">
         <span class="label">Navigate</span>
@@ -1897,9 +1936,9 @@ document.documentElement.classList.add('js');</script>
       </nav>
       <div class="foot-col">
         <span class="label">Services</span>
-        <a href="#services">General Contracting</a><a href="#services">Remodeling</a><a href="#services">Unit Turns</a>
-        <a href="#services">Siding &amp; Roofing</a><a href="#services">Carpentry &amp; Decks</a><a href="#services">Painting</a>
-        <a href="#services">Handyman &amp; Maintenance</a>
+        <a href="#concierge">Property Concierge</a><a href="#services">General Contracting</a><a href="#services">Remodeling &amp; Unit Turns</a>
+        <a href="#services">Siding, Roofing &amp; Decks</a><a href="#services">Painting</a><a href="#services">Handyman &amp; Maintenance</a>
+        <a href="#capabilities">Full capability list</a>
       </div>
       <div class="foot-col">
         <span class="label">Contact</span>
@@ -1911,7 +1950,7 @@ document.documentElement.classList.add('js');</script>
     </div>
     <div class="base">
       <div>© <span id="yr"></span> Toscano Construction LLC. All rights reserved.</div>
-      <div>Licensed &amp; Insured · General contracting &amp; project management</div>
+      <div>Insured company · Licensed &amp; insured contractor network · General contracting &amp; property concierge</div>
     </div>
   </div>
 </footer>
