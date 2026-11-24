@@ -25,11 +25,13 @@
 </script>
 <script type="application/ld+json">
 {"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
-{"@type":"Question","name":"Are you licensed and insured?","acceptedAnswer":{"@type":"Answer","text":"Fully licensed and fully insured — every trade, every site, every day. Certificates of insurance are available on request before any work begins."}},
+{"@type":"Question","name":"Are you licensed and insured?","acceptedAnswer":{"@type":"Answer","text":"Yes. Toscano maintains its own company insurance, and every independent contractor we engage is required to carry appropriate insurance and the trade licenses their work calls for. We verify both before work starts and track insurance expirations. Certificates of insurance are available on request."}},
 {"@type":"Question","name":"Do you work with landlords and property managers?","acceptedAnswer":{"@type":"Answer","text":"Yes — unit turns, apartment renovations, punch lists, and ongoing maintenance are core work for us. You get one point of contact who schedules the unit, coordinates every trade, and keeps you updated until it's done."}},
-{"@type":"Question","name":"What is the Toscano Construction Concierge?","acceptedAnswer":{"@type":"Answer","text":"It's our full-service option: you tell us what needs to get done, and we handle the process — walking the property, bringing in bids from our vetted contractor network, negotiating pricing, scheduling and coordinating the trades, and overseeing the work through the final punch list. You get one point of contact the whole way."}},
+{"@type":"Question","name":"What is the Toscano Property Concierge?","acceptedAnswer":{"@type":"Answer","text":"It means you make one call for virtually anything your property needs. We identify the issue, develop the scope, obtain competitive bids from our vetted network, verify licensing and insurance, negotiate pricing on your behalf, coordinate scheduling and access, oversee the work, and close out the punch list — with one dedicated point of contact the whole way."}},
+{"@type":"Question","name":"What if the service I need isn't listed?","acceptedAnswer":{"@type":"Answer","text":"Reach out anyway. The lists on this page are examples, not limits. Tell us what your property needs and we'll determine whether our team handles it directly or we coordinate the right licensed professional for it — either way, you make one call."}},
+{"@type":"Question","name":"Do I need a property management agreement to work with you?","acceptedAnswer":{"@type":"Answer","text":"No. Toscano makes our construction, maintenance, and property concierge services available directly — an individual repair, a renovation, or ongoing maintenance — with no management agreement required."}},
 {"@type":"Question","name":"Do you handle small jobs?","acceptedAnswer":{"@type":"Answer","text":"Yes — that's exactly what our in-house handyman team is for. Repairs, punch lists, maintenance, and the small projects most contractors won't return a call about."}},
-{"@type":"Question","name":"Do you use subcontractors?","acceptedAnswer":{"@type":"Answer","text":"Our in-house crew handles carpentry, painting, maintenance, and general work directly. For specialty trades we manage a vetted subcontractor network — but you hold one contract, one schedule, and one point of contact: us."}},
+{"@type":"Question","name":"Do you use subcontractors?","acceptedAnswer":{"@type":"Answer","text":"Our in-house crew handles carpentry, painting, maintenance, and general work directly. For specialty and regulated trades — electrical, plumbing, HVAC, fire alarm — we coordinate appropriately licensed and insured professionals from our vetted network. Either way you hold one contract, one schedule, and one point of contact: us."}},
 {"@type":"Question","name":"Is the estimate really free?","acceptedAnswer":{"@type":"Answer","text":"Yes. We walk the property, hear the plan, and come back with a detailed, line-item proposal — no cost, no obligation, and a straight answer on whether the budget and timeline are realistic."}},
 {"@type":"Question","name":"How do you keep projects on schedule?","acceptedAnswer":{"@type":"Answer","text":"Fixed milestones, coordinated trades, daily updates, and one project manager who always knows what's next on your job. Managing the schedule is the service — it's what a general contractor is for."}},
 {"@type":"Question","name":"Where do you work?","acceptedAnswer":{"@type":"Answer","text":"We're based in Plaistow, NH and work across Greater New England — most of our projects sit within about 90 minutes of home base, from the Seacoast to Greater Boston to Central Massachusetts."}}
@@ -757,6 +759,17 @@ document.documentElement.classList.add('js');</script>
 
   /* ---------- property concierge (Nov 2026 brief): longer hero line, request flow ---------- */
   h1.h1-long{font-size:clamp(36px,5.3vw,80px);max-width:20ch}
+  .trust{padding:var(--section) 0;border-top:1px solid var(--line)}
+  .trust-grid{list-style:none;display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);border:1px solid var(--line);margin-top:var(--s8)}
+  @media(min-width:640px){.trust-grid{grid-template-columns:1fr 1fr}}
+  @media(min-width:1080px){.trust-grid{grid-template-columns:repeat(3,1fr)}}
+  .trust-grid li{background:var(--panel);padding:var(--s6);display:grid;gap:var(--s2);align-content:start}
+  .trust-grid svg{width:28px;height:28px;stroke:var(--txt);fill:none;stroke-width:1.3;stroke-linecap:round;stroke-linejoin:round;margin-bottom:var(--s3)}
+  .trust-grid b{font-weight:500;font-size:var(--fs-4);letter-spacing:var(--track-title);color:var(--txt);line-height:1.25}
+  .trust-grid p{font-weight:300;font-size:var(--fs-sm);line-height:1.6;color:var(--mut)}
+  .vet{display:grid;gap:var(--s7);margin-top:var(--s8)}
+  @media(min-width:980px){.vet{grid-template-columns:7fr 5fr;gap:var(--s9);align-items:start}}
+  .trust-note{font-weight:300;font-size:var(--fs-sm);line-height:1.7;color:var(--mut);border-left:1px solid var(--accent);padding-left:var(--s4);margin-bottom:var(--s6);max-width:46ch}
   .flow{margin-top:var(--s9);border-top:1px solid var(--line2);padding-top:var(--s6)}
   .flow-head{display:flex;flex-wrap:wrap;justify-content:space-between;gap:var(--s3);margin-bottom:var(--s5)}
   .flow-list{list-style:none;display:grid;grid-template-columns:1fr;gap:0 var(--s8);border-top:1px solid var(--line)}
@@ -824,7 +837,7 @@ document.documentElement.classList.add('js');</script>
   <div class="hero">
     <div class="kick">General Contractor · Property Concierge · Plaistow, NH</div>
     <h1 id="heroline" class="h1-long"><span class="ln"><span>More than a general contractor.</span></span><span class="ln"><span><em>Your complete property concierge.</em></span></span></h1>
-    <p class="lead">One point of contact for virtually every property repair, renovation, maintenance, and improvement need. Our team handles what it can in-house and coordinates the rest through our established network of licensed, insured professionals — built right, managed start to finish.</p>
+    <p class="lead">One point of contact for virtually every property repair, renovation, maintenance, and improvement need — handled by our own team or coordinated through our network of licensed, insured professionals. Built right, managed start to finish.</p>
     <div class="btnrow">
       <a class="btn-solid" href="#cform" data-focus="f-name"><span>Tell Us What You Need Done</span></a>
       <a class="btn-ghost" href="#projects"><span>View Our Work</span></a>
@@ -1167,10 +1180,57 @@ document.documentElement.classList.add('js');</script>
   </div>
 </section>
 
+<!-- ================= TRUST — insured company, vetted licensed & insured network ================= -->
+<section class="trust" id="trust">
+  <div class="wrap">
+    <div class="dimhead" data-dim="06 · Insurance, Licensing &amp; Accountability"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="sec-head">
+      <div>
+        <div class="kick reveal">Insured company · Vetted network</div>
+        <h2 class="reveal">Your property. Our network. <em>Your peace of mind.</em></h2>
+      </div>
+      <p class="sub reveal">As an insured company with an established network of qualified, licensed, and insured contractors, we simplify every aspect of property maintenance, construction, and improvements. From everyday handyman services to major renovations and capital improvement projects, we coordinate the right professionals, negotiate competitive pricing, and oversee the details so you don't have to.</p>
+    </div>
+    <ul class="trust-grid reveal">
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.6-3 7.9-7 9.5-4-1.6-7-4.9-7-9.5V6z"/><path d="M9 12l2 2 4-4"/></svg><b>Insured Company</b><p>Toscano maintains its own company insurance on every job we take on.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h14v12H5z"/><path d="M9 10l2 2 4-4"/><path d="M9 20h6M12 16v4"/></svg><b>Licensed &amp; Insured Contractor Network</b><p>Specialty and regulated trades — electrical, plumbing, HVAC, fire alarm — are completed by appropriately licensed and insured professionals.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 3h6v3H9z"/><path d="M6 5h12v16H6z"/><path d="M9 13l2 2 4-4"/></svg><b>Thoroughly Vetted Vendors</b><p>Licenses verified, certificates of insurance collected and tracked to expiration, qualifications and workmanship reviewed before anyone is engaged.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M8 20h8M4 8h16"/><path d="M7 8l-4 7h8zM17 8l-4 7h8z"/></svg><b>Competitive Bidding &amp; Negotiation</b><p>Multiple bids on the same scope, compared line for line, then negotiated on your behalf.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 12s4-6 10-6 10 6 10 6-4 6-10 6S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg><b>Professional Project Oversight</b><p>Scheduling, site coordination, quality checks, and documentation from the first day to the final walkthrough.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="6" cy="6" r="2.5"/><circle cx="18" cy="6" r="2.5"/><circle cx="12" cy="18" r="2.5"/><path d="M8.2 7.2l2.6 8.4M15.8 7.2l-2.6 8.4M8.5 6h7"/></svg><b>Established Industry Relationships</b><p>A network built through daily property management and construction work across Massachusetts and Southern New Hampshire.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14.5 4.5a4.5 4.5 0 0 0-5.3 6L4 15.7 7.3 19l5.2-5.2a4.5 4.5 0 0 0 6-5.3l-2.7 2.7-2.3-2.3z"/></svg><b>Experienced Maintenance Personnel</b><p>In-house handyman and maintenance staff for repairs, unit turnovers, and preventative upkeep.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-7 8-7s8 2.6 8 7"/></svg><b>One Dedicated Point of Contact</b><p>One person who knows your property, your project, and what's next on it.</p></li>
+      <li><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M6 21V5h12v16"/><path d="M9 9h2M13 9h2M9 13h2M13 13h2M10 21v-4h4v4"/></svg><b>Comprehensive Property Solutions</b><p>If it's on a property, we can handle it or coordinate it — no second contractor for you to find.</p></li>
+    </ul>
+    <div class="vet">
+      <div>
+        <span class="label cc-label">Our vendor vetting process</span>
+        <ol class="cc-list">
+          <li><span>01</span>Verifying applicable contractor &amp; trade licenses</li>
+          <li><span>02</span>Obtaining &amp; reviewing certificates of insurance</li>
+          <li><span>03</span>Monitoring insurance expirations &amp; requesting updated documentation</li>
+          <li><span>04</span>Reviewing contractor qualifications &amp; experience</li>
+          <li><span>05</span>Evaluating workmanship &amp; reliability</li>
+          <li><span>06</span>Obtaining &amp; comparing competitive bids</li>
+          <li><span>07</span>Negotiating pricing &amp; project terms on your behalf</li>
+          <li><span>08</span>Coordinating scheduling &amp; execution</li>
+          <li><span>09</span>Monitoring workmanship &amp; completion</li>
+          <li><span>10</span>Holding vendors accountable for the services they provide</li>
+        </ol>
+      </div>
+      <div class="cc-aside">
+        <p class="cc-one reveal">We don't hire random contractors to work on your property.</p>
+        <p class="trust-note reveal">Toscano maintains its own company insurance and requires appropriate coverage from the independent contractors we engage. Specialized services such as electrical, plumbing, HVAC, and fire alarm systems are performed by professionals holding the licenses that work requires — our company insurance is separate from, and in addition to, the trade licenses each contractor carries.</p>
+        <div class="btnrow reveal"><a class="btn-ghost arrow" href="#cform" data-focus="f-name"><span>Talk Through a Project</span></a></div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ================= PROCESS — drawing becomes the finished room ================= -->
 <section class="process" id="process">
   <div class="wrap">
-    <div class="dimhead" data-dim="06 · Method"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="07 · Method"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">How It Works</div>
@@ -1283,7 +1343,7 @@ document.documentElement.classList.add('js');</script>
 <!-- Each project is one <article class="wk">: swap the <img>, then edit the number, category, title and meta line. -->
 <section class="projects" id="projects">
   <div class="wrap">
-    <div class="dimhead" data-dim="07 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="08 · Selected Work"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">Selected Work</div>
@@ -1499,7 +1559,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= GALLERY — more of the work. Each photo is one <a class="g-item" data-cat="…">; thumbnails show, the href opens full size. ================= -->
 <section class="gallery" id="gallery">
   <div class="wrap">
-    <div class="dimhead" data-dim="08 · Gallery"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="09 · Gallery"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="sec-head">
       <div>
         <div class="kick reveal">Gallery</div>
@@ -1553,7 +1613,7 @@ document.documentElement.classList.add('js');</script>
 <section class="area" id="area">
   <div class="area-bg" aria-hidden="true"><img src="media/work/skyline.webp" alt="" loading="lazy" decoding="async" width="1920" height="1280"></div>
   <div class="wrap">
-    <div class="dimhead" data-dim="09 · Service Area">
+    <div class="dimhead" data-dim="10 · Service Area">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="grid">
@@ -1643,7 +1703,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FAQ ================= -->
 <section class="faqs tone-bone" id="faq">
   <div class="wrap">
-    <div class="dimhead" data-dim="10 · FAQ">
+    <div class="dimhead" data-dim="11 · FAQ">
       <div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH lineR"></div><div class="tickR"></div>
     </div>
     <div class="kick center reveal">Straight Answers</div>
@@ -1651,15 +1711,23 @@ document.documentElement.classList.add('js');</script>
     <div class="faqwrap reveal">
       <div class="qa">
         <button class="qq" aria-expanded="false" aria-controls="faqa-1">Are you licensed and insured?<i class="plus" aria-hidden="true"></i></button>
-        <div class="qa-a" id="faqa-1"><p>Fully licensed and fully insured — every trade, every site, every day. Certificates of insurance are available on request before any work begins.</p></div>
+        <div class="qa-a" id="faqa-1"><p>Yes. Toscano maintains its own company insurance, and every independent contractor we engage is required to carry appropriate insurance and the trade licenses their work calls for. We verify both before work starts and track insurance expirations. Certificates of insurance are available on request.</p></div>
       </div>
       <div class="qa">
         <button class="qq" aria-expanded="false" aria-controls="faqa-7">Do you work with landlords and property managers?<i class="plus" aria-hidden="true"></i></button>
         <div class="qa-a" id="faqa-7"><p>Yes — unit turns, apartment renovations, punch lists, and ongoing maintenance are core work for us. You get one point of contact who schedules the unit, coordinates every trade, and keeps you updated until it's done.</p></div>
       </div>
       <div class="qa">
-        <button class="qq" aria-expanded="false" aria-controls="faqa-8">What is the Toscano Construction Concierge?<i class="plus" aria-hidden="true"></i></button>
-        <div class="qa-a" id="faqa-8"><p>It's our full-service option: you tell us what needs to get done, and we handle the process — walking the property, bringing in bids from our vetted contractor network, negotiating pricing, scheduling and coordinating the trades, and overseeing the work through the final punch list. You get one point of contact the whole way.</p></div>
+        <button class="qq" aria-expanded="false" aria-controls="faqa-8">What is the Toscano Property Concierge?<i class="plus" aria-hidden="true"></i></button>
+        <div class="qa-a" id="faqa-8"><p>It means you make one call for virtually anything your property needs. We identify the issue, develop the scope, obtain competitive bids from our vetted network, verify licensing and insurance, negotiate pricing on your behalf, coordinate scheduling and access, oversee the work, and close out the punch list — with one dedicated point of contact the whole way.</p></div>
+      </div>
+      <div class="qa">
+        <button class="qq" aria-expanded="false" aria-controls="faqa-9">What if the service I need isn't listed?<i class="plus" aria-hidden="true"></i></button>
+        <div class="qa-a" id="faqa-9"><p>Reach out anyway. The lists on this page are examples, not limits. Tell us what your property needs and we'll determine whether our team handles it directly or we coordinate the right licensed professional for it — either way, you make one call.</p></div>
+      </div>
+      <div class="qa">
+        <button class="qq" aria-expanded="false" aria-controls="faqa-10">Do I need a property management agreement to work with you?<i class="plus" aria-hidden="true"></i></button>
+        <div class="qa-a" id="faqa-10"><p>No. Toscano makes our construction, maintenance, and property concierge services available directly — an individual repair, a renovation, or ongoing maintenance — with no management agreement required.</p></div>
       </div>
       <div class="qa">
         <button class="qq" aria-expanded="false" aria-controls="faqa-2">Do you handle small jobs?<i class="plus" aria-hidden="true"></i></button>
@@ -1667,7 +1735,7 @@ document.documentElement.classList.add('js');</script>
       </div>
       <div class="qa">
         <button class="qq" aria-expanded="false" aria-controls="faqa-3">Do you use subcontractors?<i class="plus" aria-hidden="true"></i></button>
-        <div class="qa-a" id="faqa-3"><p>Our in-house crew handles carpentry, painting, maintenance, and general work directly. For specialty trades we manage a vetted subcontractor network — but you hold one contract, one schedule, and one point of contact: us.</p></div>
+        <div class="qa-a" id="faqa-3"><p>Our in-house crew handles carpentry, painting, maintenance, and general work directly. For specialty and regulated trades — electrical, plumbing, HVAC, fire alarm — we coordinate appropriately licensed and insured professionals from our vetted network. Either way you hold one contract, one schedule, and one point of contact: us.</p></div>
       </div>
       <div class="qa">
         <button class="qq" aria-expanded="false" aria-controls="faqa-4">Is the estimate really free?<i class="plus" aria-hidden="true"></i></button>
@@ -1688,7 +1756,7 @@ document.documentElement.classList.add('js');</script>
 <!-- ================= FINAL CTA + CONTACT ================= -->
 <section class="contact" id="contact">
   <div class="wrap">
-    <div class="dimhead" data-dim="11 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
+    <div class="dimhead" data-dim="12 · Contact"><div class="tickL"></div><div class="lineH"></div><div class="dimtxt"></div><div class="lineH"></div><div class="tickR"></div></div>
     <div class="grid">
       <div>
         <div class="kick reveal">Ready When You Are</div>
